@@ -1,0 +1,276 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HakutoIcon from "@/assets/hakuto-dark-icon.svg";
+import { Rocket, GitBranch, Terminal, Sparkles, Github, ArrowRight, Check } from "lucide-react";
+import type { WebSite, SoftwareSourceCode } from "schema-dts";
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Hakuto",
+  url: Astro.url.origin,
+  description:
+    "A free, open-source collection of Skills and workflows for building fast, modern Astro websites with Claude Code.",
+} satisfies WebSite;
+
+const codeSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: "Hakuto",
+  codeRepository: "https://github.com/teamniteo/hakuto",
+  programmingLanguage: "TypeScript",
+  license: "https://opensource.org/licenses/MIT",
+} satisfies SoftwareSourceCode;
+
+const steps = [
+  {
+    k: "01",
+    title: "Clone and connect",
+    body: "Clone the Hakuto repo, connect it to Cloudflare, and you have a production-ready Astro site with free hosting. Takes about 10 minutes.",
+    Icon: GitBranch,
+  },
+  {
+    k: "02",
+    title: "Build with Claude",
+    body: "Open your project in Claude Code. The included Skills teach Claude how to build Astro correctly, optimize images, handle SEO, and check accessibility. No need to explain it every time.",
+    Icon: Terminal,
+  },
+  {
+    k: "03",
+    title: "Share and ship",
+    body: "Open a PR to get a live preview URL. Merge to deploy. That's the whole workflow.",
+    Icon: Rocket,
+  },
+];
+
+const audiences = [
+  "Founders moving off WordPress",
+  "Indie makers shipping side projects",
+  "Small teams without a front-end hire",
+  "Anyone who already lives in Claude Code",
+];
+---
+
+<Layout schema={[websiteSchema, codeSchema]}>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 pointer-events-none opacity-[0.18]"
+      style="background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0); background-size: 32px 32px; mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, black 40%, transparent 80%);"
+    ></div>
+    <div
+      aria-hidden="true"
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"
+    ></div>
+
+    <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-32 sm:pb-28">
+      <div class="max-w-3xl">
+        <div class="mb-8" aria-label="Hakuto">
+          <HakutoIcon class="h-20 w-auto" />
+        </div>
+
+        <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
+          // Free &amp; open source · by Niteo
+        </p>
+
+        <h1 class="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02] text-heading">
+          Build websites <br class="hidden sm:block" />
+          with <span class="text-primary">Claude Code.</span>
+        </h1>
+
+        <p class="mt-8 text-lg sm:text-xl text-foreground max-w-2xl leading-relaxed">
+          Hakuto is a free collection of Skills and workflows for building fast,
+          modern sites with AI. No configuration from scratch.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-sm">
+          <a
+            href="/start"
+            class="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-primary-foreground hover:opacity-90 transition-opacity"
+          >
+            Get started
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </a>
+          <a
+            href="https://github.com/teamniteo/hakuto"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-2 rounded-md border border-input-border px-5 py-3 text-heading hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            <Github className="h-4 w-4" />
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGO STRIP -->
+    <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="border-t border-border pt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground whitespace-nowrap">
+          Built on
+        </p>
+        <div class="flex flex-wrap items-center gap-x-10 gap-y-4 font-mono text-heading">
+          <span class="inline-flex items-center gap-2 text-base">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+            Astro
+          </span>
+          <span class="inline-flex items-center gap-2 text-base">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+            Tailwind CSS
+          </span>
+          <span class="inline-flex items-center gap-2 text-base">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+            Cloudflare
+          </span>
+          <span class="inline-flex items-center gap-2 text-base">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+            Claude Code
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <section class="border-t border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-24 grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-4">
+          // What it is
+        </p>
+        <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+          A scaffold, <br />not a platform.
+        </h2>
+      </div>
+      <div class="lg:col-span-8 space-y-6 text-lg leading-relaxed text-foreground">
+        <p>
+          Hakuto gives Claude Code everything it needs to build and maintain an
+          Astro website: an opinionated project scaffold, Skills for SEO, image
+          optimization, and accessibility, and a workflow for deploying to
+          Cloudflare in minutes.
+        </p>
+        <p class="text-muted-foreground">
+          No visual editor. No proprietary platform. Just Claude, your repo, and
+          free hosting.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="border-t border-border bg-card/30">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div class="max-w-2xl mb-14">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-4">
+          // How it works
+        </p>
+        <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+          Three steps from clone to shipped.
+        </h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {steps.map(({ k, title, body, Icon }) => (
+          <div class="group relative border border-border rounded-lg p-7 bg-card hover:border-primary/50 transition-colors">
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-mono text-xs text-primary tracking-[0.2em]">{k}</span>
+              <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            </div>
+            <h3 class="font-mono text-xl font-semibold text-heading mb-3">{title}</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10">
+        <a
+          href="/start"
+          class="inline-flex items-center gap-2 font-mono text-sm text-primary hover:underline"
+        >
+          See the full walkthrough
+          <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="border-t border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-24 grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-4">
+          // Who it's for
+        </p>
+        <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+          If you live in Claude Code, <br />this is for you.
+        </h2>
+        <p class="mt-6 text-lg text-foreground leading-relaxed max-w-md">
+          Hakuto is for people who want a fast, clean website without managing
+          infrastructure — and who want to stop thinking about their site.
+        </p>
+      </div>
+      <div class="lg:col-span-7">
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {audiences.map((person) => (
+            <li class="flex items-start gap-3 border border-border rounded-md p-5 bg-card">
+              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+              <span class="text-base text-heading">{person}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE & OPEN SOURCE CTA -->
+  <section class="border-t border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div class="relative overflow-hidden rounded-lg border border-border bg-card p-10 sm:p-14">
+        <div
+          aria-hidden="true"
+          class="absolute -top-24 -right-24 w-[380px] h-[380px] bg-primary/15 blur-[100px] rounded-full pointer-events-none"
+        ></div>
+
+        <div class="relative max-w-2xl">
+          <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary mb-5">
+            <Sparkles className="h-3.5 w-3.5" />
+            Free &amp; open source
+          </div>
+          <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+            Hakuto is free. Forever.
+          </h2>
+          <p class="mt-5 text-lg text-foreground leading-relaxed">
+            The Skills are open source on GitHub. There's no account required to
+            use them. Clone it, ship it, change it, send a PR.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3 sm:gap-4 font-mono text-sm">
+            <a
+              href="https://github.com/teamniteo/hakuto"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              <Github className="h-4 w-4" />
+              View on GitHub
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="/mcps"
+              class="inline-flex items-center gap-2 rounded-md border border-input-border px-5 py-3 text-heading hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              Upcoming paid MCPs
+            </a>
+          </div>
+
+          <p class="mt-6 font-mono text-xs text-muted-foreground">
+            Coming soon: paid MCPs for PageSpeed monitoring, browser testing, and
+            Search Console integration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,81 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Globe, Mail, ArrowRight, BookOpen } from "lucide-react";
+
+const guides = [
+  {
+    href: "/guides/custom-domain",
+    title: "Custom Domain on Cloudflare",
+    Icon: Globe,
+    time: "5 min",
+    body: "How to connect your own domain (like yourname.com) to your Cloudflare Pages site.",
+  },
+  {
+    href: "/guides/contact-form",
+    title: "Contact Form with Cloudflare Workers",
+    Icon: Mail,
+    time: "15 min",
+    body: "How to add a working contact form to your Astro site using a Cloudflare Worker to handle submissions. No backend required.",
+  },
+];
+---
+
+<Layout
+  title="Guides"
+  description="Short how-to guides for common tasks when building with Hakuto and Claude Code."
+>
+  <!-- HERO -->
+  <section class="border-b border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
+        // Guides
+      </p>
+      <h1 class="font-mono text-4xl sm:text-5xl lg:text-6xl font-bold text-heading leading-[1.05]">
+        Short how-tos <br />
+        <span class="text-primary">for common tasks.</span>
+      </h1>
+      <p class="mt-8 max-w-2xl text-lg text-foreground leading-relaxed">
+        Focused guides for the things you'll want to do after your site is running.
+        More on the way.
+      </p>
+    </div>
+  </section>
+
+  <!-- GUIDES LIST -->
+  <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid gap-5">
+      {guides.map(({ href, title, Icon, time, body }) => (
+        <a
+          href={href}
+          class="group flex flex-col sm:flex-row items-start gap-6 border border-border rounded-lg p-7 bg-card hover:border-primary/50 transition-colors"
+        >
+          <div class="h-12 w-12 flex-shrink-0 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center">
+            <Icon className="h-5 w-5 text-primary" />
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h2 class="font-mono text-xl sm:text-2xl font-semibold text-heading group-hover:text-primary transition-colors">
+                {title}
+              </h2>
+              <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground border border-border rounded-full px-2 py-0.5">
+                {time}
+              </span>
+            </div>
+            <p class="text-foreground leading-relaxed">{body}</p>
+          </div>
+          <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all self-center hidden sm:block" />
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-12 border border-dashed border-border rounded-lg p-7 bg-card/50 flex items-start gap-4">
+      <BookOpen className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+      <div>
+        <p class="font-mono text-sm text-heading mb-1">More guides coming</p>
+        <p class="text-sm text-muted-foreground">
+          Got an idea for a guide? <a href="https://github.com/teamniteo/hakuto/issues" target="_blank" rel="noreferrer" class="text-primary hover:underline">Open an issue</a> and tell us what you want to learn.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

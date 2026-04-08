@@ -1,0 +1,74 @@
+---
+import HakutoLogo from "@/assets/hakuto-dark.svg";
+
+const nav = [
+  { href: "/start", label: "Start" },
+  { href: "/guides", label: "Guides" },
+  { href: "/skills", label: "Skills" },
+  { href: "/mcps", label: "MCPs" },
+];
+---
+
+<header class="border-b border-border bg-card/80 backdrop-blur sticky top-0 z-40">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <a href="/" class="flex items-center text-heading" aria-label="Hakuto home">
+      <HakutoLogo class="h-7 w-auto" />
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7 text-sm font-mono">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="text-muted-foreground hover:text-heading transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="https://github.com/teamniteo/hakuto"
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex items-center gap-1.5 text-muted-foreground hover:text-heading transition-colors"
+      >
+        GitHub
+        <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <button
+      id="mobile-nav-toggle"
+      class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-input-border text-heading"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div id="mobile-nav" class="hidden md:hidden border-t border-border bg-card">
+    <nav class="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-3 font-mono text-sm">
+      {nav.map((item) => (
+        <a href={item.href} class="text-muted-foreground hover:text-heading transition-colors">
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="https://github.com/teamniteo/hakuto"
+        target="_blank"
+        rel="noreferrer"
+        class="text-muted-foreground hover:text-heading transition-colors"
+      >
+        GitHub ↗
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("mobile-nav-toggle");
+  const menu = document.getElementById("mobile-nav");
+  toggle?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+</script>

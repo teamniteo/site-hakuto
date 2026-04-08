@@ -1,0 +1,170 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Terminal, GitBranch, Cloud, Code, GitPullRequest, CheckCircle2 } from "lucide-react";
+
+const steps = [
+  {
+    n: "01",
+    Icon: GitBranch,
+    title: "Clone the Hakuto repo",
+    intro: `Go to github.com/teamniteo/hakuto and clone the repo to your computer.`,
+    code: `git clone https://github.com/teamniteo/hakuto.git my-site\ncd my-site`,
+    outro: "This gives you a ready-to-go Astro project with all the Hakuto Skills already included.",
+  },
+  {
+    n: "02",
+    Icon: GitPullRequest,
+    title: "Push to your GitHub",
+    intro: "Create a new repository on GitHub for your site, then push:",
+    code: `git remote set-url origin https://github.com/YOUR_USERNAME/YOUR_REPO.git\ngit push -u origin main`,
+    outro: null,
+  },
+  {
+    n: "04",
+    Icon: Code,
+    title: "Open it in Claude Code",
+    intro: "Clone the repo locally and open it in Claude Code:",
+    code: `claude .`,
+    outro: "Claude already knows how to work with your project. The Skills are included in the repo.",
+  },
+];
+---
+
+<Layout
+  title="Start"
+  description="Get your Hakuto site running in 10 minutes with a simple step-by-step walkthrough."
+>
+  <!-- HERO -->
+  <section class="border-b border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
+        // Onboarding
+      </p>
+      <h1 class="font-mono text-4xl sm:text-5xl lg:text-6xl font-bold text-heading leading-[1.05]">
+        Get your site running <br />
+        <span class="text-primary">in 10 minutes.</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-foreground leading-relaxed">
+        Follow the steps below. Each one gives you exact instructions. Nothing to
+        figure out.
+      </p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <ol class="relative space-y-12 border-l border-border pl-8 sm:pl-12">
+      <!-- Step 1 -->
+      <li class="relative">
+        <div class="absolute -left-[41px] sm:-left-[57px] top-0 h-10 w-10 rounded-full border border-border bg-card flex items-center justify-center">
+          <GitBranch className="h-4 w-4 text-primary" />
+        </div>
+        <p class="font-mono text-xs text-primary tracking-[0.2em] mb-2">STEP 01</p>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">Clone the Hakuto repo</h2>
+        <p class="text-foreground mb-5 max-w-2xl">
+          Go to <a href="https://github.com/teamniteo/hakuto" target="_blank" rel="noreferrer" class="text-primary hover:underline">github.com/teamniteo/hakuto</a> and clone the repo to your computer.
+        </p>
+        <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 overflow-x-auto text-heading"><code>git clone https://github.com/teamniteo/hakuto.git my-site
+cd my-site</code></pre>
+        <p class="mt-4 text-sm text-muted-foreground max-w-2xl">
+          This gives you a ready-to-go Astro project with all the Hakuto Skills already included.
+        </p>
+      </li>
+
+      <!-- Step 2 -->
+      <li class="relative">
+        <div class="absolute -left-[41px] sm:-left-[57px] top-0 h-10 w-10 rounded-full border border-border bg-card flex items-center justify-center">
+          <GitPullRequest className="h-4 w-4 text-primary" />
+        </div>
+        <p class="font-mono text-xs text-primary tracking-[0.2em] mb-2">STEP 02</p>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">Push to your GitHub</h2>
+        <p class="text-foreground mb-5 max-w-2xl">
+          Create a new repository on GitHub for your site, then push:
+        </p>
+        <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 overflow-x-auto text-heading"><code>git remote set-url origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git push -u origin main</code></pre>
+      </li>
+
+      <!-- Step 3 -->
+      <li class="relative">
+        <div class="absolute -left-[41px] sm:-left-[57px] top-0 h-10 w-10 rounded-full border border-border bg-card flex items-center justify-center">
+          <Cloud className="h-4 w-4 text-primary" />
+        </div>
+        <p class="font-mono text-xs text-primary tracking-[0.2em] mb-2">STEP 03</p>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">Connect to Cloudflare Pages</h2>
+        <ol class="space-y-3 text-foreground max-w-2xl mb-5 list-decimal list-inside marker:text-primary marker:font-mono">
+          <li>Go to <a href="https://pages.cloudflare.com" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare Pages</a></li>
+          <li>Click <strong class="text-heading">Create a project → Connect to Git</strong></li>
+          <li>Select your repository</li>
+          <li>Set build command: <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">npm run build</code></li>
+          <li>Set output directory: <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">dist</code></li>
+          <li>Click <strong class="text-heading">Save and Deploy</strong></li>
+        </ol>
+        <p class="text-sm text-muted-foreground">
+          Your site is now live on a free Cloudflare URL.
+        </p>
+      </li>
+
+      <!-- Step 4 -->
+      <li class="relative">
+        <div class="absolute -left-[41px] sm:-left-[57px] top-0 h-10 w-10 rounded-full border border-border bg-card flex items-center justify-center">
+          <Code className="h-4 w-4 text-primary" />
+        </div>
+        <p class="font-mono text-xs text-primary tracking-[0.2em] mb-2">STEP 04</p>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">Open it in Claude Code</h2>
+        <p class="text-foreground mb-5 max-w-2xl">
+          Clone the repo locally and open it in Claude Code:
+        </p>
+        <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 overflow-x-auto text-heading"><code>claude .</code></pre>
+        <p class="mt-4 text-sm text-muted-foreground max-w-2xl">
+          Claude already knows how to work with your project. The Skills are
+          included in the repo.
+        </p>
+      </li>
+
+      <!-- Step 5 -->
+      <li class="relative">
+        <div class="absolute -left-[41px] sm:-left-[57px] top-0 h-10 w-10 rounded-full border border-border bg-card flex items-center justify-center">
+          <Terminal className="h-4 w-4 text-primary" />
+        </div>
+        <p class="font-mono text-xs text-primary tracking-[0.2em] mb-2">STEP 05</p>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">
+          Get a live preview when you're ready to share
+        </h2>
+        <p class="text-foreground mb-5 max-w-2xl">
+          When you want to share work-in-progress, open a PR on GitHub:
+        </p>
+        <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 overflow-x-auto text-heading"><code>git checkout -b my-changes
+# make your changes
+git add . && git commit -m "update hero section"
+git push origin my-changes</code></pre>
+        <p class="mt-4 text-foreground max-w-2xl">
+          Then open a Pull Request on GitHub. Cloudflare will automatically build a
+          preview URL, shareable with anyone, live for up to 24 hours.
+        </p>
+        <p class="mt-2 text-sm text-muted-foreground max-w-2xl">
+          Merge the PR to push changes to production.
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- YOU'RE SET -->
+  <section class="border-t border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="relative overflow-hidden rounded-lg border border-border bg-card p-10 sm:p-14 max-w-3xl">
+        <CheckCircle2 className="h-8 w-8 text-primary mb-5" />
+        <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+          You're set.
+        </h2>
+        <p class="mt-5 text-lg text-foreground leading-relaxed">
+          From here, just describe what you want to Claude and it'll handle the
+          rest. If you get stuck, check the
+          <a href="/guides" class="text-primary hover:underline">Guides</a> or browse the
+          <a href="/skills" class="text-primary hover:underline">Skills</a> to see what
+          Claude knows how to do.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
