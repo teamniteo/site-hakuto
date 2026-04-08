@@ -42,6 +42,18 @@
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-step-in: step-in 0.25s ease-out;
+
+  @keyframes step-in {
+    from {
+      transform: translateY(8px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
   @keyframes accordion-down {
     from {
@@ -122,6 +134,11 @@
 
   h1, h2, h3, h4, h5, h6 {
     color: hsl(var(--heading));
+  }
+
+  /* Tighten the wide space character of the mono headline font. */
+  h1.font-mono, h2.font-mono, h3.font-mono, h4.font-mono, h5.font-mono, h6.font-mono {
+    word-spacing: -0.3em;
   }
 
   a:focus-visible,

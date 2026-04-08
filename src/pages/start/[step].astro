@@ -1,0 +1,432 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import vscodeCloneImage from "@/assets/vscode-clone-repository.png";
+import {
+  Terminal,
+  GitBranch,
+  Cloud,
+  Code,
+  GitPullRequest,
+  CheckCircle2,
+  Check,
+  Copy,
+  ArrowRight,
+  ArrowLeft,
+  ListChecks,
+} from "lucide-react";
+
+type Step = {
+  key: string;
+  label: string;
+  Icon: typeof GitBranch;
+  title: string;
+  intro?: string;
+  code?: string;
+  checklist?: string[];
+  outro?: string;
+};
+
+const steps: Step[] = [
+  {
+    key: "prep",
+    label: "Prep",
+    Icon: ListChecks,
+    title: "Before you start",
+    intro:
+      "A few free accounts and tools you'll need. Grab anything you're missing and come back — the rest takes about 10 minutes.",
+    checklist: [
+      `A <a href="https://github.com/signup" target="_blank" rel="noreferrer" class="text-primary hover:underline">GitHub account</a> (free) — to host your site's code`,
+      `A <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare account</a> (free) — to deploy and host your site`,
+      `A code editor — if you don't have one, <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" class="text-primary hover:underline">Visual Studio Code</a> (free) is a solid choice`,
+    ],
+    outro: "Got everything? Let's clone the repo.",
+  },
+  {
+    key: "clone",
+    label: "Clone",
+    Icon: GitBranch,
+    title: "Clone the Hakuto repo in VS Code",
+    // Custom-rendered below — see step.key === "clone" branch.
+  },
+  {
+    key: "push",
+    label: "Push",
+    Icon: GitPullRequest,
+    title: "Push to your GitHub",
+    intro:
+      "Create a new empty repo on GitHub, then point your local clone at it and push:",
+    code: `git remote set-url origin https://github.com/YOUR_USERNAME/YOUR_REPO.git\ngit push -u origin main`,
+    outro: "Your code now lives on GitHub and is ready to deploy.",
+  },
+  {
+    key: "cloudflare",
+    label: "Deploy",
+    Icon: Cloud,
+    title: "Connect to Cloudflare Pages",
+    intro: "Cloudflare Pages gives you a free, globally distributed host with PR previews baked in.",
+    checklist: [
+      "Open pages.cloudflare.com and click Create a project → Connect to Git",
+      "Select the repository you just pushed",
+      "Set build command to: npm run build",
+      "Set output directory to: dist",
+      "Click Save and Deploy",
+    ],
+    outro: "Your site is now live on a free Cloudflare URL.",
+  },
+  {
+    key: "claude",
+    label: "Claude",
+    Icon: Code,
+    title: "Open it in Claude Code",
+    intro: "Open the project in Claude Code and describe what you want to build:",
+    code: `claude .`,
+    outro:
+      "Claude already knows how to work with your project — the Skills are included in the repo.",
+  },
+  {
+    key: "ship",
+    label: "Ship",
+    Icon: Terminal,
+    title: "Ship with preview URLs",
+    intro: "Push a branch, open a PR, and Cloudflare will build a shareable preview URL automatically:",
+    code: `git checkout -b my-changes\n# make your changes\ngit add . && git commit -m "update hero section"\ngit push origin my-changes`,
+    outro:
+      "Open a Pull Request on GitHub. Cloudflare spins up a live preview URL — merge the PR to promote it to production.",
+  },
+];
+
+export async function getStaticPaths() {
+  const stepKeys = [
+    "prep",
+    "clone",
+    "push",
+    "cloudflare",
+    "claude",
+    "ship",
+  ];
+  return stepKeys.map((key) => ({ params: { step: key } }));
+}
+
+const { step: stepParam } = Astro.params;
+const currentIndex = steps.findIndex((s) => s.key === stepParam);
+const step = steps[currentIndex];
+const Icon = step.Icon;
+const total = steps.length;
+const pad = (n: number) => String(n).padStart(2, "0");
+const prev = currentIndex > 0 ? steps[currentIndex - 1] : null;
+const next = currentIndex < total - 1 ? steps[currentIndex + 1] : null;
+const isLast = currentIndex === total - 1;
+---
+
+<Layout
+  title={`Start — ${step.label}`}
+  description="Get your Hakuto site running in 10 minutes with a step-by-step walkthrough."
+>
+  <!-- HERO -->
+  <section class="border-b border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">
+        // Onboarding
+      </p>
+      <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-heading leading-[1.1]">
+        Get your site running <span class="text-primary">in 10 minutes</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- WIZARD -->
+  <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div>
+      <!-- STEPPER -->
+      <nav class="flex items-start w-full mb-10" aria-label="Onboarding progress">
+        {
+          steps.map((s, i) => {
+            const isCurrent = i === currentIndex;
+            const isDone = i < currentIndex;
+            const circleClasses = [
+              "flex items-center justify-center w-8 h-8 rounded-full text-xs font-mono font-semibold flex-shrink-0 transition-all duration-300 border",
+              isDone
+                ? "bg-primary text-primary-foreground border-primary"
+                : isCurrent
+                  ? "bg-card text-primary border-primary scale-110"
+                  : "bg-card text-muted-foreground border-border",
+            ].join(" ");
+            const labelClasses = [
+              "mt-1.5 text-[10px] font-mono uppercase tracking-[0.15em] transition-colors duration-300",
+              i <= currentIndex ? "text-primary" : "text-muted-foreground",
+            ].join(" ");
+            const lineClasses = [
+              "flex-1 mt-4 h-[2px] transition-colors duration-300",
+              i <= currentIndex ? "bg-primary" : "bg-border",
+            ].join(" ");
+            return (
+              <>
+                {i > 0 && <div class={lineClasses} />}
+                <a
+                  href={`/start/${s.key}`}
+                  class="group flex flex-col items-center flex-shrink-0 focus:outline-none"
+                  aria-label={`Go to step ${i + 1}: ${s.label}`}
+                  aria-current={isCurrent ? "step" : undefined}
+                >
+                  <span class={circleClasses}>
+                    {isDone ? (
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    ) : (
+                      pad(i + 1)
+                    )}
+                  </span>
+                  <span class={labelClasses}>{s.label}</span>
+                </a>
+              </>
+            );
+          })
+        }
+      </nav>
+
+      <!-- STEP PANEL -->
+      <article class="animate-step-in">
+        <div class="rounded-lg border border-border bg-card p-7 sm:p-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="flex items-center justify-center h-10 w-10 rounded-md bg-primary/10 border border-primary/30">
+              <Icon className="h-5 w-5 text-primary" />
+            </span>
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">
+                Step {pad(currentIndex + 1)} / {pad(total)}
+              </p>
+              <h2 class="font-mono text-2xl sm:text-3xl font-semibold text-heading leading-tight">
+                {step.title}
+              </h2>
+            </div>
+          </div>
+
+          {
+            step.key === "clone" && (
+              <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2 space-y-5">
+                  <p class="text-foreground leading-relaxed">
+                    Open <span class="font-semibold text-heading">Visual Studio Code</span> (or your preferred editor) and clone the Hakuto template straight from GitHub — no terminal required.
+                  </p>
+                  <ol class="space-y-3 text-foreground">
+                    <li class="flex items-start gap-3">
+                      <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">1</span>
+                      <span>Click <span class="font-semibold text-heading">Source Control</span> in the left sidebar.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">2</span>
+                      <span>Click <span class="font-semibold text-heading">Clone Repository</span>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">3</span>
+                      <span>Paste the repo URL and pick a folder:</span>
+                    </li>
+                  </ol>
+                  <div class="relative group">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-4 pr-12 overflow-x-auto text-heading"><code data-code>https://github.com/teamniteo/hakuto.git</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-2.5 right-2.5 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy repository URL to clipboard"
+                    >
+                      <span data-copy-icon>
+                        <Copy className="h-4 w-4" />
+                      </span>
+                      <span class="hidden text-emerald-500" data-check-icon>
+                        <Check className="h-4 w-4" />
+                      </span>
+                    </button>
+                  </div>
+                  <p class="text-sm text-muted-foreground leading-relaxed">
+                    VS Code will download the template and ask you to open the folder — say yes. You now have a ready-to-go Astro project with all Hakuto Skills included.
+                  </p>
+                </div>
+                <figure class="lg:col-span-3 rounded-lg border border-border bg-background overflow-hidden shadow-lg">
+                  <img
+                    src={vscodeCloneImage.src}
+                    width={vscodeCloneImage.width}
+                    height={vscodeCloneImage.height}
+                    alt="Visual Studio Code Source Control panel with Open Folder and Clone Repository buttons"
+                    loading="eager"
+                    decoding="async"
+                    class="w-full h-auto block"
+                  />
+                </figure>
+              </div>
+            )
+          }
+
+          {
+            step.key !== "clone" && step.intro && (
+              <p class="text-foreground leading-relaxed mb-5">{step.intro}</p>
+            )
+          }
+
+          {
+            step.code && (
+              <div class="relative group">
+                <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>{step.code}</code></pre>
+                <button
+                  type="button"
+                  class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                  data-copy-btn
+                  aria-label="Copy command to clipboard"
+                >
+                  <span data-copy-icon>
+                    <Copy className="h-4 w-4" />
+                  </span>
+                  <span class="hidden text-emerald-500" data-check-icon>
+                    <Check className="h-4 w-4" />
+                  </span>
+                </button>
+              </div>
+            )
+          }
+
+          {
+            step.checklist && (
+              <ol class="space-y-3 text-foreground mb-2">
+                {step.checklist.map((item, j) => (
+                  <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">
+                      {j + 1}
+                    </span>
+                    <span set:html={item} />
+                  </li>
+                ))}
+              </ol>
+            )
+          }
+
+          {
+            step.outro && (
+              <p class="mt-5 text-base text-muted-foreground leading-relaxed">
+                {step.outro}
+              </p>
+            )
+          }
+        </div>
+      </article>
+
+      <!-- NAVIGATION -->
+      <div class="flex items-center justify-between mt-8 gap-4">
+        {
+          prev ? (
+            <a
+              href={`/start/${prev.key}`}
+              class="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2.5 text-sm font-medium text-muted-foreground hover:text-heading hover:border-primary/50 transition-colors"
+              rel="prev"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </a>
+          ) : (
+            <span
+              class="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2.5 text-sm font-medium text-muted-foreground opacity-40 cursor-not-allowed"
+              aria-disabled="true"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </span>
+          )
+        }
+        <p class="font-mono text-xs text-muted-foreground tabular-nums">
+          {pad(currentIndex + 1)} / {pad(total)}
+        </p>
+        {
+          next ? (
+            <a
+              href={`/start/${next.key}`}
+              class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+              rel="next"
+            >
+              Next
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          ) : (
+            <span
+              class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground opacity-60 cursor-not-allowed"
+              aria-disabled="true"
+            >
+              All done
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    isLast && (
+      <section class="border-t border-border">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div class="relative overflow-hidden rounded-lg border border-border bg-card p-10 sm:p-14">
+            <div
+              aria-hidden="true"
+              class="absolute -top-24 -right-24 w-[380px] h-[380px] bg-primary/15 blur-[100px] rounded-full pointer-events-none"
+            />
+            <div class="relative max-w-2xl">
+              <CheckCircle2 className="h-8 w-8 text-primary mb-5" />
+              <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+                You're set.
+              </h2>
+              <p class="mt-5 text-lg text-foreground leading-relaxed">
+                From here, just describe what you want to Claude and it'll handle the
+                rest. If you get stuck, check the{" "}
+                <a href="/guides" class="text-primary hover:underline">Guides</a> or browse the{" "}
+                <a href="/skills" class="text-primary hover:underline">Skills</a> to see what
+                Claude knows how to do.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Layout>
+
+<script>
+  // Copy-to-clipboard handlers for any [data-copy-btn] on the page.
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-btn]").forEach((btn) => {
+    const wrapper = btn.parentElement;
+    const codeEl = wrapper?.querySelector<HTMLElement>("[data-code]");
+    const copyIcon = btn.querySelector<HTMLElement>("[data-copy-icon]");
+    const checkIcon = btn.querySelector<HTMLElement>("[data-check-icon]");
+    if (!codeEl || !copyIcon || !checkIcon) return;
+
+    let timer: number | undefined;
+    btn.addEventListener("click", async () => {
+      const text = codeEl.textContent ?? "";
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      copyIcon.classList.add("hidden");
+      checkIcon.classList.remove("hidden");
+      if (timer) window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        copyIcon.classList.remove("hidden");
+        checkIcon.classList.add("hidden");
+      }, 2000);
+    });
+  });
+
+  // Left/right arrow keys navigate between step pages.
+  document.addEventListener("keydown", (e) => {
+    if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+    const prevLink = document.querySelector<HTMLAnchorElement>('a[rel="prev"]');
+    const nextLink = document.querySelector<HTMLAnchorElement>('a[rel="next"]');
+    if (e.key === "ArrowRight" && nextLink) {
+      window.location.href = nextLink.href;
+    } else if (e.key === "ArrowLeft" && prevLink) {
+      window.location.href = prevLink.href;
+    }
+  });
+</script>

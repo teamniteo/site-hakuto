@@ -40,28 +40,22 @@ const skills = [
 >
   <!-- HERO -->
   <section class="border-b border-border">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
-      <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">
         // /.claude/skills
       </p>
-      <h1 class="font-mono text-4xl sm:text-5xl lg:text-6xl font-bold text-heading leading-[1.05] max-w-3xl">
-        What Claude knows <br />
-        <span class="text-primary">how to do.</span>
-      </h1>
-      <p class="mt-8 max-w-2xl text-lg text-foreground leading-relaxed">
-        Skills are instructions that live in your project and teach Claude Code
-        how to handle specific tasks. Hakuto includes four Skills out of the box.
-        They're open source.
-      </p>
-      <div class="mt-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-heading leading-[1.1]">
+          What Claude knows <span class="text-primary">how to do</span>
+        </h1>
         <a
           href="https://github.com/teamniteo/hakuto/tree/main/.claude/skills"
           target="_blank"
           rel="noreferrer"
-          class="inline-flex items-center gap-2 font-mono text-sm text-primary hover:underline"
+          class="inline-flex items-center gap-2 font-mono text-sm text-primary hover:underline flex-shrink-0"
         >
           <Github className="h-4 w-4" />
-          Browse them on GitHub
+          Browse on GitHub
           <ArrowRight className="h-4 w-4" />
         </a>
       </div>

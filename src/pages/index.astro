@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import HakutoIcon from "@/assets/hakuto-dark-icon.svg";
 import { Rocket, GitBranch, Terminal, Sparkles, Github, ArrowRight, Check } from "lucide-react";
 import type { WebSite, SoftwareSourceCode } from "schema-dts";
 
@@ -32,13 +31,13 @@ const steps = [
   {
     k: "02",
     title: "Build with Claude",
-    body: "Open your project in Claude Code. The included Skills teach Claude how to build Astro correctly, optimize images, handle SEO, and check accessibility. No need to explain it every time.",
+    body: "Open your project in Claude Code. The included Skills teach Claude how to build Astro correctly, optimize images, handle SEO, and check accessibility.",
     Icon: Terminal,
   },
   {
     k: "03",
     title: "Share and ship",
-    body: "Open a PR to get a live preview URL. Merge to deploy. That's the whole workflow.",
+    body: "Open a PR to get a live preview URL on Cloudflare. Merge to deploy. That's the whole workflow.",
     Icon: Rocket,
   },
 ];
@@ -66,22 +65,19 @@ const audiences = [
 
     <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-32 sm:pb-28">
       <div class="max-w-3xl">
-        <div class="mb-8" aria-label="Hakuto">
-          <HakutoIcon class="h-20 w-auto" />
-        </div>
-
         <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
-          // Free &amp; open source · by Niteo
+          // Free &amp; open source
         </p>
 
-        <h1 class="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02] text-heading">
-          Build websites <br class="hidden sm:block" />
-          with <span class="text-primary">Claude Code.</span>
+        <h1 class="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02] text-heading [word-spacing:-0.2em]">
+          Site Builder for <br class="hidden sm:block" />
+          <span class="text-primary">Claude Code</span>
         </h1>
 
         <p class="mt-8 text-lg sm:text-xl text-foreground max-w-2xl leading-relaxed">
-          Hakuto is a free collection of Skills and workflows for building fast,
-          modern sites with AI. No configuration from scratch.
+          Hakuto is an Astro framework, Claude Code Skills, and step-by-step
+          guides. Clone it, connect to Cloudflare, and you have a fast site on
+          free hosting in 5 minutes.
         </p>
 
         <div class="mt-10 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-sm">
@@ -147,7 +143,8 @@ const audiences = [
       <div class="lg:col-span-8 space-y-6 text-lg leading-relaxed text-foreground">
         <p>
           Hakuto gives Claude Code everything it needs to build and maintain an
-          Astro website: an opinionated project scaffold, Skills for SEO, image
+          <a href="https://astro.build/" target="_blank" rel="noreferrer" class="text-primary hover:underline">Astro</a>
+          website: an opinionated project scaffold, Skills for SEO, image
           optimization, and accessibility, and a workflow for deploying to
           Cloudflare in minutes.
         </p>
@@ -179,7 +176,7 @@ const audiences = [
               <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </div>
             <h3 class="font-mono text-xl font-semibold text-heading mb-3">{title}</h3>
-            <p class="text-sm text-muted-foreground leading-relaxed">{body}</p>
+            <p class="text-base text-muted-foreground leading-relaxed">{body}</p>
           </div>
         ))}
       </div>
@@ -242,7 +239,7 @@ const audiences = [
             Hakuto is free. Forever.
           </h2>
           <p class="mt-5 text-lg text-foreground leading-relaxed">
-            The Skills are open source on GitHub. There's no account required to
+            The framework and Skills are open source on GitHub. There's no account required to
             use them. Clone it, ship it, change it, send a PR.
           </p>
 
@@ -258,17 +255,12 @@ const audiences = [
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="/mcps"
+              href="/start"
               class="inline-flex items-center gap-2 rounded-md border border-input-border px-5 py-3 text-heading hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              Upcoming paid MCPs
+              Get Started
             </a>
           </div>
-
-          <p class="mt-6 font-mono text-xs text-muted-foreground">
-            Coming soon: paid MCPs for PageSpeed monitoring, browser testing, and
-            Search Console integration.
-          </p>
         </div>
       </div>
     </div>
