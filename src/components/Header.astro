@@ -1,12 +1,14 @@
 ---
 import HakutoLogo from "@/assets/hakuto-dark.svg";
+import { ArrowRight } from "lucide-react";
 
 const nav = [
-  { href: "/start/prep", label: "Start" },
-  { href: "/docs", label: "Docs" },
   { href: "/skills", label: "Skills" },
   { href: "/mcps", label: "MCPs" },
+  { href: "/docs", label: "Docs" },
 ];
+
+const isHome = Astro.url.pathname === "/";
 ---
 
 <header class="border-b border-border bg-card/80 backdrop-blur sticky top-0 z-40">
@@ -24,6 +26,19 @@ const nav = [
           {item.label}
         </a>
       ))}
+      <a
+        id="nav-cta"
+        href="/start/prep"
+        class:list={[
+          "inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-4 py-1.5 transition-colors",
+          isHome
+            ? "border border-input-border text-heading hover:bg-accent hover:text-accent-foreground"
+            : "bg-primary text-primary-foreground hover:opacity-90",
+        ]}
+      >
+        Start building
+        <ArrowRight className="h-3.5 w-3.5" />
+      </a>
     </nav>
 
     <button
@@ -43,6 +58,13 @@ const nav = [
           {item.label}
         </a>
       ))}
+      <a
+        href="/start/prep"
+        class="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 transition-colors text-center"
+      >
+        Start building
+        <ArrowRight className="h-3.5 w-3.5" />
+      </a>
     </nav>
   </div>
 </header>
@@ -54,4 +76,25 @@ const nav = [
     const open = menu?.classList.toggle("hidden") === false;
     toggle.setAttribute("aria-expanded", String(open));
   });
+
+  // On homepage: switch nav CTA to primary style once user scrolls past hero
+  const cta = document.getElementById("nav-cta");
+  if (cta && window.location.pathname === "/") {
+    const hero = document.querySelector("section");
+    if (hero) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            cta.classList.remove("bg-primary", "text-primary-foreground");
+            cta.classList.add("border", "border-input-border", "text-heading", "hover:bg-accent", "hover:text-accent-foreground");
+          } else {
+            cta.classList.add("bg-primary", "text-primary-foreground");
+            cta.classList.remove("border", "border-input-border", "text-heading", "hover:bg-accent", "hover:text-accent-foreground");
+          }
+        },
+        { threshold: 0 }
+      );
+      observer.observe(hero);
+    }
+  }
 </script>
