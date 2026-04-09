@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 import { AstroSeo } from "@astrolib/seo";
 import { Schema } from "astro-seo-schema";
 import type { Thing, WithContext } from "schema-dts";
+import ogImageDefault from "@/assets/og-image.png";
 
 interface Props {
 	title?: string;
@@ -24,7 +25,7 @@ const {
 	title: pageTitle,
 	description = SITE_DESCRIPTION,
 	noindex = false,
-	socialImageUrl,
+	socialImageUrl = new URL(ogImageDefault.src, url.origin).href,
 	schema,
 } = Astro.props;
 
@@ -51,7 +52,7 @@ const isDev = import.meta.env.DEV;
         description,
         url: url.href,
         type: "website",
-        ...(socialImageUrl && { images: [{ url: socialImageUrl, alt: title }] }),
+        images: [{ url: socialImageUrl, alt: title }],
       }}
     />
     {schema && (Array.isArray(schema)
