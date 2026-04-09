@@ -1,11 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { ArrowLeft, Globe, Clock } from "lucide-react";
+import cfCustomImage from "@/assets/cf-custom.jpg";
 ---
 
 <Layout
   title="Custom Domain on Cloudflare"
-  description="How to connect your own domain to your Cloudflare Pages site. Takes about 5 minutes."
+  description="How to connect your own domain to your Cloudflare Worker. Takes about 5 minutes."
 >
   <article class="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <a href="/guides" class="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-heading transition-colors mb-10">
@@ -27,54 +28,46 @@ import { ArrowLeft, Globe, Clock } from "lucide-react";
         Custom Domain <br />on Cloudflare
       </h1>
       <p class="mt-6 text-lg text-foreground leading-relaxed">
-        How to connect your own domain (like <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">yourname.com</code>) to your Cloudflare Pages site.
+        How to connect your own domain (like <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">yourname.com</code>) to your Cloudflare Worker.
       </p>
     </header>
 
     <div class="space-y-10 text-foreground leading-relaxed">
       <section>
-        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">1. Open your Pages project</h2>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">1. Add your domain</h2>
+        <p class="mb-5">
+          Go to your Worker page on <a href="https://dash.cloudflare.com" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare</a> and click <strong class="text-heading">Settings</strong>. Under <strong class="text-heading">Domains & Routes</strong>, click <strong class="text-heading">Add → Custom Domain</strong> and enter the domain you want to use.
+        </p>
+        <figure class="rounded-lg border border-border bg-background overflow-hidden shadow-lg">
+          <img
+            src={cfCustomImage.src}
+            width={cfCustomImage.width}
+            height={cfCustomImage.height}
+            alt="Cloudflare Worker Settings page showing Domains & Routes section with the Custom Domain panel open, adding hakuto.dev as a custom domain"
+            loading="eager"
+            decoding="async"
+            class="w-full h-auto block"
+          />
+        </figure>
+      </section>
+
+      <section>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">2. Merge the config PR</h2>
         <p>
-          Go to <a href="https://dash.cloudflare.com" target="_blank" rel="noreferrer" class="text-primary hover:underline">dash.cloudflare.com</a>,
-          pick your Pages project, and open the <strong class="text-heading">Custom domains</strong> tab.
+          Cloudflare will detect that your Wrangler config needs updating and open a Pull Request on GitHub for you. Merge it.
         </p>
       </section>
 
       <section>
-        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">2. Add your domain</h2>
-        <p class="mb-4">
-          Click <strong class="text-heading">Set up a custom domain</strong> and enter the domain you want to use
-          (apex like <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">yourname.com</code> or a
-          subdomain like <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">www.yourname.com</code>).
-        </p>
+        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">3. Disable the workers.dev domain</h2>
         <p>
-          If your domain's DNS is already managed by Cloudflare, the record will be added automatically.
-          Otherwise, Cloudflare will show you the exact DNS record to create at your registrar.
+          We recommend disabling the <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">workers.dev</code> domain so you don't run into issues with that site getting indexed instead of your main domain. When Cloudflare prompts you, <strong class="text-heading">don't disable preview URLs</strong> — you'll want those for PR previews.
         </p>
-      </section>
-
-      <section>
-        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">3. Wait for SSL</h2>
-        <p>
-          Cloudflare provisions a free SSL certificate automatically. This usually takes under a minute,
-          but can occasionally take longer. Once it's active, your site will be live on the custom domain.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="font-mono text-2xl font-semibold text-heading mb-4">4. Update Hakuto config</h2>
-        <p class="mb-4">
-          Update <code class="font-mono text-heading bg-muted px-1.5 py-0.5 rounded">.hakuto/config.json</code> with your domain so Astro generates correct absolute URLs for sitemaps, canonical tags, and social images:
-        </p>
-        <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 overflow-x-auto text-heading"><code>{`{
-  "domain": "yourname.com",
-  "siteName": "Your Site"
-}`}</code></pre>
       </section>
 
       <section class="border-t border-border pt-8">
         <p class="text-foreground">
-          That's it. Push to main and your site is live on your domain.
+          That's all there is to it. Your site is now live on your custom domain.
         </p>
       </section>
     </div>
