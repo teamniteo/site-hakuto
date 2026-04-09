@@ -33,11 +33,12 @@ const steps: Step[] = [
     Icon: ListChecks,
     title: "Before you start",
     intro:
-      "A few free accounts and tools you'll need. Grab anything you're missing and come back — the rest takes about 10 minutes.",
+      "A few free accounts and tools you'll need. Grab anything you're missing and come back. The rest takes about 5 minutes.",
     checklist: [
-      `A <a href="https://github.com/signup" target="_blank" rel="noreferrer" class="text-primary hover:underline">GitHub account</a> (free) — to host your site's code`,
-      `A <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare account</a> (free) — to deploy and host your site`,
-      `A code editor — if you don't have one, <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" class="text-primary hover:underline">Visual Studio Code</a> (free) is a solid choice`,
+      `A <a href="https://claude.ai/code" target="_blank" rel="noreferrer" class="text-primary hover:underline">Claude Code</a> account, the AI coding agent that builds your site.`,
+      `A <a href="https://github.com/signup" target="_blank" rel="noreferrer" class="text-primary hover:underline">GitHub account</a> (free) to host your site's code.`,
+      `A <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare account</a> (free) to deploy and host your site.`,
+      `A code editor. If you don't have one, <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" class="text-primary hover:underline">Visual Studio Code</a> (free) is a solid choice.`,
     ],
     outro: "Got everything? Let's clone the repo.",
   },
@@ -54,44 +55,41 @@ const steps: Step[] = [
     Icon: GitPullRequest,
     title: "Push to your GitHub",
     intro:
-      "Create a new empty repo on GitHub, then point your local clone at it and push:",
-    code: `git remote set-url origin https://github.com/YOUR_USERNAME/YOUR_REPO.git\ngit push -u origin main`,
+      "Make sure you have the GitHub MCP server or GitHub CLI installed in Claude Code. If you're not sure, just ask Claude to help you set it up. Then give it this prompt:",
+    code: `Create new repository 'my-website' and push.`,
     outro: "Your code now lives on GitHub and is ready to deploy.",
   },
   {
     key: "cloudflare",
     label: "Deploy",
     Icon: Cloud,
-    title: "Connect to Cloudflare Pages",
-    intro: "Cloudflare Pages gives you a free, globally distributed host with PR previews baked in.",
+    title: "Deploy to Cloudflare",
+    intro: "Cloudflare gives you a free, globally distributed host with PR previews baked in.",
     checklist: [
-      "Open pages.cloudflare.com and click Create a project → Connect to Git",
-      "Select the repository you just pushed",
-      "Set build command to: npm run build",
-      "Set output directory to: dist",
-      "Click Save and Deploy",
+      `Go to <a href="https://dash.cloudflare.com" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare</a>, open <strong class="text-heading">Compute → Workers & Pages</strong> and click the <strong class="text-heading">Create Application</strong> button in the top right.`,
+      `Select <strong class="text-heading">Continue with GitHub</strong>, then pick your organization and repository.`,
+      `It will figure out the build and deploy commands on its own. Click <strong class="text-heading">Deploy</strong> without changing anything.`,
+      `Wait for the site to be deployed. Once it's done, you'll get redirected to the Worker page. Click <strong class="text-heading">Visit</strong> to see your live site on a Cloudflare subdomain.`,
+      `You can set up a custom domain under Settings. More on that in our <a href="/guides/custom-domain" class="text-primary hover:underline">custom domain guide</a>, but you can skip it for now.`,
     ],
-    outro: "Your site is now live on a free Cloudflare URL.",
+    outro: "Your site is live. Time to make it yours.",
   },
   {
     key: "claude",
     label: "Claude",
     Icon: Code,
     title: "Open it in Claude Code",
-    intro: "Open the project in Claude Code and describe what you want to build:",
-    code: `claude .`,
+    intro: "Open the project in Claude Code and describe what you want to build. Here's an example prompt:",
+    code: `Build a website for an analytics SaaS.\nUse a modern, bold style with sharp typography and vibrant accents.\nWrite convincing, benefit-driven copy that speaks to data teams.\nInclude a hero section, feature grid, pricing table, and a call-to-action.`,
     outro:
-      "Claude already knows how to work with your project — the Skills are included in the repo.",
+      "Claude already knows how to work with your project. The Skills are included in the repo.",
   },
   {
     key: "ship",
     label: "Ship",
     Icon: Terminal,
-    title: "Ship with preview URLs",
-    intro: "Push a branch, open a PR, and Cloudflare will build a shareable preview URL automatically:",
-    code: `git checkout -b my-changes\n# make your changes\ngit add . && git commit -m "update hero section"\ngit push origin my-changes`,
-    outro:
-      "Open a Pull Request on GitHub. Cloudflare spins up a live preview URL — merge the PR to promote it to production.",
+    title: "Preview and ship",
+    // Custom-rendered below — see step.key === "ship" branch.
   },
 ];
 
@@ -120,7 +118,7 @@ const isLast = currentIndex === total - 1;
 
 <Layout
   title={`Start — ${step.label}`}
-  description="Get your Hakuto site running in 10 minutes with a step-by-step walkthrough."
+  description="Get your Hakuto site running in 5 minutes with a step-by-step walkthrough."
 >
   <!-- HERO -->
   <section class="border-b border-border">
@@ -129,7 +127,7 @@ const isLast = currentIndex === total - 1;
         // Onboarding
       </p>
       <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-heading leading-[1.1]">
-        Get your site running <span class="text-primary">in 10 minutes</span>
+        Get your site running <span class="text-primary">in 5 minutes</span>
       </h1>
     </div>
   </section>
@@ -205,7 +203,7 @@ const isLast = currentIndex === total - 1;
               <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
                 <div class="lg:col-span-2 space-y-5">
                   <p class="text-foreground leading-relaxed">
-                    Open <span class="font-semibold text-heading">Visual Studio Code</span> (or your preferred editor) and clone the Hakuto template straight from GitHub — no terminal required.
+                    Open <span class="font-semibold text-heading">Visual Studio Code</span> (or your preferred editor) and clone the Hakuto template straight from GitHub.
                   </p>
                   <ol class="space-y-3 text-foreground">
                     <li class="flex items-start gap-3">
@@ -237,8 +235,8 @@ const isLast = currentIndex === total - 1;
                       </span>
                     </button>
                   </div>
-                  <p class="text-sm text-muted-foreground leading-relaxed">
-                    VS Code will download the template and ask you to open the folder — say yes. You now have a ready-to-go Astro project with all Hakuto Skills included.
+                  <p class="text-foreground leading-relaxed">
+                    VS Code will download the template and ask you to open the folder. Click yes. You now have a ready-to-go Astro project with all Hakuto Skills included.
                   </p>
                 </div>
                 <figure class="lg:col-span-3 rounded-lg border border-border bg-background overflow-hidden shadow-lg">
@@ -257,7 +255,50 @@ const isLast = currentIndex === total - 1;
           }
 
           {
-            step.key !== "clone" && step.intro && (
+            step.key === "ship" && (
+              <div class="space-y-5">
+                <p class="text-foreground leading-relaxed">
+                  You don't need to go live immediately to see changes online. Cloudflare will create a preview URL for every Pull Request. Tell Claude:
+                </p>
+                <div class="relative group">
+                  <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>Open PR for these changes.</code></pre>
+                  <button
+                    type="button"
+                    class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                    data-copy-btn
+                    aria-label="Copy command to clipboard"
+                  >
+                    <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                    <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                  </button>
+                </div>
+                <p class="text-foreground leading-relaxed">
+                  Go to the PR on GitHub and wait a few seconds for the Cloudflare comment to appear with the branch preview URL.
+                </p>
+                <p class="text-foreground leading-relaxed">
+                  If you're happy with the changes, merge the PR. If not, keep working with Claude and then tell it to:
+                </p>
+                <div class="relative group">
+                  <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>Commit changes.</code></pre>
+                  <button
+                    type="button"
+                    class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                    data-copy-btn
+                    aria-label="Copy command to clipboard"
+                  >
+                    <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                    <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                  </button>
+                </div>
+                <p class="text-foreground leading-relaxed">
+                  That pushes the new commit and relaunches the preview URL with your latest changes.
+                </p>
+              </div>
+            )
+          }
+
+          {
+            step.key !== "clone" && step.key !== "ship" && step.intro && (
               <p class="text-foreground leading-relaxed mb-5">{step.intro}</p>
             )
           }
@@ -300,7 +341,7 @@ const isLast = currentIndex === total - 1;
 
           {
             step.outro && (
-              <p class="mt-5 text-base text-muted-foreground leading-relaxed">
+              <p class="mt-5 text-foreground leading-relaxed">
                 {step.outro}
               </p>
             )
@@ -344,13 +385,13 @@ const isLast = currentIndex === total - 1;
               <ArrowRight className="h-4 w-4" />
             </a>
           ) : (
-            <span
-              class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground opacity-60 cursor-not-allowed"
-              aria-disabled="true"
+            <a
+              href="/guides"
+              class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
             >
-              All done
+              Read our guides
               <ArrowRight className="h-4 w-4" />
-            </span>
+            </a>
           )
         }
       </div>
