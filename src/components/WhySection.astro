@@ -1,0 +1,56 @@
+---
+import { Zap, Eye, Wrench, Layers } from "lucide-react";
+
+const reasons = [
+  {
+    Icon: Zap,
+    label: "Performance",
+    title: "Static HTML on 300+ edge nodes",
+    body: "Astro pre-renders every page at build time. Cloudflare serves it from the nearest edge location. No server round-trips, no cold starts.",
+  },
+  {
+    Icon: Eye,
+    label: "Preview sites",
+    title: "Live preview URLs on every PR",
+    body: "Open a pull request and Cloudflare deploys a preview automatically. Review on a real URL before you merge.",
+  },
+  {
+    Icon: Wrench,
+    label: "Your tools",
+    title: "Claude Code, GitHub, your editor",
+    body: "No new accounts, no new workflows. Hakuto runs on the tools you already use. Cloudflare hosts it for free.",
+  },
+  {
+    Icon: Layers,
+    label: "Flexibility",
+    title: "No templates, no constraints",
+    body: "A blog post with its own layout. A docs section next to a marketing page. AI generates each page from code, not from a CMS template.",
+  },
+];
+---
+
+<section id="why" class="border-t border-border">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="max-w-2xl mb-14">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-4">
+        // Why Hakuto
+      </p>
+      <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
+        Fast, flexible, and<br />entirely yours
+      </h2>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      {reasons.map(({ Icon, label, title, body }) => (
+        <div class="group relative border border-border rounded-lg p-7 bg-card hover:border-primary/50 transition-colors">
+          <div class="flex items-center justify-between mb-5">
+            <span class="font-mono text-xs uppercase tracking-[0.2em] text-primary">{label}</span>
+            <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+          </div>
+          <h3 class="font-mono text-xl font-semibold text-heading mb-3">{title}</h3>
+          <p class="text-base text-foreground leading-relaxed">{body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

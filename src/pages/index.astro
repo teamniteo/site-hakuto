@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import WhySection from "@/components/WhySection.astro";
 import { Rocket, GitBranch, Terminal, Sparkles, Github, ArrowRight, Check } from "lucide-react";
 import type { WebSite, SoftwareSourceCode } from "schema-dts";
 
@@ -60,7 +61,7 @@ const audiences = [
     ></div>
     <div
       aria-hidden="true"
-      class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"
+      class="absolute top-0 right-0 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"
     ></div>
 
     <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-32 sm:pb-28">
@@ -129,6 +130,9 @@ const audiences = [
     </div>
   </section>
 
+  <!-- WHY HAKUTO -->
+  <WhySection />
+
   <!-- WHAT IT IS -->
   <section class="border-t border-border">
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-24 grid gap-12 lg:grid-cols-12">
@@ -137,7 +141,7 @@ const audiences = [
           // What it is
         </p>
         <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
-          A scaffold, <br />not a platform.
+          A scaffold, <br />not a platform
         </h2>
       </div>
       <div class="lg:col-span-8 space-y-6 text-lg leading-relaxed text-foreground">
@@ -148,7 +152,7 @@ const audiences = [
           optimization, and accessibility, and a workflow for deploying to
           Cloudflare in minutes.
         </p>
-        <p class="text-muted-foreground">
+        <p class="text-foreground">
           No visual editor. No proprietary platform. Just Claude, your repo, and
           free hosting.
         </p>
@@ -164,7 +168,7 @@ const audiences = [
           // How it works
         </p>
         <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
-          Three steps from clone to shipped.
+          Three steps from clone to shipped
         </h2>
       </div>
 
@@ -176,7 +180,7 @@ const audiences = [
               <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </div>
             <h3 class="font-mono text-xl font-semibold text-heading mb-3">{title}</h3>
-            <p class="text-base text-muted-foreground leading-relaxed">{body}</p>
+            <p class="text-base text-foreground leading-relaxed">{body}</p>
           </div>
         ))}
       </div>
@@ -201,7 +205,7 @@ const audiences = [
           // Who it's for
         </p>
         <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
-          If you live in Claude Code, <br />this is for you.
+          Built for people who<br />already live in the terminal
         </h2>
         <p class="mt-6 text-lg text-foreground leading-relaxed max-w-md">
           Hakuto is for people who want a fast, clean website without managing
@@ -236,7 +240,7 @@ const audiences = [
             Free &amp; open source
           </div>
           <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
-            Hakuto is free. Forever.
+            Free and open source, no strings
           </h2>
           <p class="mt-5 text-lg text-foreground leading-relaxed">
             The framework and Skills are open source on GitHub. There's no account required to
