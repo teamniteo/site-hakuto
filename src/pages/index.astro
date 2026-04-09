@@ -55,11 +55,19 @@ const audiences = [
 <Layout title="Site Builder for Claude Code" schema={[websiteSchema, codeSchema]}>
   <!-- HERO -->
   <section class="relative overflow-hidden">
+    <!-- Animated dot grid — drifts slowly upward, seamless loop -->
     <div
       aria-hidden="true"
-      class="absolute inset-0 pointer-events-none opacity-[0.18]"
-      style="background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0); background-size: 32px 32px; mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, black 40%, transparent 80%);"
-    ></div>
+      class="absolute inset-0 pointer-events-none"
+      style="mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, black 30%, transparent 75%);"
+    >
+      <div
+        class="absolute top-0 left-0 right-0 opacity-[0.22] dot-drift"
+        style="background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0); background-size: 32px 32px; height: calc(100% + 32px);"
+      ></div>
+    </div>
+
+    <!-- Ambient glow -->
     <div
       aria-hidden="true"
       class="absolute top-0 right-0 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"
@@ -117,29 +125,29 @@ const audiences = [
       </div>
     </div>
 
-    <!-- LOGO STRIP -->
+    <!-- BUILT WITH -->
     <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-      <div class="border-t border-border pt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-        <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground whitespace-nowrap">
-          Built on
+      <div class="rounded-lg border border-border bg-card/50 backdrop-blur-sm px-6 py-5">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+          Built with
         </p>
-        <div class="flex flex-wrap items-center gap-x-10 gap-y-4 font-mono text-heading">
-          <span class="inline-flex items-center gap-2 text-base">
-            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="flex items-center gap-2.5 rounded-md bg-muted/40 px-3.5 py-2.5 font-mono text-sm text-heading">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
             Claude Code
-          </span>
-          <span class="inline-flex items-center gap-2 text-base">
-            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
-            Astro
-          </span>
-          <span class="inline-flex items-center gap-2 text-base">
-            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-md bg-muted/40 px-3.5 py-2.5 font-mono text-sm text-heading">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
+            Astro Framework
+          </div>
+          <div class="flex items-center gap-2.5 rounded-md bg-muted/40 px-3.5 py-2.5 font-mono text-sm text-heading">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
             Tailwind CSS
-          </span>
-          <span class="inline-flex items-center gap-2 text-base">
-            <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-md bg-muted/40 px-3.5 py-2.5 font-mono text-sm text-heading">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
             Cloudflare
-          </span>
+          </div>
         </div>
       </div>
     </div>

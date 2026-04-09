@@ -44,6 +44,17 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-step-in: step-in 0.25s ease-out;
 
+  @keyframes dot-drift {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-32px);
+    }
+  }
+
+
+
   @keyframes step-in {
     from {
       transform: translateY(8px);
@@ -160,5 +171,15 @@
   input::placeholder,
   textarea::placeholder {
     color: hsl(var(--muted-foreground));
+  }
+
+  .dot-drift {
+    animation: dot-drift 5s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot-drift {
+      animation: none !important;
+    }
   }
 }

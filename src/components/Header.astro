@@ -1,11 +1,12 @@
 ---
 import HakutoLogo from "@/assets/hakuto-dark.svg";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 const nav = [
   { href: "/skills", label: "Skills" },
   { href: "/mcps", label: "MCPs" },
   { href: "/docs", label: "Docs" },
+  { href: "https://github.com/teamniteo/hakuto/discussions", label: "Community", external: true },
 ];
 
 const isHome = Astro.url.pathname === "/";
@@ -21,9 +22,11 @@ const isHome = Astro.url.pathname === "/";
       {nav.map((item) => (
         <a
           href={item.href}
-          class="text-muted-foreground hover:text-heading transition-colors"
+          class="text-muted-foreground hover:text-heading transition-colors inline-flex items-center gap-1"
+          {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}
         >
           {item.label}
+          {item.external && <ExternalLink className="h-3 w-3" />}
         </a>
       ))}
       <a
@@ -54,8 +57,13 @@ const isHome = Astro.url.pathname === "/";
   <div id="mobile-nav" class="hidden md:hidden border-t border-border bg-card">
     <nav class="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-3 font-mono text-sm">
       {nav.map((item) => (
-        <a href={item.href} class="text-muted-foreground hover:text-heading transition-colors">
+        <a
+          href={item.href}
+          class="text-muted-foreground hover:text-heading transition-colors inline-flex items-center gap-1"
+          {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}
+        >
           {item.label}
+          {item.external && <ExternalLink className="h-3 w-3" />}
         </a>
       ))}
       <a
