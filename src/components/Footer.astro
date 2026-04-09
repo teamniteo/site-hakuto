@@ -6,17 +6,16 @@ const year = new Date().getFullYear();
 <footer class="border-t border-border bg-card mt-auto">
   <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid gap-10 md:grid-cols-12">
-      <div class="md:col-span-5">
+      <div class="md:col-span-6">
         <a href="/" class="inline-flex items-center text-heading" aria-label="Hakuto home">
-          <HakutoLogo class="h-7 w-auto" />
+          <HakutoLogo class="h-7 w-auto [&_path]:fill-current text-muted-foreground" />
         </a>
         <p class="mt-4 text-sm text-muted-foreground max-w-sm leading-relaxed">
-          Hakuto is free and open source. A collection of Skills and workflows that
-          teach Claude Code how to build fast, modern Astro sites.
+          Hakuto free and open source Astro site builder framework for Claude Code.
         </p>
       </div>
 
-      <div class="md:col-span-2">
+      <div class="md:col-span-3">
         <p class="font-mono text-xs uppercase tracking-[0.15em] text-heading mb-3">Docs</p>
         <ul class="space-y-2 text-sm">
           <li><a href="/start" class="text-muted-foreground hover:text-heading transition-colors">Start</a></li>
@@ -26,7 +25,7 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <div class="md:col-span-2">
+      <div class="md:col-span-3">
         <p class="font-mono text-xs uppercase tracking-[0.15em] text-heading mb-3">Community</p>
         <ul class="space-y-2 text-sm">
           <li>
@@ -42,20 +41,11 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <div class="md:col-span-3">
-        <p class="font-mono text-xs uppercase tracking-[0.15em] text-heading mb-3">Built by</p>
-        <a href="https://niteo.co" target="_blank" rel="noreferrer" class="text-sm text-muted-foreground hover:text-heading transition-colors">
-          Niteo, a bootstrapped SaaS studio shipping since 2007. ↗
-        </a>
-      </div>
     </div>
 
-    <div class="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+    <div class="mt-10 pt-6 border-t border-border text-center">
       <p class="font-mono text-xs text-muted-foreground">
-        © {year} Hakuto. Open source under the MIT license.
-      </p>
-      <p class="font-mono text-xs text-muted-foreground">
-        Built with Astro, Tailwind, and Claude Code.
+        © {year} Built by <a href="https://niteo.co" target="_blank" rel="noreferrer" class="hover:text-heading transition-colors">Niteo</a> with Hakuto
       </p>
     </div>
   </div>
