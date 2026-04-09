@@ -1,6 +1,6 @@
 ---
 title: "GitHub Newbies"
-description: "A plain-English guide to Git and GitHub for non-developers using Hakuto with Claude Code."
+description: "A plain-English guide to Git and GitHub for non-developers. Covers commits, branches, pull requests, and common tasks when using Hakuto."
 category: "tips"
 order: 4
 ---

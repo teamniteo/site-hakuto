@@ -1,6 +1,6 @@
 ---
-title: "Skills"
-description: "Pre-built AI workflows that extend your Hakuto site with powerful capabilities."
+title: "Skills Customization"
+description: "How Hakuto Skills work, what each built-in Skill does, and how to create your own custom Skills to extend Claude Code for your project."
 category: "customization"
 order: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Create Docs Pages"
-description: "Add a documentation section with sidebar navigation and search to your Hakuto site."
+description: "Add a documentation section to your Hakuto site with sidebar navigation, content collections, and organized category pages."
 category: "tips"
 order: 2
 ---

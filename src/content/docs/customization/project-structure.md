@@ -1,6 +1,6 @@
 ---
 title: "Project Structure"
-description: "Understand how a Hakuto project is organized and where to find key files."
+description: "Understand how a Hakuto project is organized — directory layout, key config files, page routing, and where components live."
 category: "customization"
 order: 2
 ---

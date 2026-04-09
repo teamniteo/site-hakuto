@@ -1,6 +1,6 @@
 ---
 title: "Create a Blog"
-description: "Add a full blog to your Hakuto site — with a listing page, post templates, and category pages."
+description: "Add a blog to your Hakuto site with a listing page, post templates, and category pages. Use the built-in Skill or build it manually."
 category: "tips"
 order: 1
 ---

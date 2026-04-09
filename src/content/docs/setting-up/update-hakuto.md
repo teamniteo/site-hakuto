@@ -1,6 +1,6 @@
 ---
 title: "Update Hakuto"
-description: "How to update your Hakuto site to the latest version of the template."
+description: "How to update your Hakuto site to the latest template version — pull the newest release, update Skills, Tailwind CSS, and Astro dependencies."
 category: "setting-up"
 order: 4
 ---

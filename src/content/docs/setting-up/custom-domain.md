@@ -1,6 +1,6 @@
 ---
 title: "Custom Domain"
-description: "How to connect your own domain to your Cloudflare Worker. Takes about 5 minutes."
+description: "Connect your own domain to your Cloudflare Worker in three steps — add the domain, merge the config PR, and disable the workers.dev URL."
 category: "setting-up"
 order: 2
 ---

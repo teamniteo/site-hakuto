@@ -52,9 +52,10 @@ const isDev = import.meta.env.DEV;
         description,
         url: url.href,
         type: "website",
-        images: [{ url: socialImageUrl, alt: title }],
       }}
     />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content={title} />
     {schema && (Array.isArray(schema)
       ? schema.map((s) => <Schema item={s} />)
       : <Schema item={schema} />

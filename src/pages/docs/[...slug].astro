@@ -1,6 +1,7 @@
 ---
 import DocsLayout from "@/layouts/DocsLayout.astro";
 import { getCollection, render } from "astro:content";
+import type { Article } from "schema-dts";
 
 export async function getStaticPaths() {
   const docs = await getCollection("docs", ({ data }) => !data.draft);
@@ -12,6 +13,19 @@ export async function getStaticPaths() {
 
 const { doc } = Astro.props;
 const { Content, headings } = await render(doc);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: doc.data.title,
+  description: doc.data.description,
+  url: new URL(`/docs/${doc.id}`, Astro.url.origin).href,
+  publisher: {
+    "@type": "Organization",
+    name: "Hakuto",
+    url: Astro.url.origin,
+  },
+} satisfies Article;
 
 // Build prev/next navigation
 const allDocs = await getCollection("docs", ({ data }) => !data.draft);
@@ -33,6 +47,7 @@ const next = currentIndex < ordered.length - 1 ? ordered[currentIndex + 1] : nul
   title={doc.data.title}
   description={doc.data.description}
   headings={headings}
+  schema={articleSchema}
 >
   <Content />
 

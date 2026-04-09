@@ -19,7 +19,7 @@ const allDocs = await getCollection("docs", ({ data }) => !data.draft);
 const tocHeadings = headings?.filter((h) => h.depth === 2 || h.depth === 3) ?? [];
 ---
 
-<Layout title={title} description={description} schema={schema}>
+<Layout title={`Docs - ${title}`} description={description} schema={schema}>
   <div class="docs-wrapper">
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
       <div class="lg:flex lg:gap-10">

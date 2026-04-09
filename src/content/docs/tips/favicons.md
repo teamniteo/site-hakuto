@@ -1,6 +1,6 @@
 ---
 title: "Favicons"
-description: "Add custom favicons to your Hakuto site, including dark mode and light mode variants."
+description: "Add custom favicons to your Hakuto site. Covers SVG and PNG sources, dark mode and light mode variants, and how the favicons plugin works."
 category: "tips"
 order: 3
 ---

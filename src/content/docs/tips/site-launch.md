@@ -1,6 +1,6 @@
 ---
 title: "Site Launch"
-description: "A pre-launch checklist to make sure your Hakuto site is ready to go live."
+description: "A pre-launch checklist for your Hakuto site — content review, technical checks, performance validation, and what to do after going live."
 category: "tips"
 order: 5
 ---

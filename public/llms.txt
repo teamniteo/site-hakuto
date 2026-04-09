@@ -1,0 +1,39 @@
+# Hakuto
+
+> A free, open-source site builder for Claude Code. Clone, build with AI, deploy to Cloudflare.
+
+Hakuto is a collection of Skills and workflows for building fast, modern Astro websites with Claude Code. It gives AI the context it needs to produce production-quality pages — from design systems and SEO to forms, blogs, and analytics.
+
+## Key Details
+
+- Built on Astro, Tailwind CSS v4, and shadcn/ui
+- Deployed to Cloudflare Workers with PR preview URLs
+- Skills teach Claude Code how to build pages, handle SEO, optimize images, and more
+- Free and open source (MIT license)
+- Repository: https://github.com/teamniteo/hakuto
+
+## Getting Started
+
+- [Quick Start](https://hakuto.dev/docs/setting-up/quick-start): Get your first site running in 5 minutes
+- [Step-by-step Setup](https://hakuto.dev/start/prep): Guided walkthrough from accounts to deployment
+
+## Documentation
+
+- [Docs Home](https://hakuto.dev/docs): All guides and references
+- [Quick Start](https://hakuto.dev/docs/setting-up/quick-start): First site in 5 minutes
+- [Contact Form](https://hakuto.dev/docs/setting-up/contact-form): Add forms with Cloudflare Workers
+- [Custom Domain](https://hakuto.dev/docs/setting-up/custom-domain): Connect your own domain
+- [Environment Variables](https://hakuto.dev/docs/setting-up/environment-variables): Manage secrets and config
+- [Update Hakuto](https://hakuto.dev/docs/setting-up/update-hakuto): Stay on the latest version
+- [Create a Blog](https://hakuto.dev/docs/tips/create-a-blog): Add blog pages with listings and categories
+- [Create Docs Pages](https://hakuto.dev/docs/tips/create-docs-pages): Add documentation with sidebar nav
+- [Favicons](https://hakuto.dev/docs/tips/favicons): Custom favicons with dark/light mode
+- [GitHub Newbies](https://hakuto.dev/docs/tips/github-newbies): Git and GitHub for non-developers
+- [Site Launch](https://hakuto.dev/docs/tips/site-launch): Pre-launch checklist
+- [Project Structure](https://hakuto.dev/docs/customization/project-structure): Directory layout and key files
+- [Skills Customization](https://hakuto.dev/docs/customization/skills): Built-in and custom Skills
+
+## Other Pages
+
+- [Skills](https://hakuto.dev/skills): What Claude Code knows how to do
+- [MCPs](https://hakuto.dev/mcps): Upcoming paid extensions
