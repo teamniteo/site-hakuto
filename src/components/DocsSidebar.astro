@@ -1,0 +1,266 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Search from "astro-pagefind/components/Search";
+
+interface Props {
+  docs: CollectionEntry<"docs">[];
+}
+
+interface SidebarCategory {
+  label: string;
+  slug: string;
+  items: { title: string; href: string; id: string }[];
+}
+
+const { docs } = Astro.props;
+
+const categoryOrder = ["setting-up", "tips", "customization"];
+const categoryLabels: Record<string, string> = {
+  "setting-up": "Setting Up",
+  tips: "Tips",
+  customization: "Customization",
+};
+
+const categories: SidebarCategory[] = categoryOrder
+  .map((slug) => ({
+    label: categoryLabels[slug] || slug,
+    slug,
+    items: docs
+      .filter((doc) => doc.data.category === slug)
+      .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+      .map((doc) => ({
+        title: doc.data.title,
+        href: `/docs/${doc.id}`,
+        id: doc.id,
+      })),
+  }))
+  .filter((cat) => cat.items.length > 0);
+
+// Hardcoded "Welcome" links to /docs home (top of sidebar, before categories)
+const welcomeItem = { title: "Welcome", href: "/docs", id: "__welcome" };
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
+---
+
+<!-- Desktop sidebar -->
+<aside class="docs-sidebar hidden lg:flex flex-col w-[220px] shrink-0">
+  <div class="docs-sidebar-search px-2 pb-3">
+    <Search
+      id="docs-search"
+      className="pagefind-ui"
+      uiOptions={{ showImages: false, showSubResults: false }}
+    />
+  </div>
+
+  <nav class="docs-sidebar-nav flex-1 overflow-y-auto pb-8">
+    <div class="mb-5">
+      <ul>
+        <li>
+          <a
+            href={welcomeItem.href}
+            class:list={["docs-sidebar-link", currentPath === welcomeItem.href && "active"]}
+          >
+            {welcomeItem.title}
+          </a>
+        </li>
+      </ul>
+    </div>
+    {categories.map((cat) => (
+      <div class="mb-5">
+        <p class="docs-sidebar-label">{cat.label}</p>
+        <ul>
+          {cat.items.map((item) => {
+            const isActive = currentPath === item.href;
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={["docs-sidebar-link", isActive && "active"]}
+                >
+                  {item.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </nav>
+
+  <div class="docs-sidebar-footer">
+    <a href="https://github.com/teamniteo/hakuto" target="_blank" rel="noreferrer">
+      GitHub ↗
+    </a>
+  </div>
+</aside>
+
+<!-- Mobile nav -->
+<div class="docs-mobile-bar lg:hidden sticky top-16 z-30">
+  <div class="px-4">
+    <button
+      id="docs-mobile-toggle"
+      class="docs-mobile-toggle"
+      aria-expanded="false"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </button>
+  </div>
+  <div id="docs-mobile-nav" class="docs-mobile-panel hidden">
+    <div class="mb-4">
+      <Search
+        id="docs-search-mobile"
+        className="pagefind-ui"
+        uiOptions={{ showImages: false, showSubResults: false }}
+      />
+    </div>
+    <div class="mb-4">
+      <ul>
+        <li>
+          <a
+            href={welcomeItem.href}
+            class:list={["docs-sidebar-link", currentPath === welcomeItem.href && "active"]}
+          >
+            {welcomeItem.title}
+          </a>
+        </li>
+      </ul>
+    </div>
+    {categories.map((cat) => (
+      <div class="mb-4">
+        <p class="docs-sidebar-label">{cat.label}</p>
+        <ul>
+          {cat.items.map((item) => {
+            const isActive = currentPath === item.href;
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={["docs-sidebar-link", isActive && "active"]}
+                >
+                  {item.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById("docs-mobile-toggle");
+  const nav = document.getElementById("docs-mobile-nav");
+  toggle?.addEventListener("click", () => {
+    const open = nav?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+</script>
+
+<style is:global>
+  /* Sidebar chrome */
+  .docs-sidebar {
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    align-self: flex-start;
+  }
+
+  .docs-sidebar-label {
+    padding: 0 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--docs-muted);
+  }
+
+  .docs-sidebar-link {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    font-size: 14px;
+    line-height: 1.4;
+    border-radius: 4px;
+    color: var(--docs-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .docs-sidebar-link:hover {
+    color: var(--docs-text);
+  }
+
+  .docs-sidebar-link.active {
+    color: var(--docs-link);
+    font-weight: 500;
+    background: var(--docs-link-bg);
+  }
+
+  .docs-sidebar-footer {
+    border-top: 1px solid var(--docs-border);
+    padding: 0.75rem 0.5rem;
+    font-size: 12px;
+  }
+
+  .docs-sidebar-footer a {
+    color: var(--docs-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .docs-sidebar-footer a:hover {
+    color: var(--docs-text);
+  }
+
+  /* Mobile bar */
+  .docs-mobile-bar {
+    border-bottom: 1px solid var(--docs-border);
+    background: var(--docs-bg);
+  }
+
+  .docs-mobile-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    font-size: 13px;
+    color: var(--docs-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .docs-mobile-toggle:hover {
+    color: var(--docs-text);
+  }
+
+  .docs-mobile-panel {
+    border-top: 1px solid var(--docs-border);
+    background: var(--docs-bg);
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  /* Pagefind — reset site globals leaking into the widget */
+  .docs-sidebar .pagefind-ui,
+  .docs-mobile-panel .pagefind-ui {
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: var(--docs-link);
+    --pagefind-ui-text: var(--docs-text);
+    --pagefind-ui-background: var(--docs-bg-code);
+    --pagefind-ui-border: var(--docs-border);
+    --pagefind-ui-border-width: 1px;
+  }
+
+  /* Reset the global input overrides from index.css */
+  .docs-sidebar .pagefind-ui input,
+  .docs-mobile-panel .pagefind-ui input {
+    background-color: var(--docs-bg-code) !important;
+    color: var(--docs-text) !important;
+    border-color: var(--docs-border) !important;
+  }
+</style>

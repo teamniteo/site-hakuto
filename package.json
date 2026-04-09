@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --open",
+    "dev:fresh": "rm -f .astro/data-store.json && astro dev --open",
     "build": "astro build",
     "lint": "biome lint --write .",
     "check": "astro check",
@@ -12,7 +13,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.7",
-    "@astrojs/cloudflare": "13.1.1",
+    "@astrojs/cloudflare": "^13.1.1",
     "@astrojs/react": "5.0.0",
     "@astrojs/sitemap": "3.7.1",
     "@astrolib/seo": "^1.0.0-beta.8",
@@ -46,7 +47,7 @@
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "6.0.4",
+    "astro": "^6.0.4",
     "astro-favicons": "^3.1.6",
     "astro-grab": "^0.1.6",
     "astro-llm": "^0.1.0",

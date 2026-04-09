@@ -1,0 +1,99 @@
+---
+import DocsLayout from "@/layouts/DocsLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs", ({ data }) => !data.draft);
+  return docs.map((doc) => ({
+    params: { slug: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content, headings } = await render(doc);
+
+// Build prev/next navigation
+const allDocs = await getCollection("docs", ({ data }) => !data.draft);
+
+const categoryOrder = ["setting-up", "tips", "customization"];
+const ordered = allDocs.sort((a, b) => {
+  const catA = categoryOrder.indexOf(a.data.category);
+  const catB = categoryOrder.indexOf(b.data.category);
+  if (catA !== catB) return catA - catB;
+  return (a.data.order ?? 99) - (b.data.order ?? 99);
+});
+
+const currentIndex = ordered.findIndex((d) => d.id === doc.id);
+const prev = currentIndex > 0 ? ordered[currentIndex - 1] : null;
+const next = currentIndex < ordered.length - 1 ? ordered[currentIndex + 1] : null;
+---
+
+<DocsLayout
+  title={doc.data.title}
+  description={doc.data.description}
+  headings={headings}
+>
+  <Content />
+
+  <!-- Prev / Next navigation -->
+  <nav class="docs-prev-next">
+    {prev ? (
+      <a href={`/docs/${prev.id}`} class="docs-prev-next-link">
+        <span class="docs-prev-next-label">Previous</span>
+        <span class="docs-prev-next-title">{prev.data.title}</span>
+      </a>
+    ) : <span />}
+    {next ? (
+      <a href={`/docs/${next.id}`} class="docs-prev-next-link docs-prev-next-right">
+        <span class="docs-prev-next-label">Next</span>
+        <span class="docs-prev-next-title">{next.data.title}</span>
+      </a>
+    ) : <span />}
+  </nav>
+</DocsLayout>
+
+<style is:global>
+  .docs-prev-next {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--docs-border);
+  }
+
+  .docs-prev-next-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-decoration: none !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--docs-border);
+    border-radius: 6px;
+    transition: border-color 0.15s;
+    min-width: 0;
+  }
+
+  .docs-prev-next-link:hover {
+    border-color: #333;
+  }
+
+  .docs-prev-next-right {
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .docs-prev-next-label {
+    font-size: 0.75rem;
+    color: var(--docs-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .docs-prev-next-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--docs-link);
+  }
+</style>

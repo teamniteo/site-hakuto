@@ -36,9 +36,14 @@
 - `/` — Homepage: hero, logo strip, "what it is," "how it works" (3 steps),
   "who it's for" (4 personas), open-source CTA block
 - `/start` — 5-step onboarding walkthrough with code blocks on a vertical timeline
-- `/guides` — Listing of two guides with card-style links and "more coming" note
-- `/guides/custom-domain` — Long-form guide, 800px container, numbered sections
-- `/guides/contact-form` — Long-form guide, includes Worker + Astro code samples
+- `/docs` — Documentation home with category card grid (content collections, minimal design system)
+- `/docs/getting-started/welcome` — Introduction to Hakuto
+- `/docs/getting-started/quick-start` — 4-step setup guide
+- `/docs/guides/custom-domain` — Custom domain on Cloudflare (5 min)
+- `/docs/guides/contact-form` — Contact form with Workers (15 min)
+- `/docs/guides/environment-variables` — Secrets and env vars
+- `/docs/customization/skills` — Available Skills reference
+- `/docs/customization/project-structure` — Directory layout and key files
 - `/skills` — 2-column grid of the four included Skills with "try it" prompt examples
 - `/mcps` — Coming-soon page for four upcoming paid MCPs, with notify form
 

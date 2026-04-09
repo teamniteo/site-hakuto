@@ -1,0 +1,287 @@
+---
+import Layout from "./Layout.astro";
+import DocsSidebar from "@/components/DocsSidebar.astro";
+import { getCollection } from "astro:content";
+import type { Thing, WithContext } from "schema-dts";
+
+interface Props {
+  title: string;
+  description?: string;
+  schema?: WithContext<Thing> | WithContext<Thing>[];
+  headings?: { depth: number; slug: string; text: string }[];
+}
+
+const { title, description, schema, headings } = Astro.props;
+
+const allDocs = await getCollection("docs", ({ data }) => !data.draft);
+
+// Filter headings to H2 and H3 for table of contents
+const tocHeadings = headings?.filter((h) => h.depth === 2 || h.depth === 3) ?? [];
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <div class="docs-wrapper">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
+      <div class="lg:flex lg:gap-10">
+        <!-- Sidebar -->
+        <DocsSidebar docs={allDocs} />
+
+        <!-- Main content column -->
+        <article class="docs-article flex-1 min-w-0 max-w-[680px]">
+          <slot />
+        </article>
+
+          <!-- Table of contents (right side) -->
+          {tocHeadings.length > 2 && (
+            <nav class="docs-toc hidden xl:block w-[200px] shrink-0">
+              <div class="sticky top-24">
+                <p class="docs-toc-label">On this page</p>
+                <ul class="docs-toc-list">
+                  {tocHeadings.map((h) => (
+                    <li>
+                      <a
+                        href={`#${h.slug}`}
+                        class:list={["docs-toc-link", h.depth === 3 && "docs-toc-indent"]}
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  /* ── Docs design system (dark, minimal) ── */
+  .docs-wrapper {
+    --docs-bg: #0a0a0a;
+    --docs-bg-code: #222;
+    --docs-text: #e0e0e0;
+    --docs-text-secondary: #999;
+    --docs-muted: #666;
+    --docs-link: #4d90fe;
+    --docs-link-bg: rgba(77, 144, 254, 0.08);
+    --docs-border: #1e1e1e;
+    --docs-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --docs-font-mono: Menlo, Monaco, "Courier New", monospace;
+    background: var(--docs-bg);
+    min-height: calc(100vh - 4rem);
+  }
+
+  .docs-wrapper {
+    font-family: var(--docs-font);
+  }
+
+  .docs-article,
+  .docs-sidebar-nav,
+  .docs-sidebar-label,
+  .docs-sidebar-link,
+  .docs-sidebar-footer,
+  .docs-toc-label,
+  .docs-toc-link,
+  .docs-mobile-bar,
+  .docs-mobile-panel .docs-sidebar-label,
+  .docs-mobile-panel .docs-sidebar-link {
+    font-family: var(--docs-font);
+  }
+
+  /* ── Article prose styling ── */
+  .docs-article h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .docs-article h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #fff;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--docs-border);
+  }
+
+  .docs-article h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #fff;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .docs-article > p,
+  .docs-article > ul,
+  .docs-article > ol,
+  .docs-article > blockquote {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--docs-text);
+    margin-bottom: 1.25rem;
+  }
+
+  .docs-article a {
+    color: var(--docs-link);
+    text-decoration: none;
+  }
+
+  .docs-article a:hover {
+    text-decoration: underline;
+  }
+
+  .docs-article strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Lists */
+  .docs-article ul,
+  .docs-article ol {
+    padding-left: 1.5rem;
+  }
+
+  .docs-article ul {
+    list-style-type: disc;
+  }
+
+  .docs-article ol {
+    list-style-type: decimal;
+  }
+
+  .docs-article li {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+    color: var(--docs-text);
+  }
+
+  .docs-article li strong {
+    color: #fff;
+  }
+
+  /* Inline code */
+  .docs-article code:not(pre code) {
+    font-family: var(--docs-font-mono);
+    font-size: 0.875rem;
+    background: var(--docs-bg-code);
+    border: 1px solid var(--docs-border);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    color: #d4d4d4;
+  }
+
+  /* Code blocks */
+  .docs-article pre {
+    font-family: var(--docs-font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background: var(--docs-bg-code);
+    border: 1px solid var(--docs-border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+    color: #d4d4d4;
+  }
+
+  .docs-article pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* Tables */
+  .docs-article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .docs-article th {
+    text-align: left;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--docs-border);
+  }
+
+  .docs-article td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--docs-border);
+    color: var(--docs-text);
+  }
+
+  .docs-article td code {
+    font-size: 0.8rem;
+  }
+
+  /* Blockquotes (tips/notes) */
+  .docs-article blockquote {
+    border-left: 3px solid var(--docs-border);
+    padding: 0.5rem 1rem;
+    margin: 1.25rem 0;
+    color: var(--docs-text-secondary);
+  }
+
+  .docs-article blockquote p {
+    margin-bottom: 0;
+  }
+
+  .docs-article blockquote strong {
+    color: var(--docs-text);
+  }
+
+  /* Horizontal rules */
+  .docs-article hr {
+    border: none;
+    border-top: 1px solid var(--docs-border);
+    margin: 2rem 0;
+  }
+
+  /* Table of contents */
+  .docs-toc-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--docs-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .docs-toc-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .docs-toc-link {
+    display: block;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--docs-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .docs-toc-link:hover {
+    color: var(--docs-text);
+  }
+
+  .docs-toc-indent {
+    padding-left: 0.75rem;
+  }
+</style>

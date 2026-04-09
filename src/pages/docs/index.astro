@@ -1,76 +1,116 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import { Globe, Mail, ArrowRight, BookOpen } from "lucide-react";
+import DocsLayout from "@/layouts/DocsLayout.astro";
+import { getCollection } from "astro:content";
 
-const guides = [
-  {
-    href: "/docs/custom-domain",
-    title: "Custom Domain on Cloudflare",
-    Icon: Globe,
-    time: "5 min",
-    body: "How to connect your own domain (like yourname.com) to your Cloudflare Worker.",
-  },
-  {
-    href: "/docs/contact-form",
-    title: "Contact Form with Cloudflare Workers",
-    Icon: Mail,
-    time: "15 min",
-    body: "How to add a working contact form to your Astro site using a Cloudflare Worker to handle submissions. No backend required.",
-  },
-];
+const allDocs = await getCollection("docs", ({ data }) => !data.draft);
+
+const categoryOrder = ["setting-up", "tips", "customization"];
+const categoryLabels: Record<string, string> = {
+  "setting-up": "Setting Up",
+  tips: "Tips",
+  customization: "Customization",
+};
+
+const categories = categoryOrder
+  .map((slug) => ({
+    label: categoryLabels[slug] || slug,
+    items: allDocs
+      .filter((doc) => doc.data.category === slug)
+      .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)),
+  }))
+  .filter((cat) => cat.items.length > 0);
 ---
 
-<Layout
+<DocsLayout
   title="Docs"
-  description="Short how-to docs for common tasks when building with Hakuto and Claude Code."
+  description="Learn how to build modern websites with Hakuto and Claude Code."
 >
-  <!-- HERO -->
-  <section class="border-b border-border">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-      <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">
-        // Docs
-      </p>
-      <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-heading leading-[1.1]">
-        Short how-tos <span class="text-primary">for common tasks</span>
-      </h1>
-    </div>
-  </section>
+  <h1>Welcome to Hakuto</h1>
+  <p>
+    Hakuto is a free, open-source framework for building fast, modern websites with <a href="https://astro.build">Astro</a> and <a href="https://claude.ai/code">Claude Code</a>. It gives AI the context it needs to produce production-quality pages — from design systems and SEO to forms, blogs, and analytics.
+  </p>
 
-  <!-- GUIDES LIST -->
-  <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="grid gap-5">
-      {guides.map(({ href, title, Icon, time, body }) => (
-        <a
-          href={href}
-          class="group flex flex-col sm:flex-row items-start gap-6 border border-border rounded-lg p-7 bg-card hover:border-primary/50 transition-colors"
-        >
-          <div class="h-12 w-12 flex-shrink-0 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center">
-            <Icon className="h-5 w-5 text-primary" />
-          </div>
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <h2 class="font-mono text-xl sm:text-2xl font-semibold text-heading group-hover:text-primary transition-colors">
-                {title}
-              </h2>
-              <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground border border-border rounded-full px-2 py-0.5">
-                {time}
-              </span>
-            </div>
-            <p class="text-foreground leading-relaxed">{body}</p>
-          </div>
-          <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all self-center hidden sm:block" />
-        </a>
-      ))}
-    </div>
-
-    <div class="mt-12 border border-dashed border-border rounded-lg p-7 bg-card/50 flex items-start gap-4">
-      <BookOpen className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
-      <div>
-        <p class="font-mono text-sm text-heading mb-1">More docs coming</p>
-        <p class="text-sm text-muted-foreground">
-          Got an idea for a guide? <a href="https://github.com/teamniteo/hakuto/issues" target="_blank" rel="noreferrer" class="text-primary hover:underline">Open an issue</a> and tell us what you want to learn.
-        </p>
+  {categories.map((cat) => (
+    <div>
+      <h2>{cat.label}</h2>
+      <div class="docs-card-grid">
+        {cat.items.map((doc) => (
+          <a href={`/docs/${doc.id}`} class="docs-card">
+            <span class="docs-card-title">{doc.data.title}</span>
+            <span class="docs-card-desc">{doc.data.description}</span>
+          </a>
+        ))}
       </div>
     </div>
-  </section>
-</Layout>
+  ))}
+
+  <div class="docs-help-box">
+    <p>
+      <strong>Need help?</strong> Can't find what you're looking for? <a href="https://github.com/teamniteo/hakuto/discussions" target="_blank" rel="noreferrer">Start a discussion</a> on GitHub or <a href="https://github.com/teamniteo/hakuto/issues" target="_blank" rel="noreferrer">open an issue</a> to request a guide.
+    </p>
+  </div>
+</DocsLayout>
+
+<style is:global>
+  .docs-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .docs-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--docs-border);
+    border-radius: 6px;
+    background: var(--docs-bg-code);
+    text-decoration: none !important;
+    transition: border-color 0.15s;
+  }
+
+  .docs-card:hover {
+    border-color: #333;
+  }
+
+  .docs-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .docs-card-desc {
+    font-size: 0.825rem;
+    line-height: 1.5;
+    color: var(--docs-text-secondary);
+  }
+
+  .docs-help-box {
+    border: 1px dashed var(--docs-border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .docs-help-box p {
+    font-size: 0.875rem;
+    color: var(--docs-text-secondary);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .docs-help-box strong {
+    color: var(--docs-text);
+  }
+
+  .docs-help-box a {
+    color: var(--docs-link);
+    text-decoration: none;
+  }
+
+  .docs-help-box a:hover {
+    text-decoration: underline;
+  }
+</style>
