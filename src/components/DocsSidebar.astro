@@ -174,7 +174,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--docs-muted);
+    color: hsl(var(--muted-foreground));
   }
 
   .docs-sidebar-link {
@@ -183,41 +183,41 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
     font-size: 14px;
     line-height: 1.4;
     border-radius: 4px;
-    color: var(--docs-text-secondary);
+    color: hsl(var(--muted-foreground));
     text-decoration: none;
     transition: color 0.15s;
   }
 
   .docs-sidebar-link:hover {
-    color: var(--docs-text);
+    color: hsl(var(--foreground));
   }
 
   .docs-sidebar-link.active {
-    color: var(--docs-link);
+    color: hsl(var(--primary));
     font-weight: 500;
-    background: var(--docs-link-bg);
+    background: hsl(var(--primary) / 0.08);
   }
 
   .docs-sidebar-footer {
-    border-top: 1px solid var(--docs-border);
+    border-top: 1px solid hsl(var(--border));
     padding: 0.75rem 0.5rem;
     font-size: 12px;
   }
 
   .docs-sidebar-footer a {
-    color: var(--docs-muted);
+    color: hsl(var(--muted-foreground));
     text-decoration: none;
     transition: color 0.15s;
   }
 
   .docs-sidebar-footer a:hover {
-    color: var(--docs-text);
+    color: hsl(var(--foreground));
   }
 
   /* Mobile bar */
   .docs-mobile-bar {
-    border-bottom: 1px solid var(--docs-border);
-    background: var(--docs-bg);
+    border-bottom: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
   }
 
   .docs-mobile-toggle {
@@ -226,7 +226,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
     gap: 0.5rem;
     padding: 0.75rem 0;
     font-size: 13px;
-    color: var(--docs-muted);
+    color: hsl(var(--muted-foreground));
     background: none;
     border: none;
     cursor: pointer;
@@ -234,12 +234,12 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
   }
 
   .docs-mobile-toggle:hover {
-    color: var(--docs-text);
+    color: hsl(var(--foreground));
   }
 
   .docs-mobile-panel {
-    border-top: 1px solid var(--docs-border);
-    background: var(--docs-bg);
+    border-top: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
     padding: 1rem;
     max-height: 60vh;
     overflow-y: auto;
@@ -249,18 +249,18 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
   .docs-sidebar .pagefind-ui,
   .docs-mobile-panel .pagefind-ui {
     --pagefind-ui-scale: 0.8;
-    --pagefind-ui-primary: var(--docs-link);
-    --pagefind-ui-text: var(--docs-text);
-    --pagefind-ui-background: var(--docs-bg-code);
-    --pagefind-ui-border: var(--docs-border);
+    --pagefind-ui-primary: hsl(var(--primary));
+    --pagefind-ui-text: hsl(var(--foreground));
+    --pagefind-ui-background: hsl(var(--secondary));
+    --pagefind-ui-border: hsl(var(--border));
     --pagefind-ui-border-width: 1px;
   }
 
   /* Reset the global input overrides from index.css */
   .docs-sidebar .pagefind-ui input,
   .docs-mobile-panel .pagefind-ui input {
-    background-color: var(--docs-bg-code) !important;
-    color: var(--docs-text) !important;
-    border-color: var(--docs-border) !important;
+    background-color: hsl(var(--secondary)) !important;
+    color: hsl(var(--foreground)) !important;
+    border-color: hsl(var(--border)) !important;
   }
 </style>

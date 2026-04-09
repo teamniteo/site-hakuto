@@ -1,0 +1,211 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { ArrowLeft, Calendar, User, Tag } from "lucide-react";
+import { createHash } from "node:crypto";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFormatted = post.data.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const emailHash = createHash("md5")
+  .update(post.data.authorEmail.trim().toLowerCase())
+  .digest("hex");
+const gravatarUrl = `https://gravatar.com/avatar/${emailHash}?s=160`;
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <article class="py-16 sm:py-24">
+    <div class="max-w-[680px] mx-auto px-4 sm:px-6">
+      <!-- Back link -->
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors mb-10 font-mono"
+      >
+        <ArrowLeft className="h-3.5 w-3.5" />
+        All posts
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <span class="inline-block text-xs font-mono uppercase tracking-wider text-primary mb-4">
+          {post.data.category}
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold leading-tight mb-6">
+          {post.data.title}
+        </h1>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground font-mono">
+          <span class="inline-flex items-center gap-1.5">
+            <User className="h-3.5 w-3.5" />
+            {post.data.author}
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <Calendar className="h-3.5 w-3.5" />
+            {dateFormatted}
+          </span>
+        </div>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mt-4">
+            {post.data.tags.map((tag) => (
+              <span class="inline-flex items-center gap-1 rounded-md bg-secondary px-2.5 py-1 text-xs font-mono text-muted-foreground">
+                <Tag className="h-3 w-3" />
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <!-- Content -->
+      <div id="blog-content" class="blog-content space-y-5 text-lg leading-relaxed text-foreground">
+        <Content />
+      </div>
+
+      <!-- Author box -->
+      <div class="mt-16 pt-8 border-t border-border">
+        <div class="flex items-start gap-4">
+          <img
+            src={gravatarUrl}
+            alt={post.data.author}
+            width="64"
+            height="64"
+            loading="lazy"
+            class="rounded-full shrink-0"
+          />
+          <div>
+            <p class="font-mono font-semibold text-heading text-sm">{post.data.author}</p>
+            {post.data.authorBio && (
+              <p class="text-sm text-muted-foreground mt-1 leading-relaxed">{post.data.authorBio}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<script>
+  document.querySelectorAll("#blog-content a").forEach((a) => {
+    if (a instanceof HTMLAnchorElement && a.hostname !== location.hostname) {
+      a.target = "_blank";
+      a.rel = "noreferrer";
+    }
+  });
+</script>
+
+<style is:global>
+  .blog-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: hsl(var(--heading));
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: hsl(var(--heading));
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+  }
+
+  .blog-content a:hover {
+    text-decoration: underline;
+  }
+
+  .blog-content strong {
+    color: hsl(var(--heading));
+    font-weight: 600;
+  }
+
+  .blog-content ul,
+  .blog-content ol {
+    padding-left: 1.5rem;
+  }
+
+  .blog-content ul {
+    list-style-type: disc;
+  }
+
+  .blog-content ol {
+    list-style-type: decimal;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+  }
+
+  .blog-content img {
+    border-radius: 6px;
+    border: 1px solid hsl(var(--border));
+    margin: 1.5rem 0;
+  }
+
+  .blog-content code:not(pre code) {
+    font-size: 0.875rem;
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    color: hsl(var(--accent-foreground));
+  }
+
+  .blog-content pre {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+    color: hsl(var(--heading));
+  }
+
+  .blog-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .blog-content blockquote {
+    border-left: 3px solid hsl(var(--primary) / 0.4);
+    padding: 0.5rem 1rem;
+    margin: 1.25rem 0;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .blog-content blockquote p {
+    margin-bottom: 0;
+  }
+
+  .blog-content hr {
+    border: none;
+    border-top: 1px solid hsl(var(--border));
+    margin: 2rem 0;
+  }
+</style>

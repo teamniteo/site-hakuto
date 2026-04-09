@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @plugin 'tailwindcss-animate';
+@plugin '@tailwindcss/typography';
 
 @theme {
   --color-border: hsl(var(--border));
@@ -99,7 +100,7 @@
     --popover-foreground: 210 17% 93%;
 
     /* Text */
-    --heading: 210 17% 93%;
+    --heading: 210 14% 82%;
     --foreground: 215 14% 72%;
 
     /* Primary — orange accent (Hakuto logo) */

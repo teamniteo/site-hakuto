@@ -64,31 +64,32 @@ const categories = categoryOrder
     flex-direction: column;
     gap: 0.35rem;
     padding: 1rem 1.15rem;
-    border: 1px solid var(--docs-border);
+    border: 1px solid hsl(var(--border));
     border-radius: 6px;
-    background: var(--docs-bg-code);
+    background: hsl(var(--secondary));
+    color: inherit !important;
     text-decoration: none !important;
     transition: border-color 0.15s;
   }
 
   .docs-card:hover {
-    border-color: #333;
+    border-color: hsl(var(--muted-foreground) / 0.4);
   }
 
   .docs-card-title {
     font-size: 0.95rem;
     font-weight: 600;
-    color: #fff;
+    color: hsl(var(--heading));
   }
 
   .docs-card-desc {
     font-size: 0.825rem;
     line-height: 1.5;
-    color: var(--docs-text-secondary);
+    color: hsl(var(--muted-foreground));
   }
 
   .docs-help-box {
-    border: 1px dashed var(--docs-border);
+    border: 1px dashed hsl(var(--border));
     border-radius: 6px;
     padding: 1rem 1.25rem;
     margin-top: 2rem;
@@ -96,17 +97,17 @@ const categories = categoryOrder
 
   .docs-help-box p {
     font-size: 0.875rem;
-    color: var(--docs-text-secondary);
+    color: hsl(var(--muted-foreground));
     margin: 0;
     line-height: 1.7;
   }
 
   .docs-help-box strong {
-    color: var(--docs-text);
+    color: hsl(var(--foreground));
   }
 
   .docs-help-box a {
-    color: var(--docs-link);
+    color: hsl(var(--primary));
     text-decoration: none;
   }
 
