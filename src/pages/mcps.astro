@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Copy, Gauge, TestTube2, LineChart, Bell, Github, ArrowRight } from "lucide-react";
+import { Copy, Gauge, TestTube2, LineChart } from "lucide-react";
 
 const mcps = [
   {
@@ -79,57 +79,4 @@ const mcps = [
     </div>
   </section>
 
-  <!-- NOTIFY CTA -->
-  <section class="border-t border-border">
-    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="relative overflow-hidden rounded-lg border border-border bg-card p-10 sm:p-14 max-w-3xl">
-        <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary mb-5">
-          <Bell className="h-3.5 w-3.5" />
-          Stay in the loop
-        </div>
-        <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
-          Want to know when these ship?
-        </h2>
-        <p class="mt-5 text-lg text-foreground leading-relaxed">
-          Watch the repo on GitHub. That's the most reliable way to catch the
-          release the moment we publish it.
-        </p>
-
-        <form
-          class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md"
-          onsubmit="event.preventDefault(); this.querySelector('output').textContent = 'Thanks! We\\'ll let you know.'; this.reset();"
-        >
-          <label class="sr-only" for="notify-email">Email address</label>
-          <input
-            id="notify-email"
-            type="email"
-            required
-            placeholder="you@example.com"
-            class="flex-1 rounded-md border border-input-border bg-input px-4 py-3 font-mono text-sm text-heading placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          />
-          <button
-            type="submit"
-            class="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 font-mono text-sm text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            Notify me
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </form>
-        <output class="block mt-3 font-mono text-xs text-primary"></output>
-
-        <div class="mt-8 pt-6 border-t border-border">
-          <a
-            href="https://github.com/teamniteo/hakuto"
-            target="_blank"
-            rel="noreferrer"
-            class="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground hover:text-heading transition-colors"
-          >
-            <Github className="h-4 w-4" />
-            Or watch the repo on GitHub
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 </Layout>

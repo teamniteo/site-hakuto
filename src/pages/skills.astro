@@ -1,42 +1,77 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Github, Package, Search, ImageIcon, Accessibility, ArrowRight } from "lucide-react";
+import { Github, Paintbrush, PenTool, Globe, FileText, BookOpen, FormInput, SearchCheck, Hammer, ArrowRight } from "lucide-react";
 
 const skills = [
   {
-    name: "Astro",
-    slug: "astro",
-    Icon: Package,
-    body: "Guides Claude on how to build and maintain Astro sites correctly: project structure, components, content collections, routing, and Astro best practices. Claude won't reinvent the wheel or make opinionated choices you'll regret later.",
-    example: '"Set up a content collection for blog posts"',
+    name: "Website Builder",
+    slug: "website-builder",
+    Icon: Hammer,
+    body: "The orchestrator. Generates production-ready websites from a conversation. Picks a site type, applies a design language, coordinates copywriting and branding skills, and tracks every decision in a living spec file so pages stay consistent as your site evolves.",
+    example: '"Build me a SaaS landing page"',
   },
   {
-    name: "SEO",
-    slug: "seo",
-    Icon: Search,
-    body: "Teaches Claude how to handle on-page SEO for every page: meta titles and descriptions, Open Graph tags, canonical URLs, structured data (schema.org), and XML sitemaps. Ask Claude to 'do an SEO review' and it knows what to check.",
-    example: '"Do an SEO review of every page"',
+    name: "Brand Designer",
+    slug: "brand-designer",
+    Icon: Paintbrush,
+    body: "Generates color palettes using real color theory: complementary, triadic, or analogous schemes based on your design language. Give it a hex code, a color name, or a logo to extract from, and it produces a full palette with proper contrast ratios.",
+    example: '"Use my brand color #3B82F6"',
   },
   {
-    name: "Image Optimization",
-    slug: "images",
-    Icon: ImageIcon,
-    body: "Guides Claude on using Astro's built-in image optimization correctly: responsive images, lazy loading, correct format selection, and alt text. Keeps your Lighthouse scores clean without you having to think about it.",
-    example: '"Optimize every image on the homepage"',
+    name: "Professional Copywriter",
+    slug: "professional-copywriter",
+    Icon: PenTool,
+    body: "Writes conversion-optimized website copy: benefit-driven headlines, scannable structure, clear CTAs. Knows what to generate when content is missing, what to expand from bullet points, and what to leave untouched when you've written it yourself.",
+    example: '"Write copy for the pricing page"',
   },
   {
-    name: "Accessibility Check",
-    slug: "a11y",
-    Icon: Accessibility,
-    body: "Teaches Claude how to audit pages for common accessibility issues: heading structure, ARIA labels, color contrast flags, keyboard navigation, and form labeling. Ask Claude to 'check accessibility on this page' and it'll walk through it.",
-    example: '"Check accessibility on the contact page"',
+    name: "Browser Agent",
+    slug: "agent-browser",
+    Icon: Globe,
+    body: "A full browser automation toolkit. Navigate pages, fill forms, take screenshots, record videos, intercept network requests, and extract data directly from the command line. Useful for testing your site, scraping reference content, or automating repetitive web tasks.",
+    example: '"Take a screenshot of the homepage"',
+  },
+  {
+    name: "Blog Section",
+    slug: "section-blog",
+    Icon: FileText,
+    body: "Adds a complete blog system with listing pages, dynamic post routes, and two layout options: standard single-column for articles and flexible full-width for visual content. Uses Astro content collections with proper frontmatter schemas and category/author archives.",
+    example: '"Add a blog to the site"',
+  },
+  {
+    name: "Docs Section",
+    slug: "section-docs",
+    Icon: BookOpen,
+    body: "Adds a technical documentation section with sidebar navigation, search via Pagefind, and auto-generated table of contents. Uses its own minimal design system (monochrome plus blue links) so docs stay readable regardless of your main site's aesthetic.",
+    example: '"Add documentation pages"',
+  },
+  {
+    name: "Form Section",
+    slug: "section-form",
+    Icon: FormInput,
+    body: "Builds accessible, validated forms using React islands with Zod schemas. Contact forms, newsletter signups, and waitlists with field-level validation on blur, proper ARIA attributes, and submission to a Cloudflare Worker endpoint.",
+    example: '"Add a contact form"',
+  },
+  {
+    name: "SEO Testing",
+    slug: "testing-seo",
+    Icon: SearchCheck,
+    body: "Builds the site, then audits every page for SEO issues: missing meta tags, broken heading hierarchy, invalid JSON-LD, duplicate titles, orphaned pages, and missing sitemaps. Reports findings with severity levels so you decide what to fix.",
+    example: '"Run an SEO test on all pages"',
+  },
+  {
+    name: "Plausible Analytics",
+    slug: "plausible-analytics",
+    Icon: Globe,
+    body: "Adds privacy-friendly Plausible Analytics with a Cloudflare Workers proxy that bypasses ad blockers. Strips cookies, serves the tracking script from your own domain, and caches at the edge without leaking visitor data to third parties.",
+    example: '"Add analytics tracking"',
   },
 ];
 ---
 
 <Layout
   title="Skills"
-  description="Skills are instructions that live in your project and teach Claude Code how to handle specific tasks. Hakuto ships with four Skills out of the box."
+  description="Skills are instructions that live in your project and teach Claude Code how to handle specific tasks. Hakuto ships with nine Skills out of the box."
 >
   <!-- HERO -->
   <section class="border-b border-border">
@@ -46,10 +81,10 @@ const skills = [
       </p>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
         <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-heading leading-[1.1]">
-          What Claude knows <span class="text-primary">how to do</span>
+          Hakuto Skills for <span class="text-primary">Claude Code</span>
         </h1>
         <a
-          href="https://github.com/teamniteo/hakuto/tree/main/.claude/skills"
+          href="https://github.com/teamniteo/hakuto/tree/main/template/.claude/skills"
           target="_blank"
           rel="noreferrer"
           class="inline-flex items-center gap-2 font-mono text-sm text-primary hover:underline flex-shrink-0"
