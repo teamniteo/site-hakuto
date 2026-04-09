@@ -70,7 +70,7 @@ const steps: Step[] = [
       `Select <strong class="text-heading">Continue with GitHub</strong>, then pick your organization and repository.`,
       `It will figure out the build and deploy commands on its own. Click <strong class="text-heading">Deploy</strong> without changing anything.`,
       `Wait for the site to be deployed. Once it's done, you'll get redirected to the Worker page. Click <strong class="text-heading">Visit</strong> to see your live site on a Cloudflare subdomain.`,
-      `You can set up a custom domain under Settings. More on that in our <a href="/guides/custom-domain" class="text-primary hover:underline">custom domain guide</a>, but you can skip it for now.`,
+      `You can set up a custom domain under Settings. More on that in our <a href="/docs/custom-domain" class="text-primary hover:underline">custom domain guide</a>, but you can skip it for now.`,
     ],
     outro: "Your site is live. Time to make it yours.",
   },
@@ -386,10 +386,10 @@ const isLast = currentIndex === total - 1;
             </a>
           ) : (
             <a
-              href="/guides"
+              href="/docs"
               class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
             >
-              Read our guides
+              Read our docs
               <ArrowRight className="h-4 w-4" />
             </a>
           )
@@ -415,7 +415,7 @@ const isLast = currentIndex === total - 1;
               <p class="mt-5 text-lg text-foreground leading-relaxed">
                 From here, just describe what you want to Claude and it'll handle the
                 rest. If you get stuck, check the{" "}
-                <a href="/guides" class="text-primary hover:underline">Guides</a> or browse the{" "}
+                <a href="/docs" class="text-primary hover:underline">Docs</a> or browse the{" "}
                 <a href="/skills" class="text-primary hover:underline">Skills</a> to see what
                 Claude knows how to do.
               </p>
