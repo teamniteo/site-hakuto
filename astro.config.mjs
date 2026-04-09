@@ -10,8 +10,6 @@ import sitemap from "@astrojs/sitemap";
 import favicons from "astro-favicons";
 import pagefind from "astro-pagefind";
 import { agentsSummary } from "@nuasite/agent-summary";
-import { devErrors } from "./src/integrations/dev-errors";
-import { astroGrab } from "astro-grab";
 
 import cloudflare from "@astrojs/cloudflare";
 
@@ -43,14 +41,12 @@ export default defineConfig({
       sitemap(),
       agentsSummary(),
       pagefind(),
-      devErrors(),
-      astroGrab(),
       favicons({
           input: "./src/assets/hakuto-icon.svg",
           name: hakuto.siteName,
           short_name: hakuto.siteName,
       }),
-	],
+  ],
 
   vite: viteConfig({
       cacheDir: ".astro/vite",
@@ -60,15 +56,15 @@ export default defineConfig({
               "@": "/src",
           },
       },
-	}),
+  }),
 
   build: {
       concurrency: 4,
-	},
+  },
 
   server: { port: 4321, host: "0.0.0.0", allowedHosts: true },
   devToolbar: { enabled: false },
-  adapter: cloudflare({ imageService: "compile", prerenderEnvironment: "node" }),
+  adapter: process.env.NODE_ENV === "production" ? cloudflare({ imageService: "compile", prerenderEnvironment: "node" }) : undefined,
 
   fonts: [
     {
