@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import WhySection from "@/components/WhySection.astro";
+import heroImage from "@/assets/hakuto-hero.png";
 import { Rocket, GitBranch, Terminal, Sparkles, Github, ArrowRight, Check } from "lucide-react";
 import type { WebSite, SoftwareSourceCode } from "schema-dts";
 
@@ -65,39 +66,53 @@ const audiences = [
     ></div>
 
     <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-32 sm:pb-28">
-      <div class="max-w-3xl">
-        <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
-          // Free &amp; open source
-        </p>
+      <div class="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.25em] text-primary mb-5">
+            // Free &amp; open source
+          </p>
 
-        <h1 class="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02] text-heading [word-spacing:-0.2em]">
-          Site Builder for <br class="hidden sm:block" />
-          <span class="text-primary">Claude Code</span>
-        </h1>
+          <h1 class="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02] text-heading [word-spacing:-0.2em]">
+            Site Builder for <br class="hidden sm:block" />
+            <span class="text-primary">Claude Code</span>
+          </h1>
 
-        <p class="mt-8 text-lg sm:text-xl text-foreground max-w-2xl leading-relaxed">
-          Hakuto is an Astro framework, Claude Code Skills, and step-by-step
-          guides. Clone it, connect to Cloudflare, and you have a fast site on
-          free hosting in 5 minutes.
-        </p>
+          <p class="mt-8 text-lg sm:text-xl text-foreground max-w-2xl leading-relaxed">
+            Hakuto is an Astro framework, Claude Code Skills, and step-by-step
+            guides. Clone it, connect to Cloudflare, and you have a fast site on
+            free hosting in 5 minutes.
+          </p>
 
-        <div class="mt-10 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-sm">
-          <a
-            href="/start/prep"
-            class="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            Get started
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href="https://github.com/teamniteo/hakuto"
-            target="_blank"
-            rel="noreferrer"
-            class="inline-flex items-center gap-2 rounded-md border border-input-border px-5 py-3 text-heading hover:bg-accent hover:text-accent-foreground transition-colors"
-          >
-            <Github className="h-4 w-4" />
-            View on GitHub
-          </a>
+          <div class="mt-10 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-sm">
+            <a
+              href="/start/prep"
+              class="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              Get started
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="https://github.com/teamniteo/hakuto"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center gap-2 rounded-md border border-input-border px-5 py-3 text-heading hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              <Github className="h-4 w-4" />
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="hidden lg:block max-w-[380px]">
+          <img
+            src={heroImage.src}
+            width={heroImage.width}
+            height={heroImage.height}
+            alt="Hakuto workflow: Claude Code pushes changes, branch preview on Cloudflare, merge PR to deploy live"
+            loading="eager"
+            decoding="async"
+            class="w-full h-auto"
+          />
         </div>
       </div>
     </div>
