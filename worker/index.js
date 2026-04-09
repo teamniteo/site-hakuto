@@ -6,6 +6,7 @@
  */
 
 import { handleHey } from './hey.js';
+import { handlePlausible } from './plausible.js';
 
 /**
  * Route handlers map
@@ -13,7 +14,7 @@ import { handleHey } from './hey.js';
  */
 const ROUTES = {
   '/~/hey': { handler: handleHey, description: 'Hello World' },
-  // '/~/pla': { handler: handlePlausible, description: 'Plausible Analytics Proxy' },
+  '/~/pla': { handler: handlePlausible, description: 'Plausible Analytics Proxy' },
   // '/~/form-': { handler: handleForm, description: 'Form Handler' },
 };
 

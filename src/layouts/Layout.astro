@@ -72,6 +72,15 @@ const isDev = import.meta.env.DEV;
 
     <Footer />
 
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="/~/pla/js/script.js"></script>
+    <script is:inline>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init({
+        endpoint: "/~/pla/api/event"
+      })
+    </script>
+
     {isDev && (
       <script is:inline>
         // postMessage bridge for cross-origin iframe communication (dev only)
