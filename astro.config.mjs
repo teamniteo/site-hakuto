@@ -1,7 +1,6 @@
 // @ts-check
+// biome-ignore assist/source/organizeImports: custom import order
 import { defineConfig, fontProviders } from "astro/config";
-import fs from "node:fs";
-import path from "node:path";
 
 import { defineConfig as viteConfig } from "vite";
 import react from "@astrojs/react";
@@ -13,28 +12,9 @@ import { agentsSummary } from "@nuasite/agent-summary";
 
 import cloudflare from "@astrojs/cloudflare";
 
-/**
- * Read Hakuto configuration from .hakuto/config.json
- * This allows domain and siteName to persist across template updates
- */
-function getHakutoConfig() {
-  try {
-    const configPath = path.resolve(process.cwd(), '.hakuto/config.json');
-    if (fs.existsSync(configPath)) {
-      return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-    }
-  } catch {
-    // Ignore errors, use defaults
-  }
-  return { domain: null, siteName: "Hakuto" };
-}
-
-const hakuto = getHakutoConfig();
-const site = hakuto.domain ? `https://${hakuto.domain}` : "https://preview.hakuto.dev";
-
 // https://astro.build/config
 export default defineConfig({
-  site,
+  site: "https://hakuto.dev",
   output: "static",
   integrations: [
       react(),
@@ -43,8 +23,8 @@ export default defineConfig({
       pagefind(),
       favicons({
           input: "./src/assets/hakuto-icon.svg",
-          name: hakuto.siteName,
-          short_name: hakuto.siteName,
+          name: "Hakuto",
+          short_name: "Hakuto",
       }),
   ],
 
@@ -63,7 +43,7 @@ export default defineConfig({
   },
 
   server: { port: 4321, host: "0.0.0.0", allowedHosts: true },
-  devToolbar: { enabled: false },
+  devToolbar: { enabled: true },
   adapter: process.env.NODE_ENV === "production" ? cloudflare({ imageService: "compile", prerenderEnvironment: "node" }) : undefined,
 
   fonts: [
