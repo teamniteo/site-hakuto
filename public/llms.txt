@@ -2,7 +2,7 @@
 
 > A free, open-source site builder for Claude Code. Clone, build with AI, deploy to Cloudflare.
 
-Hakuto is a collection of Skills and workflows for building fast, modern Astro websites with Claude Code. It gives AI the context it needs to produce production-quality pages — from design systems and SEO to forms, blogs, and analytics.
+Hakuto is a collection of Skills and workflows for building fast, modern Astro websites with Claude Code. It gives AI the context it needs to produce production-quality pages, from design systems and SEO to forms, blogs, and analytics.
 
 ## Key Details
 
@@ -30,6 +30,7 @@ Hakuto is a collection of Skills and workflows for building fast, modern Astro w
 - [Favicons](https://hakuto.dev/docs/tips/favicons): Custom favicons with dark/light mode
 - [GitHub Newbies](https://hakuto.dev/docs/tips/github-newbies): Git and GitHub for non-developers
 - [Site Launch](https://hakuto.dev/docs/tips/site-launch): Pre-launch checklist
+- [Build Failed](https://hakuto.dev/docs/tips/build-failed): Diagnose and fix failed Cloudflare builds
 - [Project Structure](https://hakuto.dev/docs/customization/project-structure): Directory layout and key files
 - [Skills Customization](https://hakuto.dev/docs/customization/skills): Built-in and custom Skills
 

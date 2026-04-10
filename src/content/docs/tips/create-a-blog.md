@@ -24,7 +24,7 @@ You can customize the prompt to be more specific:
 
 ```
 Add a blog. Use a two-column card layout for the listing page.
-Keep the design minimal — no author photos or category badges.
+Keep the design minimal, no author photos or category badges.
 ```
 
 ## Adding and editing posts

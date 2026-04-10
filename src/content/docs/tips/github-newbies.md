@@ -2,12 +2,12 @@
 title: "GitHub Newbies"
 description: "A plain-English guide to Git and GitHub for non-developers. Covers commits, branches, pull requests, and common tasks when using Hakuto."
 category: "tips"
-order: 4
+order: 6
 ---
 
 # GitHub Newbies
 
-You don't need to know Git to use Hakuto. Claude Code handles all the version control for you — just describe what you want in plain English.
+You don't need to know Git to use Hakuto. Claude Code handles all the version control for you. Just describe what you want in plain English.
 
 ## Key concepts
 
@@ -17,7 +17,7 @@ A commit is a saved snapshot of your changes. Think of it like hitting "Save" in
 
 ### Branches
 
-A branch is a separate copy of your site where you can make changes without affecting the live version. Your main branch (`main`) is what's published. When you create a new branch, you can experiment freely — nothing goes live until you merge it back.
+A branch is a separate copy of your site where you can make changes without affecting the live version. Your main branch (`main`) is what's published. When you create a new branch, you can experiment freely. Nothing goes live until you merge it back.
 
 ### Pull Requests (PRs)
 
@@ -63,7 +63,7 @@ Undo my last commit but keep the files.
 Revert the commit that broke the footer.
 ```
 
-Claude will create a new commit that undoes the changes — safe for shared branches.
+Claude will create a new commit that undoes the changes. This is safe for shared branches.
 
 ### Work on a separate branch
 
@@ -79,8 +79,8 @@ When you're done, ask Claude to open a PR to merge it back.
 
 Go to your repository on GitHub → **Settings** → **Branches** → **Add classic branch protection rule**. Set the branch name to `main` and enable:
 
-- **Require a pull request before merging** — prevents accidental direct pushes
-- **Require status checks** — ensures Cloudflare builds pass before merging
+- **Require a pull request before merging** to prevent accidental direct pushes
+- **Require status checks** to ensure Cloudflare builds pass before merging
 
 This means all changes go through PRs, giving you a preview URL to check before anything goes live.
 

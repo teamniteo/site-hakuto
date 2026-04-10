@@ -1,6 +1,6 @@
 ---
 title: "Project Structure"
-description: "Understand how a Hakuto project is organized — directory layout, key config files, page routing, and where components live."
+description: "Understand how a Hakuto project is organized. Covers directory layout, key config files, page routing, and where components live."
 category: "customization"
 order: 2
 ---
@@ -42,7 +42,7 @@ Base layout used by all pages. Handles meta tags, SEO, JSON-LD schema, fonts, an
 
 ### `CLAUDE.md`
 
-Instructions for Claude Code on how to build and modify the site. This is what makes Hakuto's AI workflows work — it teaches the agent your project's conventions, available components, and quality standards.
+Instructions for Claude Code on how to build and modify the site. This is what makes Hakuto's AI workflows work. It teaches the agent your project's conventions, available components, and quality standards.
 
 ### `astro.config.mjs`
 

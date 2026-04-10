@@ -11,7 +11,7 @@ Skills are pre-built AI workflows that Claude Code uses to build specific parts 
 
 ## How Skills work
 
-When you ask Claude Code to perform a task — like "add a blog" or "run an SEO audit" — it automatically invokes the matching Skill. Skills provide specialized prompts, templates, and validation logic that guide the AI through each step.
+When you ask Claude Code to perform a task, like "add a blog" or "run an SEO audit", it automatically invokes the matching Skill. Skills provide specialized prompts, templates, and validation logic that guide the AI through each step.
 
 You can also invoke Skills directly using slash commands in Claude Code, like `/section-blog` or `/testing-seo`.
 
@@ -32,9 +32,9 @@ You can also invoke Skills directly using slash commands in Claude Code, like `/
 
 Skills are stored in the `.claude/skills/` directory as markdown files. Each Skill contains:
 
-- **Trigger conditions** — when Claude Code should activate the Skill
-- **Step-by-step workflow** — the process the AI follows
-- **Technical constraints** — rules and patterns to follow
-- **Quality checks** — validation before completion
+- **Trigger conditions**: when Claude Code should activate the Skill
+- **Step-by-step workflow**: the process the AI follows
+- **Technical constraints**: rules and patterns to follow
+- **Quality checks**: validation before completion
 
 Check the [repository](https://github.com/teamniteo/hakuto) for examples of how built-in Skills are structured.

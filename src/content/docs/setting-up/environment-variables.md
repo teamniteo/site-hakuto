@@ -11,7 +11,7 @@ Learn how to manage API keys, secrets, and configuration values for your Hakuto 
 
 ## Overview
 
-Cloudflare Workers uses **secrets** and **environment variables** to store configuration. Secrets are encrypted and not visible in the dashboard after creation — use them for API keys and sensitive data.
+Cloudflare Workers uses **secrets** and **environment variables** to store configuration. Secrets are encrypted and not visible in the dashboard after creation. Use them for API keys and sensitive data.
 
 ## Setting secrets
 

@@ -1,8 +1,8 @@
 ---
 title: "Site Launch"
-description: "A pre-launch checklist for your Hakuto site — content review, technical checks, performance validation, and what to do after going live."
+description: "A pre-launch checklist for your Hakuto site. Covers content review, technical checks, performance validation, and what to do after going live."
 category: "tips"
-order: 5
+order: 4
 ---
 
 # Site Launch
@@ -31,6 +31,8 @@ Fix anything it flags before going live.
 
 ## Manual checks
 
+You can of course use Claude Code to do these.
+
 ### Content
 
 - All placeholder text has been replaced with real copy
@@ -42,7 +44,8 @@ Fix anything it flags before going live.
 - Custom domain is configured ([guide](/docs/setting-up/custom-domain))
 - The `workers.dev` subdomain is disabled to avoid duplicate indexing
 - Favicon is set and shows correctly in the browser tab
-- Forms work end-to-end — submit a test message
+- Forms work end-to-end (submit a test message)
+- `llms.txt` is updated with all current pages and descriptions
 
 ## After launch
 

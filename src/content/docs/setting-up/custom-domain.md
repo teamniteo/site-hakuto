@@ -1,6 +1,6 @@
 ---
 title: "Custom Domain"
-description: "Connect your own domain to your Cloudflare Worker in three steps — add the domain, merge the config PR, and disable the workers.dev URL."
+description: "Connect your own domain to your Cloudflare Worker in three steps. Add the domain, merge the config PR, and disable the workers.dev URL."
 category: "setting-up"
 order: 2
 ---
@@ -19,7 +19,7 @@ Cloudflare will detect that your Wrangler config needs updating and open a Pull 
 
 ## 3. Disable the workers.dev domain
 
-We recommend disabling the `workers.dev` domain so you don't run into issues with that site getting indexed instead of your main domain. When Cloudflare prompts you, **don't disable preview URLs** — you'll want those for PR previews.
+We recommend disabling the `workers.dev` domain so you don't run into issues with that site getting indexed instead of your main domain. When Cloudflare prompts you, **don't disable preview URLs** because you'll want those for PR previews.
 
 ---
 
