@@ -3,7 +3,7 @@ import "../index.css";
 import { Font } from "astro:assets";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import { AstroSeo } from "@astrolib/seo";
+
 import { Schema } from "astro-seo-schema";
 import type { Thing, WithContext } from "schema-dts";
 import ogImageDefault from "@/assets/og-image.png";
@@ -42,34 +42,27 @@ const isDev = import.meta.env.DEV;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href={url.href} />
-    <AstroSeo
-      title={title}
-      description={description}
-      noindex={noindex}
-      nofollow={noindex}
-      openGraph={{
-        title,
-        description,
-        url: url.href,
-        type: "website",
-        images: [
-          {
-            url: socialImageUrl,
-            alt: title,
-            width: ogImageDefault.width,
-            height: ogImageDefault.height,
-            type: `image/${ogImageDefault.format}`,
-          },
-        ],
-      }}
-      twitter={{
-        cardType: "summary_large_image",
-        title,
-        description,
-        image: socialImageUrl,
-        imageAlt: title,
-      }}
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:width" content={String(ogImageDefault.width)} />
+    <meta property="og:image:height" content={String(ogImageDefault.height)} />
+    <meta property="og:image:type" content={`image/${ogImageDefault.format}`} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={title} />
     {schema && (Array.isArray(schema)
       ? schema.map((s) => <Schema item={s} />)
       : <Schema item={schema} />
