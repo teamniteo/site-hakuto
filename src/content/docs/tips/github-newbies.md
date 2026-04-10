@@ -28,19 +28,19 @@ A Pull Request is how you propose merging a branch into `main`. When you open a 
 ### Save your changes
 
 ```
-Commit my changes with a descriptive message.
+Commit changes.
 ```
 
 ### Push to GitHub
 
 ```
-Push my changes to GitHub.
+Push changes to GitHub.
 ```
 
 ### Open a Pull Request
 
 ```
-Open a PR for these changes.
+Open a PR.
 ```
 
 Cloudflare will automatically create a preview URL on the PR so you can see your changes live before merging.
@@ -77,7 +77,7 @@ When you're done, ask Claude to open a PR to merge it back.
 
 ### Protect your main branch
 
-Go to your repository on GitHub → **Settings** → **Branches** → **Add branch protection rule**. Set the branch name to `main` and enable:
+Go to your repository on GitHub → **Settings** → **Branches** → **Add classic branch protection rule**. Set the branch name to `main` and enable:
 
 - **Require a pull request before merging** — prevents accidental direct pushes
 - **Require status checks** — ensures Cloudflare builds pass before merging
@@ -86,4 +86,4 @@ This means all changes go through PRs, giving you a preview URL to check before 
 
 ### Share access with collaborators
 
-Go to **Settings** → **Collaborators** → **Add people**. Give them "Write" access so they can push branches and create PRs.
+Go to **Settings** → **Collaborators and teams** → **Add people**. Give them "Write" access so they can push branches and create PRs.

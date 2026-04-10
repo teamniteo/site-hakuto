@@ -14,7 +14,7 @@ Before you point your domain at your new site, run through this checklist.
 Hakuto includes a `testing-seo` Skill that checks your entire site for common issues. Open Claude Code and type:
 
 ```
-Run an SEO check on my site.
+Run an SEO test on my site.
 ```
 
 Claude will scan every page and report on:
@@ -42,18 +42,10 @@ Fix anything it flags before going live.
 - Custom domain is configured ([guide](/docs/setting-up/custom-domain))
 - The `workers.dev` subdomain is disabled to avoid duplicate indexing
 - Favicon is set and shows correctly in the browser tab
-- Site loads over HTTPS (Cloudflare handles this by default)
 - Forms work end-to-end — submit a test message
-
-### Performance
-
-- Images are optimized (use `<Picture>` for local images)
-- No large unused JavaScript bundles
-- Lighthouse score is 90+ across all categories
 
 ## After launch
 
-- Set up [Plausible Analytics](/docs/customization/skills) for privacy-friendly traffic tracking. Ask Claude: `Add Plausible analytics to my site.`
 - Submit your sitemap to [Google Search Console](https://search.google.com/search-console) at `yourdomain.com/sitemap-index.xml`
 - Test your site with [PageSpeed Insights](https://pagespeed.web.dev/) from multiple locations
 
