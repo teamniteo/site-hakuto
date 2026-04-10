@@ -7,7 +7,7 @@ order: 2
 
 # Custom Domain on Cloudflare
 
-How to connect your own domain (like `yourname.com`) to your Cloudflare Worker. Takes about 5 minutes.
+How to connect your own domain (like `yourname.com`) to your Cloudflare Worker. Takes about a minute.
 
 ## 1. Add your domain
 

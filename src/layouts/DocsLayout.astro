@@ -57,6 +57,38 @@ const tocHeadings = headings?.filter((h) => h.depth === 2 || h.depth === 3) ?? [
   </div>
 </Layout>
 
+<script>
+  // External links open in new tab
+  document.querySelectorAll('.docs-article a[href^="http"]').forEach((link) => {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  });
+
+  // Copy button on code blocks
+  document.querySelectorAll('.docs-article pre').forEach((pre) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'docs-code-wrapper';
+    pre.parentNode!.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    const btn = document.createElement('button');
+    btn.className = 'docs-copy-btn';
+    btn.setAttribute('aria-label', 'Copy code');
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    wrapper.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+      const code = pre.querySelector('code')?.textContent ?? pre.textContent ?? '';
+      navigator.clipboard.writeText(code).then(() => {
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+        setTimeout(() => {
+          btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+        }, 2000);
+      });
+    });
+  });
+</script>
+
 <style is:global>
   /* ── Docs design system — uses site theme variables ── */
   .docs-wrapper {
@@ -153,6 +185,34 @@ const tocHeadings = headings?.filter((h) => h.depth === 2 || h.depth === 3) ?? [
   }
 
   /* Code blocks */
+  .docs-code-wrapper {
+    position: relative;
+    margin-bottom: 1.25rem;
+  }
+
+  .docs-code-wrapper pre {
+    margin-bottom: 0;
+  }
+
+  .docs-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.35rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: 4px;
+    background: hsl(var(--secondary));
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    line-height: 0;
+  }
+
+  .docs-copy-btn:hover {
+    color: hsl(var(--foreground));
+    background: hsl(var(--background));
+  }
+
   .docs-article pre {
     font-size: 0.875rem;
     line-height: 1.6;
