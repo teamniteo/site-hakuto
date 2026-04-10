@@ -26,4 +26,4 @@ That's when the light bulb went off — why don't we just use Claude Code direct
 
 It took me a couple of days to figure out, but the Astro framework and the Skills we'd built were really the only things we needed. There is no paid product here.
 
-Since we need it ourselves and had already promised it to a lot of people, we decided to open-source everything, build this website, and show you how to do it on your own. We might explore paid MCPs for advanced features down the road, but for now, this is what most of us actually need.
+Since we need it ourselves and had already promised it to a lot of people, we decided to open-source everything, build this website, and show you how to do it on your own.
