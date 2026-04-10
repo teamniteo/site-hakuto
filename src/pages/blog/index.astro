@@ -1,60 +1,68 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Rss } from "lucide-react";
 
 const posts = await getCollection("blog", ({ data }) => data.draft !== true);
 posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout title="Blog" description="Articles about building modern websites with Hakuto, Astro, and Claude Code.">
-  <section class="py-16 sm:py-24">
-    <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Page header -->
-      <div class="mb-16">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-4">Blog</h1>
-        <p class="text-lg text-muted-foreground max-w-[560px]">
-          Thoughts on building for the web — architecture decisions, workflow tips, and the occasional opinion.
-        </p>
+  <!-- HERO -->
+  <section class="border-b border-border">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">
+        // blog
+      </p>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-heading leading-[1.1]">
+          From the <span class="text-primary">build log</span>
+        </h1>
+        <div class="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground flex-shrink-0 self-start lg:self-auto">
+          <Rss className="h-3.5 w-3.5 text-primary" />
+          {posts.length} article{posts.length !== 1 && "s"}
+        </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Post grid -->
-      <div class="grid gap-6">
-        {posts.map((post) => {
-          const dateFormatted = post.data.date.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          });
-          return (
-            <a
-              href={`/blog/${post.data.slug}`}
-              class="group block rounded-lg border border-border bg-card p-6 sm:p-8 transition-colors hover:border-primary/40 hover:bg-secondary/40"
-            >
-              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                <div class="flex-1 min-w-0">
-                  <span class="inline-block text-xs font-mono uppercase tracking-wider text-primary mb-2">
-                    {post.data.category}
-                  </span>
-                  <h2 class="text-xl sm:text-2xl font-mono font-semibold mb-2 group-hover:text-primary transition-colors">
-                    {post.data.title}
-                  </h2>
-                  <p class="text-muted-foreground text-sm sm:text-base line-clamp-2">
-                    {post.data.description}
-                  </p>
-                </div>
-                <div class="flex items-center gap-4 text-sm text-muted-foreground font-mono shrink-0 sm:mt-1">
-                  <span class="inline-flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {dateFormatted}
-                  </span>
-                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary hidden sm:block" />
-                </div>
+  <!-- POST LIST -->
+  <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="grid gap-6">
+      {posts.map((post) => {
+        const dateFormatted = post.data.date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+        return (
+          <a
+            href={`/blog/${post.data.slug}`}
+            class="group block rounded-lg border border-border bg-card p-6 sm:p-8 transition-colors hover:border-primary/40 hover:bg-secondary/40"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              <div class="flex-1 min-w-0">
+                <span class="inline-block text-xs font-mono uppercase tracking-wider text-primary mb-2">
+                  {post.data.category}
+                </span>
+                <h2 class="text-xl sm:text-2xl font-mono font-semibold mb-2 group-hover:text-primary transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-muted-foreground text-sm sm:text-base line-clamp-2">
+                  {post.data.description}
+                </p>
               </div>
-            </a>
-          );
-        })}
-      </div>
+              <div class="flex items-center gap-4 text-sm text-muted-foreground font-mono shrink-0 sm:mt-1">
+                <span class="inline-flex items-center gap-1.5">
+                  <Calendar className="h-3.5 w-3.5" />
+                  {dateFormatted}
+                </span>
+                <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary hidden sm:block" />
+              </div>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </section>
 </Layout>
