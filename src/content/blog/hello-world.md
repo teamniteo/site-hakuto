@@ -1,5 +1,5 @@
 ---
-title: "Hello World"
+title: "How we killed our new AI product"
 slug: "hello-world"
 date: "2026-04-09"
 author: "Dejan Murko"
