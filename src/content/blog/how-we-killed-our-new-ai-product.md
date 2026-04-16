@@ -1,6 +1,6 @@
 ---
 title: "How we killed our new AI product"
-slug: "hello-world"
+slug: "how-we-killed-our-new-ai-product"
 date: "2026-04-09"
 author: "Dejan Murko"
 authorEmail: "dm@niteo.co"
