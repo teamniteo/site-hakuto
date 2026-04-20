@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "site-overview",
+      "type": "skill-md",
+      "description": "Overview of Hakuto, a free open-source site builder for Claude Code. Includes capabilities, resources, and documentation links.",
+      "url": "/.well-known/agent-skills/site-overview/SKILL.md",
+      "digest": "sha256:5c3e675061dad634195bcb130504e29c1e98b58cbe73ffb50c980782bd7aa877"
+    }
+  ]
+}

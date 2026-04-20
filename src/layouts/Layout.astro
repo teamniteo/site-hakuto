@@ -80,6 +80,61 @@ const isDev = import.meta.env.DEV;
 
     <Footer />
 
+    <!-- WebMCP: expose site tools to AI agents -->
+    <script is:inline>
+      (function() {
+        if (!navigator.modelContext) return;
+        navigator.modelContext.registerTool({
+          name: "search-docs",
+          description: "Search Hakuto documentation for a given query. Returns matching page titles and URLs.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: { type: "string", description: "Search query" }
+            },
+            required: ["query"]
+          },
+          async execute({ query }) {
+            const res = await fetch(`/pagefind/pagefind.js`);
+            if (!res.ok) return { results: [], message: "Search unavailable" };
+            const pagefind = await import("/pagefind/pagefind.js");
+            await pagefind.init();
+            const search = await pagefind.search(query);
+            const results = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
+            return results.map(r => ({ title: r.meta?.title, url: r.url, excerpt: r.excerpt }));
+          }
+        });
+        navigator.modelContext.registerTool({
+          name: "get-page-content",
+          description: "Get the main text content of the current page as markdown-friendly plain text.",
+          inputSchema: { type: "object", properties: {}, required: [] },
+          async execute() {
+            const main = document.querySelector("main");
+            return {
+              title: document.title,
+              url: window.location.href,
+              content: main ? main.innerText.slice(0, 4000) : document.body.innerText.slice(0, 4000)
+            };
+          }
+        });
+        navigator.modelContext.registerTool({
+          name: "navigate",
+          description: "Navigate to a page on this site by path (e.g. /docs/quick-start/).",
+          inputSchema: {
+            type: "object",
+            properties: {
+              path: { type: "string", description: "Site path to navigate to" }
+            },
+            required: ["path"]
+          },
+          async execute({ path }) {
+            window.location.href = path;
+            return { navigated: path };
+          }
+        });
+      })();
+    </script>
+
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="/~/pla/js/script.js"></script>
     <script is:inline>

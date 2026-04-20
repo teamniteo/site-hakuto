@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://hakuto.dev/",
+      "service-doc": [
+        {
+          "href": "https://hakuto.dev/docs/",
+          "type": "text/html"
+        }
+      ],
+      "service-desc": [
+        {
+          "href": "https://hakuto.dev/llms.txt",
+          "type": "text/plain"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://hakuto.dev/llms.txt",
+          "type": "text/plain"
+        }
+      ]
+    }
+  ]
+}
