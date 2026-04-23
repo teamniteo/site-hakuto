@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-description: "Get your first Hakuto site up and running in about 5 minutes. All you need is Claude Code, GitHub, Cloudflare, and a code editor."
+description: "Get your first Hakuto site up and running in about 5 minutes. All you need is Claude Code, GitHub, Cloudflare, and Bun."
 category: "setting-up"
 order: 0
 ---
@@ -16,25 +16,52 @@ Before you start, make sure you have:
 - A [Claude Code](https://claude.ai/code) account, the AI coding agent that builds your site.
 - A [GitHub](https://github.com/signup) account (free) to host your site's code.
 - A [Cloudflare](https://dash.cloudflare.com/sign-up) account (free) to deploy and host your site.
-- A code editor. If you don't have one, [Visual Studio Code](https://code.visualstudio.com/) (free) is a solid choice.
+- [Bun](https://bun.sh) installed locally. Hakuto uses Bun exclusively — not npm.
 
-## 2. Clone the Hakuto repo
+## 2. Install the Hakuto plugin
 
-Open Visual Studio Code (or your preferred editor) and clone the Hakuto template straight from GitHub.
+Hakuto ships as a [Claude Code plugin](https://code.claude.com/docs/en/plugins). Install it once globally and you can scaffold new sites anywhere afterwards.
 
-1. Click **Source Control** in the left sidebar.
-2. Click **Clone Repository**.
-3. Paste the repo URL and pick a folder:
+Open Claude Code and run:
 
 ```
-https://github.com/teamniteo/hakuto.git
+/plugin marketplace add teamniteo/hakuto
+/plugin install hakuto@hakuto
 ```
 
-VS Code will download the template and ask you to open the folder. Click yes. You now have a ready-to-go Astro project with all Hakuto Skills included.
+`/hakuto:init` now appears in your slash-command completion.
 
-## 3. Push to your GitHub
+## 3. Scaffold a new site
 
-Make sure you have the GitHub MCP server or GitHub CLI installed in Claude Code. If you're not sure, just ask Claude to help you set it up. Then give it this prompt:
+In a terminal, create an empty directory and launch Claude inside it:
+
+```sh
+mkdir my-site && cd my-site
+claude
+```
+
+Then, inside Claude, run:
+
+```
+/hakuto:init
+```
+
+This drops a ready-to-go Astro project in your directory and initializes a git repo. You'll see the files appear as `/hakuto:init` copies the scaffold — `package.json`, `src/`, `CLAUDE.md`, `wrangler.toml`, and the rest.
+
+## 4. Start the dev server
+
+In a second terminal (leave Claude running in the first):
+
+```sh
+bun install
+bun run dev
+```
+
+Open [localhost:4321](http://localhost:4321). The scaffold is intentionally blank — next step, you tell Claude what to build into it.
+
+## 5. Push to your GitHub
+
+In Claude, ask it to create and push the repository. You'll need the GitHub MCP server or GitHub CLI installed — if you're not sure, just ask Claude to help you set it up:
 
 ```
 Create new repository 'my-website' and push.
@@ -42,7 +69,7 @@ Create new repository 'my-website' and push.
 
 Your code now lives on GitHub and is ready to deploy.
 
-## 4. Deploy to Cloudflare
+## 6. Deploy to Cloudflare
 
 Cloudflare gives you a free, globally distributed host with PR previews baked in.
 
@@ -52,11 +79,11 @@ Cloudflare gives you a free, globally distributed host with PR previews baked in
 4. Wait for the site to be deployed. Once it's done, you'll get redirected to the Worker page. Click **Visit** to see your live site on a Cloudflare subdomain.
 5. You can set up a custom domain under Settings. More on that in our [custom domain guide](/docs/setting-up/custom-domain), but you can skip it for now.
 
-Your site is live. Time to make it yours.
+Your site is live. Time to iterate.
 
-## 5. Open it in Claude Code
+## 7. Tell Claude what to build
 
-Open the project in Claude Code and describe what you want to build. Here's an example prompt:
+Claude is already in your new project. Describe what you want. Example:
 
 ```
 Build a website for an analytics SaaS.
@@ -65,22 +92,30 @@ Write convincing, benefit-driven copy that speaks to data teams.
 Include a hero section, feature grid, pricing table, and a call-to-action.
 ```
 
-Claude already knows how to work with your project. The Skills are included in the repo.
+The `website-builder` skill auto-activates and drives the workflow: site type, design language, copy, brand colors, components. Watch it happen live at localhost:4321.
 
-## 6. Preview and ship
+## 8. Preview and ship
 
-You don't need to go live immediately to see changes online. Cloudflare will create a preview URL for every Pull Request. Tell Claude:
+Cloudflare creates a preview URL for every Pull Request. Tell Claude:
 
 ```
 Open PR for these changes.
 ```
 
-Go to the PR on GitHub and wait a few seconds for the Cloudflare comment to appear with the branch preview URL.
-
-If you're happy with the changes, merge the PR. If not, keep working with Claude and then tell it to:
+Go to the PR on GitHub and wait a few seconds for the Cloudflare comment to appear with the preview URL. If you're happy with the changes, merge the PR. If not, keep iterating with Claude and then tell it:
 
 ```
 Commit changes.
 ```
 
-That pushes the new commit and relaunches the preview URL with your latest changes.
+That pushes a new commit and refreshes the preview.
+
+## Updating Hakuto later
+
+Skills and commands update in place:
+
+```
+/plugin update hakuto
+```
+
+No re-clone, no merge conflicts. See [Update Hakuto](/docs/setting-up/update-hakuto) for details.

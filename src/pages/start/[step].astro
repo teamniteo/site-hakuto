@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import vscodeCloneImage from "@/assets/vscode-clone-repository.png";
 import {
   Terminal,
   GitBranch,
@@ -13,6 +12,7 @@ import {
   ArrowRight,
   ArrowLeft,
   ListChecks,
+  Package,
 } from "lucide-react";
 
 type Step = {
@@ -38,24 +38,38 @@ const steps: Step[] = [
       `A <a href="https://claude.ai/code" target="_blank" rel="noreferrer" class="text-primary hover:underline">Claude Code</a> account, the AI coding agent that builds your site.`,
       `A <a href="https://github.com/signup" target="_blank" rel="noreferrer" class="text-primary hover:underline">GitHub account</a> (free) to host your site's code.`,
       `A <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare account</a> (free) to deploy and host your site.`,
-      `A code editor. If you don't have one, <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" class="text-primary hover:underline">Visual Studio Code</a> (free) is a solid choice.`,
+      `<a href="https://bun.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">Bun</a> installed locally (Hakuto uses Bun, not npm).`,
     ],
-    outro: "Got everything? Let's clone the repo.",
+    outro: "Got everything? Let's install Hakuto.",
   },
   {
-    key: "clone",
-    label: "Clone",
-    Icon: GitBranch,
-    title: "Clone the Hakuto repo in VS Code",
-    // Custom-rendered below — see step.key === "clone" branch.
+    key: "install",
+    label: "Install",
+    Icon: Package,
+    title: "Install the plugin and scaffold a site",
+    // Custom-rendered below — see step.key === "install" branch.
+  },
+  {
+    key: "build",
+    label: "Build",
+    Icon: Code,
+    title: "Tell Claude what to build",
+    intro:
+      "Claude is already in your new project — you opened it for /hakuto:init. Describe the site you want. Here's an example prompt:",
+    code: `Build a website for an analytics SaaS.
+Use a modern, bold style with sharp typography and vibrant accents.
+Write convincing, benefit-driven copy that speaks to data teams.
+Include a hero section, feature grid, pricing table, and a call-to-action.`,
+    outro:
+      "The website-builder skill auto-activates and drives the workflow: site type, design language, copy, brand colors, components. Watch it happen in the preview at localhost:4321.",
   },
   {
     key: "push",
     label: "Push",
     Icon: GitPullRequest,
-    title: "Push to your GitHub",
+    title: "Push to GitHub",
     intro:
-      "Make sure you have the GitHub MCP server or GitHub CLI installed in Claude Code. If you're not sure, just ask Claude to help you set it up. Then give it this prompt:",
+      "Make sure you have the GitHub MCP server or GitHub CLI installed in Claude Code. If you're not sure, ask Claude to help you set it up. Then give it this prompt:",
     code: `Create new repository 'my-website' and push.`,
     outro: "Your code now lives on GitHub and is ready to deploy.",
   },
@@ -72,17 +86,7 @@ const steps: Step[] = [
       `Wait for the site to be deployed. Once it's done, you'll get redirected to the Worker page. Click <strong class="text-heading">Visit</strong> to see your live site on a Cloudflare subdomain.`,
       `You can set up a custom domain under Settings. More on that in our <a href="/docs/setting-up/custom-domain" class="text-primary hover:underline">custom domain guide</a>, but you can skip it for now.`,
     ],
-    outro: "Your site is live. Time to make it yours.",
-  },
-  {
-    key: "claude",
-    label: "Claude",
-    Icon: Code,
-    title: "Open it in Claude Code",
-    intro: "Open the project in Claude Code and describe what you want to build. Here's an example prompt:",
-    code: `Build a website for an analytics SaaS.\nUse a modern, bold style with sharp typography and vibrant accents.\nWrite convincing, benefit-driven copy that speaks to data teams.\nInclude a hero section, feature grid, pricing table, and a call-to-action.`,
-    outro:
-      "Claude already knows how to work with your project. The Skills are included in the repo.",
+    outro: "Your site is live. Time to iterate.",
   },
   {
     key: "ship",
@@ -96,10 +100,10 @@ const steps: Step[] = [
 export async function getStaticPaths() {
   const stepKeys = [
     "prep",
-    "clone",
+    "install",
+    "build",
     "push",
     "cloudflare",
-    "claude",
     "ship",
   ];
   return stepKeys.map((key) => ({ params: { step: key } }));
@@ -199,57 +203,99 @@ const isLast = currentIndex === total - 1;
           </div>
 
           {
-            step.key === "clone" && (
-              <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2 space-y-5">
-                  <p class="text-foreground leading-relaxed">
-                    Open <span class="font-semibold text-heading">Visual Studio Code</span> (or your preferred editor) and clone the Hakuto template straight from GitHub.
+            step.key === "install" && (
+              <div class="space-y-6">
+                <p class="text-foreground leading-relaxed">
+                  Hakuto is a Claude Code plugin. You install it once, globally, and can scaffold
+                  new sites in any empty directory thereafter.
+                </p>
+
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-primary mb-3">
+                    // Step 1 · Install the plugin (one-time)
                   </p>
-                  <ol class="space-y-3 text-foreground">
-                    <li class="flex items-start gap-3">
-                      <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">1</span>
-                      <span>Click <span class="font-semibold text-heading">Source Control</span> in the left sidebar.</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">2</span>
-                      <span>Click <span class="font-semibold text-heading">Clone Repository</span>.</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="flex-shrink-0 mt-0.5 flex items-center justify-center h-6 w-6 rounded-md border border-border bg-background font-mono text-[11px] text-primary">3</span>
-                      <span>Paste the repo URL and pick a folder:</span>
-                    </li>
-                  </ol>
+                  <p class="text-foreground leading-relaxed mb-3">
+                    Open Claude Code and run these two slash commands:
+                  </p>
                   <div class="relative group">
-                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-4 pr-12 overflow-x-auto text-heading"><code data-code>https://github.com/teamniteo/hakuto.git</code></pre>
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/plugin marketplace add teamniteo/hakuto
+/plugin install hakuto@hakuto</code></pre>
                     <button
                       type="button"
-                      class="absolute top-2.5 right-2.5 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
                       data-copy-btn
-                      aria-label="Copy repository URL to clipboard"
+                      aria-label="Copy commands to clipboard"
                     >
-                      <span data-copy-icon>
-                        <Copy className="h-4 w-4" />
-                      </span>
-                      <span class="hidden text-emerald-500" data-check-icon>
-                        <Check className="h-4 w-4" />
-                      </span>
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
                     </button>
                   </div>
-                  <p class="text-foreground leading-relaxed">
-                    VS Code will download the template and ask you to open the folder. Click yes. You now have a ready-to-go Astro project with all Hakuto Skills included.
+                </div>
+
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-primary mb-3">
+                    // Step 2 · Scaffold a new site
+                  </p>
+                  <p class="text-foreground leading-relaxed mb-3">
+                    In your terminal, create an empty directory and launch Claude Code inside it:
+                  </p>
+                  <div class="relative group">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>mkdir my-site && cd my-site
+claude</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy commands to clipboard"
+                    >
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                    </button>
+                  </div>
+                  <p class="text-foreground leading-relaxed mt-4 mb-3">
+                    Then, inside Claude, run:
+                  </p>
+                  <div class="relative group">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/hakuto:init</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy command to clipboard"
+                    >
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                    </button>
+                  </div>
+                  <p class="text-foreground leading-relaxed mt-4">
+                    The scaffold drops a ready-to-go Astro project in your directory and initializes a git repo.
                   </p>
                 </div>
-                <figure class="lg:col-span-3 rounded-lg border border-border bg-background overflow-hidden shadow-lg">
-                  <img
-                    src={vscodeCloneImage.src}
-                    width={vscodeCloneImage.width}
-                    height={vscodeCloneImage.height}
-                    alt="Visual Studio Code Source Control panel with Open Folder and Clone Repository buttons"
-                    loading="eager"
-                    decoding="async"
-                    class="w-full h-auto block"
-                  />
-                </figure>
+
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-primary mb-3">
+                    // Step 3 · Start the dev server
+                  </p>
+                  <p class="text-foreground leading-relaxed mb-3">
+                    In a separate terminal (so Claude keeps running):
+                  </p>
+                  <div class="relative group">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>bun install
+bun run dev</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy commands to clipboard"
+                    >
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                    </button>
+                  </div>
+                  <p class="text-foreground leading-relaxed mt-4">
+                    Open <a href="http://localhost:4321" target="_blank" rel="noreferrer" class="text-primary hover:underline">localhost:4321</a> to see the fresh scaffold. It's intentionally blank — next step, you tell Claude what to build into it.
+                  </p>
+                </div>
               </div>
             )
           }
@@ -258,7 +304,7 @@ const isLast = currentIndex === total - 1;
             step.key === "ship" && (
               <div class="space-y-5">
                 <p class="text-foreground leading-relaxed">
-                  You don't need to go live immediately to see changes online. Cloudflare will create a preview URL for every Pull Request. Tell Claude:
+                  You don't need to go live immediately to see changes online. Cloudflare creates a preview URL for every Pull Request. Tell Claude:
                 </p>
                 <div class="relative group">
                   <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>Open PR for these changes.</code></pre>
@@ -293,12 +339,15 @@ const isLast = currentIndex === total - 1;
                 <p class="text-foreground leading-relaxed">
                   That pushes the new commit and relaunches the preview URL with your latest changes.
                 </p>
+                <p class="text-foreground leading-relaxed">
+                  To pick up newer plugin versions later, run <code class="font-mono text-primary">/plugin update hakuto</code> inside Claude Code — skills and commands update in place without a re-scaffold.
+                </p>
               </div>
             )
           }
 
           {
-            step.key !== "clone" && step.key !== "ship" && step.intro && (
+            step.key !== "install" && step.key !== "ship" && step.intro && (
               <p class="text-foreground leading-relaxed mb-5">{step.intro}</p>
             )
           }

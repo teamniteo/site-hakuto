@@ -7,14 +7,15 @@ order: 2
 
 # Project Structure
 
-A Hakuto project follows the standard Astro project structure with a few additions for Skills and Cloudflare Workers deployment.
+A Hakuto project follows the standard Astro project structure with a few additions for Cloudflare Workers deployment. Skills, subagents, and the statusline come from the installed `hakuto` plugin — they're **not** vendored into your repo.
 
 ## Directory layout
 
 ```
 my-site/
 ├── .claude/
-│   └── skills/          # AI workflow definitions
+│   ├── settings.json        # Permissions and local config
+│   └── settings.local.json  # Personal overrides (gitignored)
 ├── src/
 │   ├── assets/          # Images, SVGs, favicons
 │   ├── components/      # Reusable .astro components
@@ -26,9 +27,12 @@ my-site/
 │   └── index.css        # Theme & design tokens
 ├── public/              # Static assets (auto-generated)
 ├── astro.config.mjs     # Astro + integrations config
-├── CLAUDE.md            # Agent instructions
+├── CLAUDE.md            # Project-specific agent instructions
+├── devenv.nix           # Optional: bun + tooling via devenv
 └── wrangler.toml        # Cloudflare Workers config
 ```
+
+Skills live in the plugin cache at `~/.claude/plugins/cache/hakuto/hakuto/<version>/skills/`. They're shared across every Hakuto site on your machine and update via `/plugin update hakuto`.
 
 ## Key files
 
@@ -42,7 +46,7 @@ Base layout used by all pages. Handles meta tags, SEO, JSON-LD schema, fonts, an
 
 ### `CLAUDE.md`
 
-Instructions for Claude Code on how to build and modify the site. This is what makes Hakuto's AI workflows work. It teaches the agent your project's conventions, available components, and quality standards.
+Project-specific instructions for Claude Code: conventions, available components, quality standards, the mandatory workflow for building pages. `/hakuto:init` scaffolds it; you can edit and extend it (a `## Project Plan` section is common). It combines with plugin-provided skills to drive the agent.
 
 ### `astro.config.mjs`
 
