@@ -1,13 +1,13 @@
 ---
 title: "Update Hakuto"
-description: "How updates work now that Hakuto is a Claude Code plugin. Covers /plugin update, skill refresh, scaffold drift, and the migration path from older git-clone sites."
+description: "How updates work with the Hakuto plugin. Covers /plugin update, scaffold drift, and dependency updates."
 category: "setting-up"
-order: 4
+order: 3
 ---
 
 # Update Hakuto
 
-Since Hakuto became a Claude Code plugin, updating skills and commands no longer touches your site repo. Your project source stays yours; the plugin evolves separately.
+Hakuto is a Claude Code plugin, so updating skills and commands doesn't touch your site repo. Your project source stays yours; the plugin evolves separately.
 
 ## Update the plugin
 
@@ -29,41 +29,35 @@ To check what you have installed:
 
 A scaffolded site is a snapshot of `scaffold/` at the moment you ran `/hakuto:init`. That means later changes to Astro versions, Tailwind config, base `Layout.astro`, or the CLAUDE.md spec **do not** flow into your repo automatically.
 
-For major scaffold improvements, we'll ship release notes with a per-file diff so you can cherry-pick what you want. Most sites don't need to chase scaffold updates — once built, they're stable.
+For major scaffold improvements, we'll ship release notes with a per-file diff so you can cherry-pick what you want. Most sites don't need to chase scaffold updates. Once built, they're stable.
 
 ## Update dependencies in your site
 
-Standard bun workflow:
+Run these inside `devenv shell` (if you use devenv) or directly in your terminal (if you installed bun standalone). The commands are the same either way.
+
+Update everything within semver:
 
 ```sh
-bun update               # update everything within semver
-bun update astro         # update a specific package
+bun update
 ```
 
-Before committing, run:
+Or update a specific package:
 
 ```sh
-bun run check            # astro type-check
-bun run build            # verify the build still passes
+bun update astro
 ```
 
-## Migrating from a pre-plugin Hakuto site
-
-If you built your site before the plugin existed, it has a vendored `.claude/skills/`, `.claude/agents/`, and `.claude/statusline.sh`. Installing the plugin alongside those duplicates every skill.
-
-Run this cleanup once per site:
+Before committing, type-check:
 
 ```sh
-rm -rf .claude/skills
-rm -f  .claude/agents/astro-file-editor.md
-rmdir  .claude/agents 2>/dev/null || true
-rm -f  .claude/statusline.sh
-git add -A && git commit -m "Switch to hakuto plugin"
+bun run check
 ```
 
-Keep `CLAUDE.md`, `.claude/settings.local.json`, `site-specification.md`, and the rest of your source — those are yours.
+And verify the build still passes:
 
-The [full migration guide](https://github.com/teamniteo/hakuto/blob/main/MIGRATING.md) covers edge cases (custom skills you added, statusline wiring, diffing against the latest spec).
+```sh
+bun run build
+```
 
 ## Pinning a version
 

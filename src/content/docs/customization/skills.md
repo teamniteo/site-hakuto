@@ -7,7 +7,7 @@ order: 1
 
 # Skills
 
-Skills are pre-built AI workflows that Claude Code uses to build specific parts of your site. They encode best practices so you get production-quality output every time. Hakuto ships them as part of the [Claude Code plugin](https://code.claude.com/docs/en/plugins) — install the plugin once and every skill is available in every site you scaffold.
+Skills are pre-built AI workflows that Claude Code uses to build specific parts of your site. They encode best practices so you get production-quality output every time. Hakuto ships them as part of the [Claude Code plugin](https://code.claude.com/docs/en/plugins). Install the plugin once and every skill is available in every site you scaffold.
 
 ## How Skills work
 
@@ -41,4 +41,4 @@ Each Skill contains:
 - **Technical constraints**: rules and patterns to follow
 - **Quality checks**: validation before completion
 
-To contribute a skill back to the Hakuto plugin, open a PR against the [hakuto repository](https://github.com/teamniteo/hakuto) — plugin skills live in `skills/` at the repo root.
+To contribute a skill back to the Hakuto plugin, open a PR against the [hakuto repository](https://github.com/teamniteo/hakuto). Plugin skills live in `skills/` at the repo root.

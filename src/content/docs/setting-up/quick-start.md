@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-description: "Get your first Hakuto site up and running in about 5 minutes. All you need is Claude Code, GitHub, Cloudflare, and Bun."
+description: "Get your first Hakuto site up and running in about 5 minutes. All you need is Claude Code, GitHub, Cloudflare, and a code editor."
 category: "setting-up"
 order: 0
 ---
@@ -16,52 +16,57 @@ Before you start, make sure you have:
 - A [Claude Code](https://claude.ai/code) account, the AI coding agent that builds your site.
 - A [GitHub](https://github.com/signup) account (free) to host your site's code.
 - A [Cloudflare](https://dash.cloudflare.com/sign-up) account (free) to deploy and host your site.
-- [Bun](https://bun.sh) installed locally. Hakuto uses Bun exclusively — not npm.
+- A code editor. If you don't have one, [Visual Studio Code](https://code.visualstudio.com/) (free) is a solid choice.
 
-## 2. Install the Hakuto plugin
+## 2. Open VS Code and launch Claude
 
-Hakuto ships as a [Claude Code plugin](https://code.claude.com/docs/en/plugins). Install it once globally and you can scaffold new sites anywhere afterwards.
-
-Open Claude Code and run:
-
-```
-/plugin marketplace add teamniteo/hakuto
-/plugin install hakuto@hakuto
-```
-
-`/hakuto:init` now appears in your slash-command completion.
-
-## 3. Scaffold a new site
-
-In a terminal, create an empty directory and launch Claude inside it:
+In **Visual Studio Code** (or your editor of choice), open a new window (`File → New Window`) and open or create an empty folder for your site. Then open the integrated terminal and launch Claude Code:
 
 ```sh
-mkdir my-site && cd my-site
 claude
 ```
 
-Then, inside Claude, run:
+## 3. Install the plugin and scaffold a new site
+
+Hakuto ships as a [Claude Code plugin](https://code.claude.com/docs/en/plugins). Inside Claude, run each of these slash commands. The first two install Hakuto (you only do this once per machine); the third scaffolds your site:
+
+```
+/plugin marketplace add teamniteo/hakuto
+```
+
+```
+/plugin install hakuto@hakuto
+```
 
 ```
 /hakuto:init
 ```
 
-This drops a ready-to-go Astro project in your directory and initializes a git repo. You'll see the files appear as `/hakuto:init` copies the scaffold — `package.json`, `src/`, `CLAUDE.md`, `wrangler.toml`, and the rest.
+This drops a ready-to-go Astro project into the folder and initializes a git repo. You'll see the files appear as `/hakuto:init` copies the scaffold: `package.json`, `src/`, `CLAUDE.md`, `wrangler.toml`, and the rest.
 
 ## 4. Start the dev server
 
-In a second terminal (leave Claude running in the first):
+The scaffold ships with [devenv](https://devenv.sh) pre-configured. bun is declared, dependencies install automatically on first shell entry, and `devenv up` starts the Astro dev server. In a second terminal (leave Claude running in the first):
+
+```sh
+devenv up
+```
+
+**Don't want devenv?** Install [bun](https://bun.sh), then run:
 
 ```sh
 bun install
+```
+
+```sh
 bun run dev
 ```
 
-Open [localhost:4321](http://localhost:4321). The scaffold is intentionally blank — next step, you tell Claude what to build into it.
+Open [localhost:4321](http://localhost:4321). The scaffold is intentionally blank. Next step, you tell Claude what to build into it.
 
 ## 5. Push to your GitHub
 
-In Claude, ask it to create and push the repository. You'll need the GitHub MCP server or GitHub CLI installed — if you're not sure, just ask Claude to help you set it up:
+In Claude, ask it to create and push the repository. You'll need the GitHub MCP server or GitHub CLI installed. If you're not sure, just ask Claude to help you set it up:
 
 ```
 Create new repository 'my-website' and push.

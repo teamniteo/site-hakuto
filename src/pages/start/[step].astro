@@ -38,7 +38,7 @@ const steps: Step[] = [
       `A <a href="https://claude.ai/code" target="_blank" rel="noreferrer" class="text-primary hover:underline">Claude Code</a> account, the AI coding agent that builds your site.`,
       `A <a href="https://github.com/signup" target="_blank" rel="noreferrer" class="text-primary hover:underline">GitHub account</a> (free) to host your site's code.`,
       `A <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noreferrer" class="text-primary hover:underline">Cloudflare account</a> (free) to deploy and host your site.`,
-      `<a href="https://bun.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">Bun</a> installed locally (Hakuto uses Bun, not npm).`,
+      `A code editor. If you don't have one, <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer" class="text-primary hover:underline">Visual Studio Code</a> (free) is a solid choice.`,
     ],
     outro: "Got everything? Let's install Hakuto.",
   },
@@ -207,24 +207,23 @@ const isLast = currentIndex === total - 1;
               <div class="space-y-6">
                 <p class="text-foreground leading-relaxed">
                   Hakuto is a Claude Code plugin. You install it once, globally, and can scaffold
-                  new sites in any empty directory thereafter.
+                  new sites in any empty folder thereafter.
                 </p>
 
                 <div>
                   <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-primary mb-3">
-                    // Step 1 · Install the plugin (one-time)
+                    // Step 1 · Open VS Code and launch Claude
                   </p>
                   <p class="text-foreground leading-relaxed mb-3">
-                    Open Claude Code and run these two slash commands:
+                    In <strong class="text-heading">Visual Studio Code</strong> (or your editor of choice), open a new window (<code class="font-mono text-primary">File → New Window</code>) and open or create an empty folder for your site. Then open the integrated terminal and launch Claude Code:
                   </p>
                   <div class="relative group">
-                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/plugin marketplace add teamniteo/hakuto
-/plugin install hakuto@hakuto</code></pre>
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>claude</code></pre>
                     <button
                       type="button"
                       class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
                       data-copy-btn
-                      aria-label="Copy commands to clipboard"
+                      aria-label="Copy command to clipboard"
                     >
                       <span data-copy-icon><Copy className="h-4 w-4" /></span>
                       <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
@@ -234,27 +233,35 @@ const isLast = currentIndex === total - 1;
 
                 <div>
                   <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-primary mb-3">
-                    // Step 2 · Scaffold a new site
+                    // Step 2 · Install the plugin and scaffold
                   </p>
                   <p class="text-foreground leading-relaxed mb-3">
-                    In your terminal, create an empty directory and launch Claude Code inside it:
+                    Inside Claude, run each of these slash commands. The first two install Hakuto (you only do this once per machine); the third scaffolds your site:
                   </p>
-                  <div class="relative group">
-                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>mkdir my-site && cd my-site
-claude</code></pre>
+                  <div class="relative group mb-3">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/plugin marketplace add teamniteo/hakuto</code></pre>
                     <button
                       type="button"
                       class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
                       data-copy-btn
-                      aria-label="Copy commands to clipboard"
+                      aria-label="Copy command to clipboard"
                     >
                       <span data-copy-icon><Copy className="h-4 w-4" /></span>
                       <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
                     </button>
                   </div>
-                  <p class="text-foreground leading-relaxed mt-4 mb-3">
-                    Then, inside Claude, run:
-                  </p>
+                  <div class="relative group mb-3">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/plugin install hakuto@hakuto</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy command to clipboard"
+                    >
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                    </button>
+                  </div>
                   <div class="relative group">
                     <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/hakuto:init</code></pre>
                     <button
@@ -268,7 +275,7 @@ claude</code></pre>
                     </button>
                   </div>
                   <p class="text-foreground leading-relaxed mt-4">
-                    The scaffold drops a ready-to-go Astro project in your directory and initializes a git repo.
+                    The scaffold drops a ready-to-go Astro project into the folder and initializes a git repo.
                   </p>
                 </div>
 
@@ -277,16 +284,42 @@ claude</code></pre>
                     // Step 3 · Start the dev server
                   </p>
                   <p class="text-foreground leading-relaxed mb-3">
-                    In a separate terminal (so Claude keeps running):
+                    The scaffold ships with <a href="https://devenv.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">devenv</a> pre-configured — bun is declared, dependencies install automatically on first shell entry, and <code class="font-mono text-primary">devenv up</code> starts the Astro dev server. In a second terminal (leave Claude running in the first):
                   </p>
                   <div class="relative group">
-                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>bun install
-bun run dev</code></pre>
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>devenv up</code></pre>
                     <button
                       type="button"
                       class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
                       data-copy-btn
-                      aria-label="Copy commands to clipboard"
+                      aria-label="Copy command to clipboard"
+                    >
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                    </button>
+                  </div>
+                  <p class="text-foreground leading-relaxed mt-4 mb-3">
+                    <strong class="text-heading">Don't want devenv?</strong> Install <a href="https://bun.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">bun</a>, then run:
+                  </p>
+                  <div class="relative group mb-3">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>bun install</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy command to clipboard"
+                    >
+                      <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                      <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                    </button>
+                  </div>
+                  <div class="relative group">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>bun run dev</code></pre>
+                    <button
+                      type="button"
+                      class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                      data-copy-btn
+                      aria-label="Copy command to clipboard"
                     >
                       <span data-copy-icon><Copy className="h-4 w-4" /></span>
                       <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>

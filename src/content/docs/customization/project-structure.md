@@ -7,7 +7,7 @@ order: 2
 
 # Project Structure
 
-A Hakuto project follows the standard Astro project structure with a few additions for Cloudflare Workers deployment. Skills, subagents, and the statusline come from the installed `hakuto` plugin — they're **not** vendored into your repo.
+A Hakuto project follows the standard Astro project structure with a few additions for Cloudflare Workers deployment. Skills, subagents, and the statusline come from the installed `hakuto` plugin. They're **not** vendored into your repo.
 
 ## Directory layout
 
