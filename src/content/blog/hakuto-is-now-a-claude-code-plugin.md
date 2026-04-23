@@ -14,12 +14,17 @@ Hakuto used to be a repo you cloned. Every site ended up carrying a full copy of
 
 Claude Code has had first-class plugin support for months, and this week we moved Hakuto onto it.
 
-## What that means for you
+## How to install
 
-Install the plugin once:
+Add our GitHub repo as marketplace:
 
 ```
 /plugin marketplace add teamniteo/hakuto
+```
+
+Then install plugin:
+
+```
 /plugin install hakuto@hakuto
 ```
 
@@ -27,13 +32,8 @@ Then in any empty folder, run `/hakuto:init` and you have a production-ready Ast
 
 Your site repo stays yours: content, components, design decisions. The plugin is where the shared stuff lives: skills, the subagent, the scaffolder, the agent spec.
 
-## The rest hasn't changed
-
-Hakuto is still free, still open source, still bring-your-own-API-key, still deployed on Cloudflare's free tier. Same skills (plus a new `fonts` skill we added during the move), same Astro 6 + Tailwind v4 + shadcn stack, same PR-preview-and-merge workflow.
-
 ## Getting started
 
-- New to Hakuto? The [Start wizard](/start/prep) walks you through the whole thing in about five minutes.
-- Already running a Hakuto site? [MIGRATING.md](https://github.com/teamniteo/hakuto/blob/main/MIGRATING.md) is a one-paragraph cleanup. Do it once per site.
+New to Hakuto? The [Start wizard](/start/prep) walks you through the whole thing in about five minutes.
 
 That's the whole update. Back to shipping.
