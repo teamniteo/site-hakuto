@@ -1,32 +1,70 @@
 ---
 title: "Update Hakuto"
-description: "How to update your Hakuto site to the latest template version. Covers pulling the newest release, updating Skills, Tailwind CSS, and Astro dependencies."
+description: "How updates work with the Hakuto plugin. Covers /plugin update, scaffold drift, and dependency updates."
 category: "setting-up"
-order: 4
+order: 3
 ---
 
 # Update Hakuto
 
-## Get the latest release
+Hakuto is a Claude Code plugin, so updating skills and commands doesn't touch your site repo. Your project source stays yours; the plugin evolves separately.
 
-<!-- TODO: Add instructions for pulling updates from the Hakuto repo. Should cover how to fetch the latest stable release from github.com/teamniteo/hakuto and merge it into an existing project without overwriting user customizations. -->
+## Update the plugin
 
-*Coming soon.*
+Inside Claude Code, in any project:
 
-## Update Skills
+```
+/plugin update hakuto
+```
 
-<!-- TODO: Add instructions for updating Skills to match the latest Hakuto release. -->
+This pulls the latest skills (`website-builder`, `brand-designer`, `section-blog`, etc.), the `astro-file-editor` subagent, and the `/hakuto:init` command. No files change in your site repo.
 
-*Coming soon.*
+To check what you have installed:
 
-## Update Tailwind CSS
+```
+/plugin list
+```
 
-<!-- TODO: Add instructions for updating Tailwind CSS and migrating any breaking changes. -->
+## What does not update automatically
 
-*Coming soon.*
+A scaffolded site is a snapshot of `scaffold/` at the moment you ran `/hakuto:init`. That means later changes to Astro versions, Tailwind config, base `Layout.astro`, or the CLAUDE.md spec **do not** flow into your repo automatically.
 
-## Update Astro
+For major scaffold improvements, we'll ship release notes with a per-file diff so you can cherry-pick what you want. Most sites don't need to chase scaffold updates. Once built, they're stable.
 
-<!-- TODO: Add instructions for updating Astro and its integrations. -->
+## Update dependencies in your site
 
-*Coming soon.*
+Run these inside `devenv shell` (if you use devenv) or directly in your terminal (if you installed bun standalone). The commands are the same either way.
+
+Update everything within semver:
+
+```sh
+bun update
+```
+
+Or update a specific package:
+
+```sh
+bun update astro
+```
+
+Before committing, type-check:
+
+```sh
+bun run check
+```
+
+And verify the build still passes:
+
+```sh
+bun run build
+```
+
+## Pinning a version
+
+If you want to lock a team to a specific plugin version, install a tag:
+
+```
+/plugin install hakuto@hakuto@0.1.0
+```
+
+Drop the version suffix to track the rolling latest.

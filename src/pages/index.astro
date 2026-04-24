@@ -26,20 +26,20 @@ const codeSchema = {
 const steps = [
   {
     k: "01",
-    title: "Clone and connect",
-    body: "Clone the Hakuto repo, connect it to Cloudflare, and you have a production-ready Astro site with free hosting. Takes about 5 minutes.",
-    Icon: GitBranch,
+    title: "Install the plugin",
+    body: "Install the Hakuto plugin once in Claude Code, then run /hakuto:init in any empty directory to scaffold a production-ready Astro site. Takes about 2 minutes.",
+    Icon: Terminal,
   },
   {
     k: "02",
     title: "Build with Claude",
-    body: "Open your project in Claude Code. The included Skills teach Claude how to build Astro correctly, optimize images, handle SEO, and check accessibility.",
-    Icon: Terminal,
+    body: "Describe your site and Claude takes over. The plugin's Skills teach Claude how to build Astro correctly, pick fonts and palettes, write copy, optimize images, handle SEO, and check accessibility.",
+    Icon: GitBranch,
   },
   {
     k: "03",
     title: "Share and ship",
-    body: "Open a PR to get a live preview URL on Cloudflare. Merge to deploy. That's the whole workflow.",
+    body: "Push to GitHub, connect Cloudflare, get a preview URL on every PR. Merge to deploy. That's the whole workflow.",
     Icon: Rocket,
   },
 ];
@@ -86,9 +86,10 @@ const audiences = [
           </h1>
 
           <p class="mt-8 text-lg sm:text-xl text-foreground max-w-2xl leading-relaxed">
-            Hakuto is a free Astro starter with built-in Claude Code Skills.
-            Clone it, connect to Cloudflare, and ship a production site on
-            Cloudflare's free hosting in 5 minutes.
+            Hakuto is a free Claude Code plugin bundling skills, a subagent,
+            and an Astro scaffold. Install it once, run
+            <code class="font-mono text-primary">/hakuto:init</code>, and ship
+            a production site on Cloudflare's free hosting in minutes.
           </p>
 
           <div class="mt-10 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-sm">
@@ -188,7 +189,7 @@ const audiences = [
           // How it works
         </p>
         <h2 class="font-mono text-3xl sm:text-4xl font-bold text-heading leading-tight">
-          Three steps from clone to shipped
+          Three steps from install to shipped
         </h2>
       </div>
 
@@ -264,8 +265,8 @@ const audiences = [
             Free and open source, no strings
           </h2>
           <p class="mt-5 text-lg text-foreground leading-relaxed">
-            The framework and Skills are open source on GitHub. There's no account required to
-            use them. Clone it, make it yours, ship it, open a PR.
+            The plugin, skills, and scaffold are open source on GitHub. No account required.
+            Install once, make it yours, ship it, open a PR.
           </p>
 
           <div class="mt-8 flex flex-wrap gap-3 sm:gap-4 font-mono text-sm">

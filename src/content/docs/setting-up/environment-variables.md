@@ -2,7 +2,7 @@
 title: "Environment Variables"
 description: "How to manage API keys, secrets, and configuration values for your Hakuto site on Cloudflare Workers."
 category: "setting-up"
-order: 3
+order: 2
 ---
 
 # Environment Variables
