@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Github, Paintbrush, PenTool, Globe, FileText, BookOpen, FormInput, SearchCheck, Hammer, ArrowRight } from "lucide-react";
+import { Github, Paintbrush, PenTool, Globe, FileText, BookOpen, FormInput, SearchCheck, ClipboardCheck, Hammer, ArrowRight } from "lucide-react";
 
 const skills = [
   {
@@ -53,6 +53,13 @@ const skills = [
     example: '"Add a contact form"',
   },
   {
+    name: "Code Review",
+    slug: "code-review",
+    Icon: ClipboardCheck,
+    body: "A report-only source audit that complements SEO Testing. Checks src/ against the rules in CLAUDE.md: Tailwind v4 import order, className vs class on shadcn, Picture for local images, Fonts API usage, Cloudflare adapter options, anchor-link targets, and template placeholder cleanup. Cites file:line plus the rule it violates.",
+    example: '"Run a code review"',
+  },
+  {
     name: "SEO Testing",
     slug: "testing-seo",
     Icon: SearchCheck,
@@ -71,7 +78,7 @@ const skills = [
 
 <Layout
   title="Skills"
-  description="Skills are instructions that live in your project and teach Claude Code how to handle specific tasks. Hakuto ships with nine Skills out of the box."
+  description="Skills are instructions that live in your project and teach Claude Code how to handle specific tasks. Hakuto ships with ten Skills out of the box."
 >
   <!-- HERO -->
   <section class="border-b border-border">
@@ -101,7 +108,12 @@ const skills = [
   <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="grid gap-6 lg:grid-cols-2">
       {skills.map(({ name, slug, Icon, body, example }) => (
-        <article class="group relative border border-border rounded-lg p-8 bg-card hover:border-primary/50 transition-colors flex flex-col">
+        <a
+          href={`https://github.com/teamniteo/hakuto/tree/main/skills/${slug}`}
+          target="_blank"
+          rel="noreferrer"
+          class="group relative border border-border rounded-lg p-8 bg-card hover:border-primary/50 transition-colors flex flex-col"
+        >
           <div class="flex items-center justify-between mb-6">
             <div class="inline-flex items-center gap-3">
               <div class="h-10 w-10 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center">
@@ -109,7 +121,10 @@ const skills = [
               </div>
               <h2 class="font-mono text-2xl font-semibold text-heading">{name}</h2>
             </div>
-            <code class="font-mono text-xs text-muted-foreground">/{slug}</code>
+            <code class="font-mono text-xs text-muted-foreground inline-flex items-center gap-1.5">
+              /{slug}
+              <Github className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+            </code>
           </div>
 
           <p class="text-foreground leading-relaxed flex-1">{body}</p>
@@ -118,7 +133,7 @@ const skills = [
             <p class="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">Try it</p>
             <p class="font-mono text-sm text-primary">{example}</p>
           </div>
-        </article>
+        </a>
       ))}
     </div>
   </section>
