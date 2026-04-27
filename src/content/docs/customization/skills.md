@@ -23,7 +23,7 @@ You can also list them explicitly by name in a prompt ("use the brand-designer s
 | `brand-designer` | Generate custom color palettes using color theory. Provide hex codes or upload a logo for extraction. |
 | `professional-copywriter` | Conversion-optimized content with benefit-driven messaging. Preserves user-provided copy and fills gaps. |
 | `fonts` | Configure web fonts via Astro's Fonts API (top-level `fonts` in Astro 6+). Google, Fontsource, Bunny, Fontshare, Adobe, and local fonts. |
-| `testing-seo` | SEO validation for pages or entire sites. Reports issues and successes without applying fixes. |
+| `seo-audit` | SEO validation for pages or entire sites. Reports issues and successes without applying fixes. |
 | `section-form` | Add forms to Astro pages using React with Zod validation. Contact forms, newsletter signups, and more. |
 | `section-blog` | Multi-page blog system with listing pages, post templates, author archives, and category pages. |
 | `section-docs` | Technical documentation section with sidebar navigation, search, and nested category pages. |
