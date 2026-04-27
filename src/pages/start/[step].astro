@@ -337,6 +337,21 @@ const isLast = currentIndex === total - 1;
             step.key === "ship" && (
               <div class="space-y-5">
                 <p class="text-foreground leading-relaxed">
+                  Before merging to main and going live, run the prelaunch checklist. Claude scans your wrangler config, forms, legal pages, and placeholder text, and confirms you've run the SEO and code-review skills. See the <a href="/docs/tips/site-launch" class="text-primary hover:underline">full launch guide</a> for what's covered.
+                </p>
+                <div class="relative group">
+                  <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>Run prelaunch checklist.</code></pre>
+                  <button
+                    type="button"
+                    class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
+                    data-copy-btn
+                    aria-label="Copy command to clipboard"
+                  >
+                    <span data-copy-icon><Copy className="h-4 w-4" /></span>
+                    <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
+                  </button>
+                </div>
+                <p class="text-foreground leading-relaxed">
                   You don't need to go live immediately to see changes online. Cloudflare creates a preview URL for every Pull Request. Tell Claude:
                 </p>
                 <div class="relative group">

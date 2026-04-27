@@ -1,6 +1,6 @@
 ---
 title: "Custom Domain"
-description: "Connect your own domain to your Cloudflare Worker. Add the domain, update wrangler.toml, and disable the workers.dev URL."
+description: "Connect your own domain to your Cloudflare Worker. Add the domain, update wrangler.toml, and hide the workers.dev URL from the public."
 category: "setting-up"
 order: 1
 ---
@@ -33,9 +33,17 @@ Tell Claude if you'd rather have it handle the edit:
 Add yourname.com as a custom domain in wrangler.toml.
 ```
 
-## 3. Disable the workers.dev domain
+## 3. Hide the workers.dev URL from the public
 
-We recommend disabling the `workers.dev` domain so you don't run into issues with that site getting indexed instead of your main domain. When Cloudflare prompts you, **don't disable preview URLs** because you'll want those for PR previews.
+Every Cloudflare Worker comes with a default `workers.dev` URL (like `your-site.your-team.workers.dev`). Now that your custom domain is live, you don't want Google indexing the same site under that URL too. Duplicate content hurts your SEO.
+
+In your worker page on Cloudflare, go to **Settings → Domains & Routes** and click the `…` menu on the `workers.dev` row. Toggle **Cloudflare Access** on. The URL now sits behind a login screen, so the public and search engines can't reach it.
+
+Leave the **Preview URLs** row alone. Cloudflare Access should stay **off** there so your per-PR preview links remain publicly shareable.
+
+![Cloudflare Domains & Routes settings showing workers.dev with Cloudflare Access enabled and Preview URLs with Cloudflare Access disabled](/images/docs/cloudflare-domain-routes.jpg)
+
+If Cloudflare ever prompts you to disable Preview URLs entirely, **don't**. You'll lose the per-PR previews.
 
 ---
 
