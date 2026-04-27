@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Github, Paintbrush, PenTool, Globe, FileText, BookOpen, FormInput, SearchCheck, ClipboardCheck, Hammer, ArrowRight } from "lucide-react";
+import { Github, Paintbrush, PenTool, Globe, FileText, BookOpen, FormInput, SearchCheck, ClipboardCheck, Rocket, Hammer, ArrowRight } from "lucide-react";
 
 const skills = [
   {
@@ -73,12 +73,19 @@ const skills = [
     body: "Adds privacy-friendly Plausible Analytics with a Cloudflare Workers proxy that bypasses ad blockers. Strips cookies, serves the tracking script from your own domain, and caches at the edge without leaking visitor data to third parties.",
     example: '"Add analytics tracking"',
   },
+  {
+    name: "Prelaunch Checklist",
+    slug: "prelaunch-checklist",
+    Icon: Rocket,
+    body: "Walks the repo before you go live and reports what's ready and what's not: scaffold defaults still in Layout.astro, placeholder copy in source, forms wired to real endpoints, wrangler config customized, legal pages linked from the footer. Confirms you've run the SEO and code-review skills, then lists the manual Cloudflare dashboard steps it can't automate.",
+    example: '"Run prelaunch checklist"',
+  },
 ];
 ---
 
 <Layout
   title="Skills"
-  description="Skills are instructions that live in your project and teach Claude Code how to handle specific tasks. Hakuto ships with ten Skills out of the box."
+  description="Skills are instructions that live in your project and teach Claude Code how to handle specific tasks. Hakuto ships with eleven Skills out of the box."
 >
   <!-- HERO -->
   <section class="border-b border-border">
