@@ -37,7 +37,7 @@ The `prelaunch-checklist` skill scans your project and reports what's ready and 
 
 **Confirmation gates** — the skill asks you directly:
 
-- Have you run the `testing-seo` skill?
+- Have you run the `seo-audit` skill?
 - Has the source been reviewed (via `code-review` skill, external reviewer, or PR review)?
 
 If you haven't, run those skills first, then come back.
