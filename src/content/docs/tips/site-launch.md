@@ -1,56 +1,60 @@
 ---
 title: "Site Launch"
-description: "A pre-launch checklist for your Hakuto site. Covers content review, technical checks, performance validation, and what to do after going live."
+description: "A pre-launch checklist for your Hakuto site. Run the prelaunch-checklist skill, then handle the manual Cloudflare steps the skill can't automate."
 category: "tips"
 order: 4
 ---
 
 # Site Launch
 
-Before you point your domain at your new site, run through this checklist.
+Before you point your domain at your new site, run the prelaunch checklist. It's a single Claude Code command that walks the repo and surfaces anything that needs attention.
 
-## Run the SEO audit
+## Run the prelaunch checklist
 
-Hakuto includes a `testing-seo` Skill that checks your entire site for common issues. Open Claude Code and type:
+Open Claude Code in your site repo and type:
 
 ```
-Run an SEO test on my site.
+Run prelaunch checklist.
 ```
 
-Claude will scan every page and report on:
+The `prelaunch-checklist` skill scans your project and reports what's ready and what's not. It's report-only — it won't modify files.
 
-- Missing or duplicate title tags and meta descriptions
-- Heading hierarchy issues (skipped levels, multiple H1s)
-- Missing alt text on images
-- Open Graph and Twitter card tags
-- Canonical URLs
-- Structured data (JSON-LD)
-- Broken internal links
+### What it checks
 
-Fix anything it flags before going live.
+**Critical issues (block launch):**
 
-## Manual checks
+- `SITE_NAME` and `SITE_DESCRIPTION` in `Layout.astro` aren't still the Hakuto scaffold defaults
+- No placeholder text anywhere in the source (`Lorem ipsum`, `TODO`, `your-email@`, `hello@example.com`, `+1 (555)`, etc.)
+- Any forms on the site submit to a real endpoint with a real recipient — not `action="#"` or a missing worker handler
 
-You can of course use Claude Code to do these.
+**Warnings (review before launch):**
 
-### Content
+- `wrangler.toml` `name` and `package.json` `name` aren't still `hakuto-site`
+- `compatibility_date` in `wrangler.toml` isn't more than 12 months old
+- Custom domain is configured (either via `[[routes]]` in `wrangler.toml` or in the Cloudflare dashboard)
+- Legal pages exist where appropriate — `privacy.astro`, `terms.astro`, `cookies.astro` — and are linked from the Footer
+- 404 page has been customized away from the scaffold default
 
-- All placeholder text has been replaced with real copy
-- Contact information is correct (email, phone, address)
-- Legal pages are in place if needed (privacy policy, terms)
+**Confirmation gates** — the skill asks you directly:
 
-### Technical
+- Have you run the `testing-seo` skill?
+- Has the source been reviewed (via `code-review` skill, external reviewer, or PR review)?
 
-- Custom domain is configured ([guide](/docs/setting-up/custom-domain))
-- The `workers.dev` subdomain is disabled to avoid duplicate indexing
-- Favicon is set and shows correctly in the browser tab
-- Forms work end-to-end (submit a test message)
-- `llms.txt` is updated with all current pages and descriptions
+If you haven't, run those skills first, then come back.
+
+## Manual steps
+
+Some things can't be checked from the repo. The skill reminds you, but you do these in the Cloudflare dashboard:
+
+- **Disable the `workers.dev` subdomain** once your custom domain is live, so Google doesn't index your site under two URLs. Workers & Pages → your worker → Settings → Domains & Routes → disable the `*.workers.dev` route.
+- **Confirm your custom domain** is configured and DNS has propagated. See the [custom domain guide](/docs/setting-up/custom-domain).
+- **Verify analytics** fires on the live domain if you've installed Plausible or similar.
+- **Set environment variables / secrets** in Cloudflare for forms or analytics that need them.
 
 ## After launch
 
-- Submit your sitemap to [Google Search Console](https://search.google.com/search-console) at `yourdomain.com/sitemap-index.xml`
-- Test your site with [PageSpeed Insights](https://pagespeed.web.dev/) from multiple locations
+- Submit your sitemap to [Google Search Console](https://search.google.com/search-console) at `yourdomain.com/sitemap-index.xml`.
+- Run [PageSpeed Insights](https://pagespeed.web.dev/) from a couple of locations to spot-check performance.
 
 ---
 
