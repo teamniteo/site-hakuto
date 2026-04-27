@@ -12,13 +12,11 @@ import { agentsSummary } from "@nuasite/agent-summary";
 
 import cloudflare from "@astrojs/cloudflare";
 
-import sentry from "@sentry/astro";
-import spotlightjs from "@spotlightjs/astro";
-
 // https://astro.build/config
 export default defineConfig({
 	site: "https://hakuto.dev",
 	output: "static",
+	trailingSlash: "always",
 	integrations: [
 		react(),
 		sitemap(),
@@ -29,8 +27,11 @@ export default defineConfig({
 			name: "Hakuto",
 			short_name: "Hakuto",
 		}),
-		sentry(),
-		spotlightjs(),
+		// @sentry/astro and @spotlightjs/astro are intentionally not registered:
+		// Sentry has no DSN configured and Spotlight is a dev-only debugging
+		// overlay. Together they added ~260 KiB of unused JS to every prod
+		// page. Re-add sentry() here once a DSN is set, and gate spotlightjs()
+		// to dev mode if you want it back.
 	],
 
 	vite: viteConfig({

@@ -30,16 +30,16 @@ const categories: SidebarCategory[] = categoryOrder
       .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
       .map((doc) => ({
         title: doc.data.title,
-        href: `/docs/${doc.id}`,
+        href: `/docs/${doc.id}/`,
         id: doc.id,
       })),
   }))
   .filter((cat) => cat.items.length > 0);
 
 // Hardcoded "Welcome" links to /docs home (top of sidebar, before categories)
-const welcomeItem = { title: "Welcome", href: "/docs", id: "__welcome" };
+const welcomeItem = { title: "Welcome", href: "/docs/", id: "__welcome" };
 
-const currentPath = Astro.url.pathname.replace(/\/$/, "");
+const currentPath = Astro.url.pathname;
 ---
 
 <!-- Desktop sidebar -->
