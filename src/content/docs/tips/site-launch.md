@@ -46,7 +46,7 @@ If you haven't, run those skills first, then come back.
 
 Some things can't be checked from the repo. The skill reminds you, but you do these in the Cloudflare dashboard:
 
-- **Disable the `workers.dev` subdomain** once your custom domain is live, so Google doesn't index your site under two URLs. Workers & Pages → your worker → Settings → Domains & Routes → disable the `*.workers.dev` route.
+- **Toggle Cloudflare Access on for the `workers.dev` URL** once your custom domain is live, so Google doesn't index your site under two URLs. In Workers & Pages → your worker → Settings → Domains & Routes, click `…` on the `workers.dev` row and flip Cloudflare Access on. Leave it off on the Preview URLs row. See the [custom domain guide](/docs/setting-up/custom-domain) for the screenshot.
 - **Confirm your custom domain** is configured and DNS has propagated. See the [custom domain guide](/docs/setting-up/custom-domain).
 - **Verify analytics** fires on the live domain if you've installed Plausible or similar.
 - **Set environment variables / secrets** in Cloudflare for forms or analytics that need them.
