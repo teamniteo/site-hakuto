@@ -38,6 +38,8 @@ Hakuto ships as a [Claude Code plugin](https://code.claude.com/docs/en/plugins).
 /plugin install hakuto@hakuto
 ```
 
+After the install, Claude will recommend reloading plugins so the new commands become available. Go ahead and do it, then scaffold your site:
+
 ```
 /hakuto:init
 ```
@@ -46,13 +48,13 @@ This drops a ready-to-go Astro project into the folder and initializes a git rep
 
 ## 4. Start the dev server
 
-The scaffold ships with [devenv](https://devenv.sh) pre-configured. bun is declared, dependencies install automatically on first shell entry, and `devenv up` starts the Astro dev server. In a second terminal (leave Claude running in the first):
+In a second terminal (leave Claude running in the first), install [bun](https://bun.sh) if you don't have it yet:
 
 ```sh
-devenv up
+curl -fsSL https://bun.sh/install | bash
 ```
 
-**Don't want devenv?** Install [bun](https://bun.sh), then run:
+Then install dependencies and start the dev server:
 
 ```sh
 bun install
@@ -62,7 +64,7 @@ bun install
 bun run dev
 ```
 
-Open [localhost:4321](http://localhost:4321). The scaffold is intentionally blank. Next step, you tell Claude what to build into it.
+Open [localhost:4321](http://localhost:4321) to see the placeholder site. Next step, you tell Claude what to build into it.
 
 ## 5. Push to your GitHub
 
@@ -88,7 +90,7 @@ Your site is live. Time to iterate.
 
 ## 7. Tell Claude what to build
 
-Claude is already in your new project. Describe what you want. Example:
+Describe what you want. Example:
 
 ```
 Build a website for an analytics SaaS.
