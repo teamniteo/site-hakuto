@@ -33,9 +33,9 @@ For major scaffold improvements, we'll ship release notes with a per-file diff s
 
 ## Update dependencies in your site
 
-Run these inside `devenv shell` (if you use devenv) or directly in your terminal (if you installed bun standalone). The commands are the same either way.
+Run these in your terminal with [bun](https://bun.sh) installed.
 
-Update everything within semver:
+Update everything to the latest compatible versions (no breaking changes):
 
 ```sh
 bun update

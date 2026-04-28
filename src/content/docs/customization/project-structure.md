@@ -28,7 +28,6 @@ my-site/
 ├── public/              # Static assets (auto-generated)
 ├── astro.config.mjs     # Astro + integrations config
 ├── CLAUDE.md            # Project-specific agent instructions
-├── devenv.nix           # Optional: bun + tooling via devenv
 └── wrangler.toml        # Cloudflare Workers config
 ```
 

@@ -55,13 +55,13 @@ const steps: Step[] = [
     Icon: Code,
     title: "Tell Claude what to build",
     intro:
-      "Claude is already in your new project — you opened it for /hakuto:init. Describe the site you want. Here's an example prompt:",
+      "Describe the site you want. Here's an example prompt:",
     code: `Build a website for an analytics SaaS.
 Use a modern, bold style with sharp typography and vibrant accents.
 Write convincing, benefit-driven copy that speaks to data teams.
 Include a hero section, feature grid, pricing table, and a call-to-action.`,
     outro:
-      "The website-builder skill auto-activates and drives the workflow: site type, design language, copy, brand colors, components. Watch it happen in the preview at localhost:4321.",
+      `The website-builder skill auto-activates and drives the workflow: site type, design language, copy, brand colors, components. Watch it happen in the preview at <a href="http://localhost:4321" target="_blank" rel="noreferrer" class="text-primary hover:underline">localhost:4321</a>.`,
   },
   {
     key: "push",
@@ -262,6 +262,9 @@ const isLast = currentIndex === total - 1;
                       <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
                     </button>
                   </div>
+                  <p class="text-foreground leading-relaxed mt-4 mb-3">
+                    After the install, Claude will recommend reloading plugins so the new commands become available. Go ahead and do it, then run:
+                  </p>
                   <div class="relative group">
                     <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>/hakuto:init</code></pre>
                     <button
@@ -284,10 +287,10 @@ const isLast = currentIndex === total - 1;
                     // Step 3 · Start the dev server
                   </p>
                   <p class="text-foreground leading-relaxed mb-3">
-                    The scaffold ships with <a href="https://devenv.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">devenv</a> pre-configured — bun is declared, dependencies install automatically on first shell entry, and <code class="font-mono text-primary">devenv up</code> starts the Astro dev server. In a second terminal (leave Claude running in the first):
+                    In a second terminal (leave Claude running in the first), install <a href="https://bun.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">bun</a> if you don't have it yet:
                   </p>
-                  <div class="relative group">
-                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>devenv up</code></pre>
+                  <div class="relative group mb-3">
+                    <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>curl -fsSL https://bun.sh/install | bash</code></pre>
                     <button
                       type="button"
                       class="absolute top-3 right-3 p-2 rounded-md text-muted-foreground hover:text-heading hover:bg-accent transition-colors"
@@ -298,8 +301,8 @@ const isLast = currentIndex === total - 1;
                       <span class="hidden text-emerald-500" data-check-icon><Check className="h-4 w-4" /></span>
                     </button>
                   </div>
-                  <p class="text-foreground leading-relaxed mt-4 mb-3">
-                    <strong class="text-heading">Don't want devenv?</strong> Install <a href="https://bun.sh" target="_blank" rel="noreferrer" class="text-primary hover:underline">bun</a>, then run:
+                  <p class="text-foreground leading-relaxed mb-3">
+                    Then install dependencies and start the dev server:
                   </p>
                   <div class="relative group mb-3">
                     <pre class="font-mono text-sm bg-background border border-border rounded-md p-5 pr-14 overflow-x-auto text-heading"><code data-code>bun install</code></pre>
@@ -326,7 +329,7 @@ const isLast = currentIndex === total - 1;
                     </button>
                   </div>
                   <p class="text-foreground leading-relaxed mt-4">
-                    Open <a href="http://localhost:4321" target="_blank" rel="noreferrer" class="text-primary hover:underline">localhost:4321</a> to see the fresh scaffold. It's intentionally blank — next step, you tell Claude what to build into it.
+                    Open <a href="http://localhost:4321" target="_blank" rel="noreferrer" class="text-primary hover:underline">localhost:4321</a> to see the placeholder site. Next step, you tell Claude what to build into it.
                   </p>
                 </div>
               </div>
@@ -388,7 +391,7 @@ const isLast = currentIndex === total - 1;
                   That pushes the new commit and relaunches the preview URL with your latest changes.
                 </p>
                 <p class="text-foreground leading-relaxed">
-                  To pick up newer plugin versions later, run <code class="font-mono text-primary">/plugin update hakuto</code> inside Claude Code — skills and commands update in place without a re-scaffold.
+                  To pick up newer plugin versions later, run <code class="font-mono text-primary">/plugin update hakuto</code> inside Claude Code. Skills and commands update in place without a re-scaffold.
                 </p>
               </div>
             )
@@ -438,9 +441,7 @@ const isLast = currentIndex === total - 1;
 
           {
             step.outro && (
-              <p class="mt-5 text-foreground leading-relaxed">
-                {step.outro}
-              </p>
+              <p class="mt-5 text-foreground leading-relaxed" set:html={step.outro} />
             )
           }
         </div>
