@@ -8,6 +8,7 @@
 
 import type { AstroIntegration } from 'astro';
 import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { HotPayload } from 'vite';
 
 interface ErrorInfo {
   message: string;
@@ -52,7 +53,7 @@ export function devErrors(): AstroIntegration {
 
         // Hook into Vite's WebSocket to capture errors
         const originalSend = server.ws.send.bind(server.ws);
-        server.ws.send = (payload: unknown) => {
+        server.ws.send = ((payload: HotPayload) => {
           if (typeof payload === 'object' && payload !== null) {
             const msg = payload as { type?: string; err?: { message?: string; stack?: string; id?: string; frame?: string; loc?: { file?: string; line?: number; column?: number } } };
 
@@ -89,7 +90,7 @@ export function devErrors(): AstroIntegration {
           }
 
           return originalSend(payload);
-        };
+        }) as typeof server.ws.send;
 
         // Also listen for connection errors
         server.ws.on('error', (err: Error) => {
