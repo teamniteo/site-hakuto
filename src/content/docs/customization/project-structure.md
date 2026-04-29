@@ -31,7 +31,7 @@ my-site/
 └── wrangler.toml        # Cloudflare Workers config
 ```
 
-Skills live in the plugin cache at `~/.claude/plugins/cache/hakuto/hakuto/<version>/skills/`. They're shared across every Hakuto site on your machine and update via `/plugin update hakuto`.
+Skills live in the plugin cache at `~/.claude/plugins/cache/hakuto/hakuto/<version>/skills/`. They're shared across every Hakuto site on your machine. Update via `/plugin marketplace update hakuto`, then run `/reload-plugins` to activate.
 
 ## Key files
 

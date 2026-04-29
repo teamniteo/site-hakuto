@@ -14,7 +14,13 @@ Hakuto is a Claude Code plugin, so updating skills and commands doesn't touch yo
 Inside Claude Code, in any project:
 
 ```
-/plugin update hakuto
+/plugin marketplace update hakuto
+```
+
+Then reload to activate:
+
+```
+/reload-plugins
 ```
 
 This pulls the latest skills (`website-builder`, `brand-designer`, `section-blog`, etc.), the `astro-file-editor` subagent, and the `/hakuto:init` command. No files change in your site repo.

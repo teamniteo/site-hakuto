@@ -122,7 +122,13 @@ That pushes a new commit and refreshes the preview.
 Skills and commands update in place:
 
 ```
-/plugin update hakuto
+/plugin marketplace update hakuto
+```
+
+Then reload to activate:
+
+```
+/reload-plugins
 ```
 
 No re-clone, no merge conflicts. See [Update Hakuto](/docs/setting-up/update-hakuto) for details.
