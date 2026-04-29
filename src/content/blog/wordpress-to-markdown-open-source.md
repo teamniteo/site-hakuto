@@ -10,7 +10,7 @@ description: "The Python script Claude built to move our blogs off WordPress is 
 draft: false
 ---
 
-A couple of weeks ago I [wrote about moving our first site off WordPress in under an hour](/blog/bye-bye-wordpress). The script Claude wrote for that migration was sitting in a project folder, and I kept reusing it for our other sites.
+A week ago I [wrote about moving our first site off WordPress in under an hour](/blog/bye-bye-wordpress). The script Claude wrote for that migration was sitting in a project folder, and I kept reusing it for our other sites.
 
 So we cleaned it up and published it as its own repo: [teamniteo/wordpress-to-markdown](https://github.com/teamniteo/wordpress-to-markdown).
 
@@ -20,6 +20,6 @@ It strips the usual WordPress noise — block comments, copy-paste artifacts, CT
 
 The output frontmatter is the same shape we use on the Hakuto blog, so if you're moving to a Hakuto site, the posts drop straight into `src/content/blog/`. If you're moving somewhere else, the markdown is plain enough that adapting it is a five-minute job.
 
-If you've been meaning to ditch WordPress and stop paying for plugins, hosting, and the constant updates — this is the easiest path I've found.
+If you've been meaning to ditch WordPress and stop paying for plugins, hosting, and the constant updates — this is the best way.
 
 Repo: [github.com/teamniteo/wordpress-to-markdown](https://github.com/teamniteo/wordpress-to-markdown)
